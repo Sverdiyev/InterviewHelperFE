@@ -9,12 +9,6 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
-  "prettier/prettier": [
-    "error",
-    {
-      "endOfLine": "auto"
-    }
-  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -27,5 +21,6 @@
   ],
   "rules": {
     "react/react-in-jsx-scope": "off"
+
   }
 }
