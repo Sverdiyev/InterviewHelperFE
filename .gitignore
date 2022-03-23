@@ -52,3 +52,8 @@ Thumbs.db
 .eslintcache
 .vscode
 
+# -abdallah //personal local editor conf
+.editorconfig
+.eslintrc.json
+.prettierrc
+
