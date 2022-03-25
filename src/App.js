@@ -3,6 +3,7 @@ import './App.css';
 import { Navbar, Footer } from './components';
 import About from './pages/About.js';
 import Main from './pages/Main.js';
+import NotFound from './pages/NotFound.js';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/" element={<Main />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
