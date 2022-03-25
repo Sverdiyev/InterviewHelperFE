@@ -1,6 +1,12 @@
 import React from 'react';
 import './Footer.css';
 
+const footerStyle = {
+  'background-color': '#1976d2',
+  height: '40px',
+  'align-items': 'center'
+};
+
 export default function Footer() {
-  return <div className="footer">Copyright © 2022 Interview SS All rights reserved.</div>;
+  return <div style={footerStyle}>Copyright © 2022 Interview SS All rights reserved.</div>;
 }
