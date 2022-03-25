@@ -1,13 +1,19 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Navbar, Footer } from './components';
+import About from './pages/About.js';
+import Main from './pages/Main.js';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <header className="App-header">
-        Welcome to the interview cheat sheet, this is the main page.
-      </header>
+      <main>
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );
