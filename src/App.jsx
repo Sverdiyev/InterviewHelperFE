@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Navbar, Footer } from './components';
-import About from './pages/About.js';
-import Main from './pages/Main.js';
-import NotFound from './pages/NotFound.js';
+import About from './pages/About.jsx';
+import Main from './pages/Main.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 function App() {
   return (
