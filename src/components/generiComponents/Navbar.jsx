@@ -1,8 +1,7 @@
-import * as React from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
@@ -12,11 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 const pages = ['About'];
 
 export default function Navbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -36,14 +31,6 @@ export default function Navbar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            ></IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
