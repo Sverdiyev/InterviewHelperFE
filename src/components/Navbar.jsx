@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const pages = ['main', 'about'];
 
-export default function Navbar() {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleCloseNavMenu = () => {
@@ -85,3 +85,5 @@ export default function Navbar() {
     </AppBar>
   );
 }
+
+export default Navbar;
