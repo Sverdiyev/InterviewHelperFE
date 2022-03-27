@@ -1,11 +1,11 @@
 import React from 'react';
 
 const footerStyle = {
-  'background-color': '#1976d2',
+  backgroundColor: '#1976d2',
   height: '40px',
-  'align-items': 'center'
+  alignItems: 'center'
 };
 
 export default function Footer() {
-  return <div style={footerStyle}>Copyright © 2022 Interview SS All rights reserved.</div>;
+  return <div style={footerStyle}>Copyright © 2022 Interview Helper All rights reserved.</div>;
 }
