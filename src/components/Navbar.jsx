@@ -7,10 +7,11 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 
-const pages = ['About'];
+const pages = ['main', 'about'];
 
-export default function Navbar() {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleCloseNavMenu = () => {
@@ -24,8 +25,10 @@ export default function Navbar() {
           <Typography
             variant="h6"
             noWrap
-            component="div"
+            component={Link}
+            to="/"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            style={{ textDecoration: 'none', color: 'white' }}
           >
             Interview Helper
           </Typography>
@@ -66,13 +69,15 @@ export default function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Link key={page} to={'/' + page} style={{ textDecoration: 'none' }}>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>
@@ -80,3 +85,5 @@ export default function Navbar() {
     </AppBar>
   );
 }
+
+export default Navbar;

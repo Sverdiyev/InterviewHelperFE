@@ -6,6 +6,8 @@ const footerStyle = {
   alignItems: 'center'
 };
 
-export default function Footer() {
+function Footer() {
   return <div style={footerStyle}>Copyright © 2022 Interview Helper All rights reserved.</div>;
 }
+
+export default Footer;
