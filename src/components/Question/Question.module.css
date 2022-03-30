@@ -21,13 +21,16 @@
 
 h4 {
   margin: 0;
+  max-width: 80%;
+  font-size: 1.3rem;
 }
 .card {
   display: flex;
-  width: 40%;
+  width: 60%;
   text-align: left;
   flex-direction: column;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .heading {
@@ -74,7 +77,7 @@ h4 {
 
 .description {
   margin: 0 0 10px 0;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .contentText {
