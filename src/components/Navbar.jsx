@@ -11,6 +11,14 @@ import { Link } from 'react-router-dom';
 
 const pages = ['main', 'about'];
 
+let navbarStyle = {
+  backgroundColor: '#EAEAEA',
+  textDecoration: 'none',
+  color: 'black',
+  fontSize: '10px',
+  fontFamily: 'Montserrat'
+};
+
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -19,17 +27,10 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="static" style={navbarStyle}>
+      <Container maxWidth="x1">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
+          <Typography variant="h6" noWrap component={Link} to="/" style={navbarStyle}>
             Interview Helper
           </Typography>
 
@@ -69,11 +70,12 @@ function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link key={page} to={'/' + page} style={{ textDecoration: 'none' }}>
+              <Link key={page} to={'/' + page} style={navbarStyle}>
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{ my: 1, color: 'white', display: 'block' }}
+                  style={navbarStyle}
                 >
                   {page}
                 </Button>
