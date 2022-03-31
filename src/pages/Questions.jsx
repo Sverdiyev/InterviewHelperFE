@@ -13,7 +13,7 @@ const questions = [
   },
   {
     Id: 2,
-    Complexity: 'Easy',
+    Complexity: 'medium',
     QuestionContent: 'Lorem ipsum dolor sit amet.',
     Note: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. A, laborum. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error, voluptatibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur harum possimus esse quidem quasi magnam.',
     Vote: 5,
@@ -21,7 +21,7 @@ const questions = [
   },
   {
     Id: 3,
-    Complexity: 'Easy',
+    Complexity: 'hard',
     QuestionContent:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident voluptatum debitis eius, quibusdam saepe iusto.',
     Vote: 5,
