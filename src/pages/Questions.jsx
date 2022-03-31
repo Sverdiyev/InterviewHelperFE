@@ -1,5 +1,5 @@
 import React from 'react';
-import Question from '../Question/Question.jsx';
+import Question from '../components/Question/Question.jsx';
 
 const questions = [
   {
