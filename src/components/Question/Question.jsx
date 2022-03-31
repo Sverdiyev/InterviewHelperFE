@@ -1,5 +1,5 @@
 import React from 'react';
-import Actions from './Actions.jsx';
+import Actions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
 
