@@ -47,16 +47,6 @@ h4 {
   align-content: space-between;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-.rating {
-  color: black;
-  margin-right: 5px;
-}
-
 .tags {
   display: flex;
   width: 80%;
