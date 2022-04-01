@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 
-const pages = ['main', 'about'];
+const pages = ['main', 'about', 'questions'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -28,8 +28,7 @@ function Navbar() {
             component={Link}
             to="/"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
+            style={{ textDecoration: 'none', color: 'white' }}>
             Interview Helper
           </Typography>
 
@@ -50,8 +49,7 @@ function Navbar() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' }
-              }}
-            >
+              }}>
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -63,8 +61,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -73,8 +70,7 @@ function Navbar() {
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
+                  sx={{ my: 2, color: 'white', display: 'block' }}>
                   {page}
                 </Button>
               </Link>
