@@ -6,15 +6,14 @@ const pages = ['main', 'about', 'questions'];
 function Navbar() {
   return (
     <AppBar position="static">
-      <Container>
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             component={Link}
             to="/"
-            sx={{ mr: 2, display: 'flex' }}
-            style={{ textDecoration: 'none', color: 'white' }}>
+            sx={{ mr: 2, display: 'flex', textDecoration: 'none', color: 'white' }}>
             Interview Helper
           </Typography>
 
