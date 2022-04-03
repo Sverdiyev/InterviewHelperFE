@@ -18,7 +18,7 @@ function QuestionSearch({ questions, setFilteredQuestions }) {
   };
 
   return (
-    <Grid container sx={{ width: '60%', margin: '1rem 0', position: 'absolute', top: 0 }}>
+    <Grid container sx={{ width: '60%', margin: '1rem 0' }}>
       <TextField
         sx={{ width: '60%' }}
         margin="dense"
