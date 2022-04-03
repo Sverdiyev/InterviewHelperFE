@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Question from '../components/Question/Question.jsx';
+import QuestionSearch from '../components/QuestionSearch/QuestionSearch.jsx';
 
 const questions = [
   {
@@ -30,9 +31,12 @@ const questions = [
 ];
 
 function Questions() {
+  const [filteredQuestions, setFilteredQuestions] = useState(questions);
+
   return (
     <>
-      {questions.map((question) => (
+      <QuestionSearch questions={questions} onFilter={setFilteredQuestions} />
+      {filteredQuestions.map((question) => (
         <Question key={question.Id} {...question} />
       ))}
     </>
