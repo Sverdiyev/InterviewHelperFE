@@ -35,7 +35,8 @@ function Questions() {
 
   return (
     <>
-      <QuestionSearch questions={questions} onFilter={setFilteredQuestions} />
+      <QuestionSearch questions={questions} setFilteredQuestions={setFilteredQuestions} />
+      {filteredQuestions.length === 0 && <div>No Questions Found</div>}
       {filteredQuestions.map((question) => (
         <Question key={question.Id} {...question} />
       ))}

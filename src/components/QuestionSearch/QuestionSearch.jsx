@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { Grid, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Clear as ClearIcon } from '@mui/icons-material';
-import { filterByQuestion } from './search.js';
+import filterQuestions from './search.js';
 
-function QuestionSearch({ questions }) {
+function QuestionSearch({ questions, setFilteredQuestions }) {
   const [inputValue, setInputValue] = useState('');
 
   const searchHandler = () => {
-    const filtered = filterByQuestion(questions, inputValue);
-    console.log('🚀 ~ searchHandler ~ filtered', filtered);
+    const filtered = filterQuestions(questions, inputValue);
+    setFilteredQuestions(filtered);
   };
 
   const clearHandler = () => {
     setInputValue('');
+    setFilteredQuestions(questions);
   };
 
   return (
@@ -49,11 +50,13 @@ function QuestionSearch({ questions }) {
         id="search"
         label="Search"
         variant="outlined"
+        value={inputValue}
         placeholder="Question, complexity or tag"
+        onChange={(e) => setInputValue(e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <IconButton>
+              <IconButton onClick={searchHandler}>
                 <SearchIcon />
               </IconButton>
             </InputAdornment>
