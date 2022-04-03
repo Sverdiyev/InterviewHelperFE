@@ -19,43 +19,13 @@ function QuestionSearch({ questions, setFilteredQuestions }) {
 
   return (
     <Grid container sx={{ width: '60%', margin: '1rem 0' }}>
-      {/* SEARCH OPTION 1 */}
       <TextField
-        sx={{ width: '51%' }}
+        sx={{ width: '60%' }}
         margin="dense"
         id="search"
         variant="outlined"
         placeholder="Search"
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <IconButton onClick={searchHandler}>
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
-          endAdornment: inputValue && (
-            <InputAdornment position="end">
-              <IconButton onClick={clearHandler}>
-                <ClearIcon />
-              </IconButton>
-            </InputAdornment>
-          )
-        }}
-      />
-
-      {/* SEARCH OPTION 2 */}
-
-      <TextField
-        sx={{ width: '51%' }}
-        margin="dense"
-        id="search"
-        label="Search"
-        variant="outlined"
-        value={inputValue}
-        placeholder="Question, complexity or tag"
         onChange={(e) => setInputValue(e.target.value)}
         InputProps={{
           startAdornment: (
