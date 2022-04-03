@@ -16,7 +16,7 @@ const filterByNote = (questions, input) => {
 
 const filterByTag = (questions, input) => {
   const filteredQuestions = questions.filter((question) =>
-    question.Tags.some((el) => el.includes(input))
+    question.Tags.some((el) => el.toLowerCase().includes(input))
   );
   const filteredIDs = filteredQuestions.map((question) => question.Id);
 
