@@ -1,4 +1,4 @@
-export const filterByQuestion = (questions, input) => {
+const filterByQuestion = (questions, input) => {
   const filteredQuestions = questions.filter((question) =>
     question.QuestionContent.toLowerCase().includes(input)
   );
@@ -6,7 +6,7 @@ export const filterByQuestion = (questions, input) => {
   return filteredIDs;
 };
 
-export const filterByNote = (questions, input) => {
+const filterByNote = (questions, input) => {
   const filteredQuestions = questions.filter((question) => {
     return question?.Note?.toLowerCase().includes(input);
   });
@@ -23,7 +23,7 @@ const filterByTag = (questions, input) => {
   return filteredIDs;
 };
 
-export const filterByComplexity = (questions, input) => {
+const filterByComplexity = (questions, input) => {
   const filteredQuestions = questions.filter((question) =>
     question.Complexity.toLowerCase().includes(input)
   );
