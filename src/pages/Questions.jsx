@@ -1,6 +1,6 @@
 import React from 'react';
-import { getQuestions, postQuestion } from '../../services/api-request.js';
 import Question from '../components/Question/Question.jsx';
+import { getQuestions, postQuestion } from '../services/api-request.js';
 
 const question = {
   Id: 3,
