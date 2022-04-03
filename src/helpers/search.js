@@ -23,20 +23,11 @@ const filterByTag = (questions, input) => {
   return filteredIDs;
 };
 
-const filterByComplexity = (questions, input) => {
-  const filteredQuestions = questions.filter((question) =>
-    question.Complexity.toLowerCase().includes(input)
-  );
-  const filteredIDs = filteredQuestions.map((question) => question.Id);
-  return filteredIDs;
-};
-
 const filterQuestions = (questions, input) => {
   const trimmedInput = input.trim().toLowerCase();
   if (trimmedInput === '') return questions;
 
   let filteredIDs = [];
-  filteredIDs.push(...filterByComplexity(questions, trimmedInput));
   filteredIDs.push(...filterByQuestion(questions, trimmedInput));
   filteredIDs.push(...filterByNote(questions, trimmedInput));
   filteredIDs.push(...filterByTag(questions, trimmedInput));
