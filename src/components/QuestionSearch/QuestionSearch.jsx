@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Clear as ClearIcon } from '@mui/icons-material';
-import filterQuestions from './search.js';
+import filterQuestions from '../../helpers/search.js';
 
 function QuestionSearch({ questions, setFilteredQuestions }) {
   const [inputValue, setInputValue] = useState('');
