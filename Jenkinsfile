@@ -27,7 +27,6 @@ pipeline {
         container("node14-slim") {
           sh("CI=true npm ci")
           sh("CI=true npm run lint")
-          sh("CI=true npm run test-coverage")
           sh("CI=true npm run build")
         }
       }
