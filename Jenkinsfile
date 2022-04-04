@@ -1,5 +1,5 @@
 acrUrl = "sourcery2021fall.azurecr.io"
-team = "interview_helper" // Team handle
+team = "interview-helper" // Team handle
 app = "frontend" // Type of application
 hostname = "interview-helper.devbstaging.com" // DNS name (needs to be manually configured by DevOps)
 
