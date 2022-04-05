@@ -44,6 +44,7 @@ function Questions() {
 
   return (
     <>
+      {/* To add isLoading prop for Question search - awaiting PR#12 */}
       <QuestionSearch setSearchValue={setSearchValue} />
       {filteredQuestions.length === 0 && <div>No Questions Found</div>}
       {filteredQuestions.map((question) => (
