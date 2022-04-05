@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { Grid, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Grid, IconButton, InputAdornment, LinearProgress, TextField } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Clear as ClearIcon } from '@mui/icons-material';
-import filterQuestions from '../../helpers/search.js';
 
-function QuestionSearch({ questions, setFilteredQuestions }) {
+function QuestionSearch({ setSearchValue, isLoading }) {
   const [inputValue, setInputValue] = useState('');
 
-  const searchHandler = () => {
-    const filtered = filterQuestions(questions, inputValue);
-    setFilteredQuestions(filtered);
-  };
+  const searchHandler = () => setSearchValue(inputValue);
 
   const clearHandler = () => {
     setInputValue('');
-    setFilteredQuestions(questions);
+    setSearchValue(inputValue);
   };
 
   return (
@@ -27,6 +23,9 @@ function QuestionSearch({ questions, setFilteredQuestions }) {
         placeholder="Search"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') searchHandler();
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -44,6 +43,7 @@ function QuestionSearch({ questions, setFilteredQuestions }) {
           )
         }}
       />
+      {isLoading && <LinearProgress sx={{ width: '59%', height: '5px', margin: '0 0.5%' }} />}
     </Grid>
   );
 }
