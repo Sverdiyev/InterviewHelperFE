@@ -29,9 +29,7 @@ function QuestionSearch({ setSearchValue, isLoading }) {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <IconButton onClick={searchHandler}>
-                <SearchIcon />
-              </IconButton>
+              <SearchIcon />
             </InputAdornment>
           ),
           endAdornment: inputValue && (
