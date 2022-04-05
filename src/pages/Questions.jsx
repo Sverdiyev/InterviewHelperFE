@@ -1,17 +1,15 @@
 import React from 'react';
 import Question from '../components/Question/Question.jsx';
-import { getQuestions } from '../services/api-request.js';
+import { useGetQuestions } from '../services/api-requests/questions.js';
 
 function Questions() {
-  const { data, error, isFetching } = getQuestions();
+  const { data, error, isSuccess, isLoading } = useGetQuestions();
 
   return (
     <>
-      {isFetching && <div>Loading</div>}
+      {isLoading && <div>Loading</div>}
       {error && <div>error</div>}
-      {!isFetching &&
-        !error &&
-        data.map((question) => <Question key={question.Id} {...question} />)}
+      {isSuccess && data.map((question) => <Question key={question.Id} {...question} />)}
     </>
   );
 }
