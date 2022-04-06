@@ -1,35 +1,54 @@
 import { Link } from 'react-router-dom';
 import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledAppBar = styled(AppBar)({
+  backgroundColor: '#EAEAEA'
+});
+
+const StyledTypography = styled(Typography)({
+  color: 'black',
+  textDecoration: 'none',
+  fontFamily: 'Montserrat'
+});
+
+const StyledButton = styled(Button)({
+  color: 'black',
+  textDecoration: 'none',
+  fontFamily: 'Montserrat',
+  fontSize: '20px',
+  display: 'block'
+});
 
 const pages = ['main', 'about', 'questions'];
 
 function Navbar() {
   return (
-    <AppBar position="static">
+    <StyledAppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+          <StyledTypography
             variant="h6"
             noWrap
             component={Link}
             to="/"
-            sx={{ mr: 2, display: 'flex', textDecoration: 'none', color: 'white' }}
+            sx={{ mr: 2, display: 'flex' }}
           >
             Interview Helper
-          </Typography>
+          </StyledTypography>
 
           <Grid container sx={{ flex: 1 }}>
             {pages.map((page) => (
               <Link key={page} to={'/' + page} style={{ textDecoration: 'none' }}>
-                <Button key={page} sx={{ my: 2, color: 'white', display: 'block' }}>
+                <StyledButton key={page} sx={{ my: 2 }}>
                   {page}
-                </Button>
+                </StyledButton>
               </Link>
             ))}
           </Grid>
         </Toolbar>
       </Container>
-    </AppBar>
+    </StyledAppBar>
   );
 }
 

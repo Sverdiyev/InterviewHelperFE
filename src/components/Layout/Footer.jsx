@@ -2,9 +2,9 @@ import React from 'react';
 
 const footerStyle = {
   backgroundColor: '#EAEAEA',
-  height: '13px',
+  height: '20px',
   alignItems: 'center',
-  fontSize: '10px'
+  fontSize: '14px'
 };
 
 function Footer() {
