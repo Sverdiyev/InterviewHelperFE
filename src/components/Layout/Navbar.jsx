@@ -16,7 +16,7 @@ const StyledButton = styled(Button)({
   color: 'black',
   textDecoration: 'none',
   fontFamily: 'Montserrat',
-  fontSize: '20px',
+  fontSize: '13px',
   display: 'block'
 });
 
