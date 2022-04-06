@@ -32,8 +32,7 @@ function Navbar() {
             noWrap
             component={Link}
             to="/"
-            sx={{ mr: 2, display: 'flex' }}
-          >
+            sx={{ mr: 2, display: 'flex' }}>
             Interview Helper
           </StyledTypography>
 
