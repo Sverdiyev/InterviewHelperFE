@@ -21,8 +21,7 @@ function QuestionBody({ Note, Tags }) {
       container
       direction="column"
       justifyContent="space-between"
-      sx={{ padding: 0, flex: 1 }}
-    >
+      sx={{ padding: 0, flex: 1 }}>
       <span style={{ fontSize: '0.8rem' }}>{Note} </span>
       <Grid alignItems="center" sx={{ width: '80%' }}>
         {Tags.map((tag) => (
