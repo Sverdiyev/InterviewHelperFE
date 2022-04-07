@@ -17,7 +17,7 @@ function Questions() {
       <Search setSearchValue={setSearchValue} />
       {isLoading && (
         <Grid container alignItems="center" flexGrow="1" sx={{ paddingBottom: '5%', width: '15%' }}>
-          <CircularProgress size="100%" />
+          <CircularProgress size="30%" />
         </Grid>
       )}
 

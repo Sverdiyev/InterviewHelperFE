@@ -17,7 +17,8 @@ function Search({ setSearchValue }) {
     <Grid container sx={{ width: '60%' }}>
       <TextField
         sx={{ width: '60%' }}
-        margin="dense"
+        size="small"
+        margin="normal"
         id="search"
         variant="outlined"
         placeholder="Search"
