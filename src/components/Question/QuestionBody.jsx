@@ -11,7 +11,8 @@ const StyledTag = styled('span')({
   fontSize: '0.8rem',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
-  maxWidth: '100px'
+  maxWidth: '100px',
+  display: 'inline-block'
 });
 
 function QuestionBody({ Note, Tags }) {
