@@ -1,29 +1,25 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Question from '../components/Question/Question.jsx';
 import Search from '../components/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
 
 function Questions() {
-  const { data, error, isSuccess, isLoading } = useQuestions();
+  const [searchParams] = useSearchParams();
+  const searchValue = searchParams.get('search');
+  const { data, error, isSuccess, isLoading } = useQuestions(searchValue);
+
   const navigate = useNavigate();
-  const [filteredQuestions, setFilteredQuestions] = useState(data);
 
-  const setSearchValue = (value) => {
-    console.log('search value:', value);
-    navigate({ pathname: '/questions', search: '?search=' + value });
-    //get request with specifies query params -- awaiting merge of PR#12 for backend communication
-    //setFilteredQuestions(data from getRequests)
-  };
-
+  const setSearchValue = (value) =>
+    navigate({ pathname: '/questions', search: `${value ? '?search=' + value : ''}` });
   return (
     <>
       <Search setSearchValue={setSearchValue} />
       {isLoading && <div>Loading</div>}
       {error && <div>error</div>}
-      {isSuccess &&
-        filteredQuestions.map((question) => <Question key={question.Id} {...question} />)}
-      {isSuccess && filteredQuestions.length === 0 && <div>No Questions Found</div>}
+      {isSuccess && data.map((question) => <Question key={question.Id} {...question} />)}
+      {isSuccess && data.length === 0 && <div>No Questions Found</div>}
     </>
   );
 }
