@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { Grid, IconButton, InputAdornment, LinearProgress, TextField } from '@mui/material';
+import { Grid, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Clear as ClearIcon } from '@mui/icons-material';
 
-function Search({ setSearchValue, isLoading }) {
+function Search({ setSearchValue }) {
   const [inputValue, setInputValue] = useState('');
 
   const searchHandler = () => setSearchValue(inputValue);
 
   const clearHandler = () => {
     setInputValue('');
-    setSearchValue(inputValue);
+    setSearchValue('');
   };
 
   return (
-    <Grid container sx={{ width: '60%', margin: '1rem 0' }}>
+    <Grid container sx={{ width: '60%' }}>
       <TextField
         sx={{ width: '60%' }}
         margin="dense"
@@ -41,7 +41,6 @@ function Search({ setSearchValue, isLoading }) {
           )
         }}
       />
-      {isLoading && <LinearProgress sx={{ width: '59%', height: '5px', margin: '0 0.5%' }} />}
     </Grid>
   );
 }

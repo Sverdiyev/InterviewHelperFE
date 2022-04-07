@@ -1,3 +1,4 @@
+import { LinearProgress } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Question from '../components/Question/Question.jsx';
@@ -16,6 +17,11 @@ function Questions() {
   return (
     <>
       <Search setSearchValue={setSearchValue} />
+      {isLoading && (
+        <LinearProgress
+          sx={{ width: '36%', height: '7px', margin: '0 auto 0 20%', borderRadius: '25px' }}
+        />
+      )}
       {isLoading && <div>Loading</div>}
       {error && <div>error</div>}
       {isSuccess && data.map((question) => <Question key={question.Id} {...question} />)}
