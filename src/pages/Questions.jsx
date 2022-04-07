@@ -1,4 +1,4 @@
-import { LinearProgress } from '@mui/material';
+import { CircularProgress, Grid } from '@mui/material';
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Question from '../components/Question/Question.jsx';
@@ -16,12 +16,9 @@ function Questions() {
     <>
       <Search setSearchValue={setSearchValue} />
       {isLoading && (
-        <>
-          <LinearProgress
-            sx={{ width: '36%', height: '7px', margin: '0 auto 0 20%', borderRadius: '25px' }}
-          />
-          <div>Loading</div>
-        </>
+        <Grid container alignItems="center" flexGrow="1" sx={{ paddingBottom: '5%', width: '15%' }}>
+          <CircularProgress size="100%" />
+        </Grid>
       )}
 
       {error && <div>error</div>}
