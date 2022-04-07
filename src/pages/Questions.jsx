@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Question from '../components/Question/Question.jsx';
-import QuestionSearch from '../components/QuestionSearch/QuestionSearch.jsx';
+import Search from '../components/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
 
 function Questions() {
@@ -18,7 +18,7 @@ function Questions() {
 
   return (
     <>
-      <QuestionSearch setSearchValue={setSearchValue} />
+      <Search setSearchValue={setSearchValue} />
       {isLoading && <div>Loading</div>}
       {error && <div>error</div>}
       {isSuccess &&

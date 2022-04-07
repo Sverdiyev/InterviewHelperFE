@@ -3,7 +3,7 @@ import { Grid, IconButton, InputAdornment, LinearProgress, TextField } from '@mu
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Clear as ClearIcon } from '@mui/icons-material';
 
-function QuestionSearch({ setSearchValue, isLoading }) {
+function Search({ setSearchValue, isLoading }) {
   const [inputValue, setInputValue] = useState('');
 
   const searchHandler = () => setSearchValue(inputValue);
@@ -46,4 +46,4 @@ function QuestionSearch({ setSearchValue, isLoading }) {
   );
 }
 
-export default QuestionSearch;
+export default Search;
