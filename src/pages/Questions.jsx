@@ -10,7 +10,7 @@ function Questions() {
   const searchValue = searchParams.get('search');
   const { data, error, isSuccess, isLoading } = useQuestions(searchValue);
 
-  const setSearchValue = (value) => setSearchParams(`${value ? '?search=' + value : ''}`);
+  const setSearchValue = (value) => setSearchParams({ search: value });
 
   return (
     <>
