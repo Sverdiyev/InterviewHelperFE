@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import InputField from '../components/Form/InputField.jsx';
+import InputField from '../components/InputField.jsx';
 
 function Login() {
   const [emailValue, setEmailValue] = useState('');
@@ -63,19 +63,17 @@ function Login() {
       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
         <InputField
           id="email"
-          inputTouched={emailIsTouched}
-          inputValid={emailIsValid}
           inputValue={emailValue}
           onInputChange={onChangeEmail}
           autoFocus
+          error={emailIsTouched && !emailIsValid}
         />
 
         <InputField
           id="password"
-          inputTouched={passwordIsTouched}
-          inputValid={passwordIsValid}
           inputValue={passwordValue}
           onInputChange={onChangePassword}
+          error={passwordIsTouched && !passwordIsValid}
         />
 
         <Button

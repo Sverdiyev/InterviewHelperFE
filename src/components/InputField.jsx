@@ -1,7 +1,7 @@
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import React from 'react';
 
-function InputField({ id, inputTouched, inputValid, inputValue, onInputChange, autoFocus }) {
+function InputField({ id, error, inputValue, onInputChange, autoFocus }) {
   return (
     <>
       <TextField
@@ -16,8 +16,13 @@ function InputField({ id, inputTouched, inputValid, inputValue, onInputChange, a
         autoFocus={autoFocus}
         value={inputValue}
         onChange={onInputChange}
+        error={error}
       />
-      {inputTouched && !inputValid && `PLEASE CORRECT ${id}`}
+      {error && (
+        <Typography color="red" variant="body2">
+          Enter valid {id}
+        </Typography>
+      )}
     </>
   );
 }
