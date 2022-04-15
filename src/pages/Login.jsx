@@ -1,7 +1,8 @@
-import { Avatar, Box, Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import InputField from '../components/Form/InputField.jsx';
 
 function Login() {
   const [emailValue, setEmailValue] = useState('');
@@ -45,65 +46,52 @@ function Login() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
-        <Avatar sx={{ m: 1, backgroundColor: '#bbb' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+    <Box
+      sx={{
+        marginTop: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        maxWidth: '400px'
+      }}>
+      <Avatar sx={{ m: 1, backgroundColor: '#bbb' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Sign in
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <InputField
+          id="email"
+          inputTouched={emailIsTouched}
+          inputValid={emailIsValid}
+          inputValue={emailValue}
+          onInputChange={onChangeEmail}
+          autoFocus
+        />
+
+        <InputField
+          id="password"
+          inputTouched={passwordIsTouched}
+          inputValid={passwordIsValid}
+          inputValue={passwordValue}
+          onInputChange={onChangePassword}
+        />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          disabled={passwordIsTouched && emailIsTouched && !formIsValid}
+          sx={{ mt: 3, mb: 2, backgroundColor: '#545454' }}>
+          Sign In
+        </Button>
+
+        <Typography variant="body2" component={Link} to="/signup">
+          Don`t have an account? Sign Up
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={emailValue}
-            onChange={onChangeEmail}
-          />
-          {emailIsTouched && !emailIsValid && 'PLEASE CORRECT email'}
-
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={passwordValue}
-            onChange={onChangePassword}
-          />
-          {passwordIsTouched && !passwordIsValid && 'PLEASE CORRECT PASSWORD'}
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            disabled={passwordIsTouched && emailIsTouched && !formIsValid}
-            sx={{ mt: 3, mb: 2, backgroundColor: '#545454' }}>
-            Sign In
-          </Button>
-
-          <Typography variant="body2" component={Link} to="/signup">
-            Don`t have an account? Sign Up
-          </Typography>
-        </Box>
       </Box>
-    </Container>
+    </Box>
   );
 }
 
