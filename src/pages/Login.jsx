@@ -1,10 +1,13 @@
 import { Avatar, Box, Button, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import InputField from '../components/InputField.jsx';
+import AuthContext from '../store/auth-context.js';
 
 function Login() {
+  const ctx = useContext(AuthContext);
+  console.log('🚀 ~ Login ~ ctx', ctx);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
 
@@ -42,7 +45,10 @@ function Login() {
 
     const data = { email: emailValue, password: passwordValue };
 
-    console.log('data:', data);
+    console.log(data);
+    //send data to BE
+    //if valid, login
+    ctx.logIn();
   };
 
   return (
