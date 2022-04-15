@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Typography } from '@mui/material';
+import { Alert, Avatar, Button, Grid, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
@@ -7,7 +7,8 @@ import AuthContext from '../store/auth-context.js';
 
 function Login() {
   const ctx = useContext(AuthContext);
-  console.log('🚀 ~ Login ~ ctx', ctx);
+
+  const [successfullLogin, setSuccessfullLogin] = useState(null);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
 
@@ -46,27 +47,29 @@ function Login() {
     const data = { email: emailValue, password: passwordValue };
 
     console.log(data);
+
     //send data to BE
+
     //if valid, login
     ctx.logIn();
+    //if not, display message
+    setSuccessfullLogin(false);
   };
 
   return (
-    <Box
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        maxWidth: '400px'
-      }}>
+    <Grid container flexDirection="column" alignItems="center" sx={{ width: '400px' }} mt={8}>
+      {successfullLogin == false && (
+        <Alert severity="error" onClose={() => setSuccessfullLogin(null)} sx={{ width: '100%' }}>
+          Login Failed
+        </Alert>
+      )}
       <Avatar sx={{ m: 1, backgroundColor: '#bbb' }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+      <Grid item component="form" onSubmit={handleSubmit} noValidate sx={{ width: '400px' }}>
         <InputField
           id="email"
           inputValue={emailValue}
@@ -94,8 +97,8 @@ function Login() {
         <Typography variant="body2" component={Link} to="/signup">
           Don`t have an account? Sign Up
         </Typography>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
 
