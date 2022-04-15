@@ -67,7 +67,7 @@ function Login() {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        Log in
       </Typography>
       <Grid item component="form" onSubmit={handleSubmit} noValidate sx={{ width: '400px' }}>
         <InputField
@@ -90,12 +90,17 @@ function Login() {
           fullWidth
           variant="contained"
           disabled={passwordIsTouched && emailIsTouched && !formIsValid}
-          sx={{ mt: 3, mb: 2, backgroundColor: '#545454' }}>
-          Sign In
+          sx={{
+            mt: 3,
+            mb: 2,
+            backgroundColor: '#6e6e6e',
+            [':hover']: { backgroundColor: '#545454' }
+          }}>
+          Log In
         </Button>
 
         <Typography variant="body2" component={Link} to="/signup">
-          Don`t have an account? Sign Up
+          Don`t have an account? Register
         </Typography>
       </Grid>
     </Grid>
