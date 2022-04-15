@@ -1,4 +1,4 @@
-import { Button, Grid } from '@mui/material';
+import { Avatar, Button, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -19,19 +19,18 @@ const StyledRegister = styled(StyledButton)({
 const StyledLogin = styled(StyledButton)({
   color: '#bbb',
   border: '1px solid #bbb',
-  marginRight: '0.7rem',
   [':hover']: { backgroundColor: '#fff' }
 });
 
 const StyledLogout = styled(StyledButton)({
   color: '#bbb',
   border: '1px solid #bbb',
-  marginRight: '0.7rem',
   [':hover']: { backgroundColor: '#fff' }
 });
 
 function AuthActions() {
   const ctx = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const loginHandler = () => ctx.togglePopup();
@@ -39,8 +38,13 @@ function AuthActions() {
   const logoutHandler = () => ctx.logOut();
 
   return (
-    <Grid>
-      {ctx.isAuth && <StyledLogout onClick={logoutHandler}> Log out</StyledLogout>}
+    <Grid container xs={3} gap="8px" justifyContent="flex-end">
+      {ctx.isAuth && (
+        <>
+          <StyledLogout onClick={logoutHandler}> Log out</StyledLogout>
+          <Avatar>{ctx.name.firstName[0] + ctx.name.lastName[0]}</Avatar>
+        </>
+      )}
       {!ctx.isAuth && (
         <>
           <StyledLogin onClick={loginHandler}>Log in</StyledLogin>

@@ -49,9 +49,10 @@ function LoginComponent() {
     console.log(data);
 
     //send data to BE
-
+    //fetch name from BE
+    const name = { firstName: 'Sasha', lastName: 'Verdiyev' };
     //if valid, login
-    ctx.logIn();
+    ctx.logIn(name);
     //if not, display message
     setSuccessfullLogin(false);
   };

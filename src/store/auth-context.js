@@ -28,6 +28,8 @@ const reducer = (state, action) => {
   if (action.type === ACTIONS.LOG_IN) {
     newState.isAuth = true;
     newState.name = { ...action.name };
+    console.log('🚀 ~ reducer ~ action', action);
+    console.log('🚀 ~ reducer ~ newState', newState);
   } else if (action.type === ACTIONS.LOG_OUT) {
     newState.isAuth = false;
     newState.name = { firstName: '', lastName: '' };
@@ -45,8 +47,8 @@ export function AuthContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
 
-  const logIn = () => {
-    dispatch({ type: ACTIONS.LOG_IN });
+  const logIn = (name) => {
+    dispatch({ type: ACTIONS.LOG_IN, name });
     dispatch({ type: ACTIONS.TOGGLE_POPUP });
 
     navigate('/');
