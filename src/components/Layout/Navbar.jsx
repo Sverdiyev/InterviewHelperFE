@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/system';
-import LogInOut from '../Login/LogInOut.jsx';
+import AuthActions from '../Login/AuthActions.jsx';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#EAEAEA'
@@ -47,7 +47,7 @@ function Navbar() {
               </Link>
             ))}
           </Grid>
-          <LogInOut type="login" />
+          <AuthActions />
         </Toolbar>
       </Container>
     </StyledAppBar>

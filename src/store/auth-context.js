@@ -1,32 +1,38 @@
-import { createContext } from 'react';
-import { useReducer } from 'react';
+import { createContext, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext({
   isAuth: false,
-  name: ''
+  name: { firstName: '', lastName: '' },
+  popupIsVisible: false,
+  logIn() {},
+  logOut() {},
+  togglePopup() {}
 });
 
 const ACTIONS = {
   LOG_OUT: 'logout',
-  LOG_IN: 'login'
+  LOG_IN: 'login',
+  TOGGLE_POPUP: 'logglePopup'
 };
 
 const initialState = {
   isAuth: false,
-  name: ''
+  name: { firstName: '', lastName: '' },
+  popupIsVisible: false
 };
 
 const reducer = (state, action) => {
-  let newState = {};
+  const newState = {};
 
   if (action.type === ACTIONS.LOG_IN) {
     newState.isAuth = true;
-    newState.name = action.name;
-  }
-  if (action.type === ACTIONS.LOG_OUT) {
+    newState.name = { ...action.name };
+  } else if (action.type === ACTIONS.LOG_OUT) {
     newState.isAuth = false;
-    newState.name = '';
+    newState.name = { firstName: '', lastName: '' };
+  } else if (action.type === ACTIONS.TOGGLE_POPUP) {
+    newState.popupIsVisible = !state.popupIsVisible;
   }
 
   return {
@@ -38,17 +44,23 @@ const reducer = (state, action) => {
 export function AuthContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
+
   const logIn = () => {
     dispatch({ type: ACTIONS.LOG_IN });
+    dispatch({ type: ACTIONS.TOGGLE_POPUP });
+
     navigate('/');
   };
   const logOut = () => {
     dispatch({ type: ACTIONS.LOG_OUT });
     navigate('/');
   };
+  const togglePopup = () => dispatch({ type: ACTIONS.TOGGLE_POPUP });
+
   const contextValue = {
     logIn,
     logOut,
+    togglePopup,
     ...state
   };
 

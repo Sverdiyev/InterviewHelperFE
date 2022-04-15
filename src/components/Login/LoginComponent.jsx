@@ -59,7 +59,10 @@ function LoginComponent() {
   return (
     <>
       {successfullLogin == false && (
-        <Alert severity="error" onClose={() => setSuccessfullLogin(null)} sx={{ width: '100%' }}>
+        <Alert
+          severity="error"
+          onClose={() => setSuccessfullLogin(null)}
+          sx={{ width: '100%', boxSizing: 'border-box' }}>
           Login Failed
         </Alert>
       )}

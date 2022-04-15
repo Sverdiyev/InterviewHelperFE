@@ -30,11 +30,11 @@ const StyledLogout = styled(StyledButton)({
   [':hover']: { backgroundColor: '#fff' }
 });
 
-function LogInOut() {
+function AuthActions() {
   const ctx = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const loginHandler = () => navigate('/login');
+  const loginHandler = () => ctx.togglePopup();
   const registerHandler = () => navigate('/signup');
   const logoutHandler = () => ctx.logOut();
 
@@ -51,4 +51,4 @@ function LogInOut() {
   );
 }
 
-export default LogInOut;
+export default AuthActions;
