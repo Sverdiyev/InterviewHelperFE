@@ -38,7 +38,7 @@ function AuthActions() {
   const logoutHandler = () => ctx.logOut();
 
   return (
-    <Grid container xs={3} gap="8px" justifyContent="flex-end">
+    <Grid container gap="10px" justifyContent="center" sx={{ width: '180px' }}>
       {ctx.isAuth && (
         <>
           <StyledLogout onClick={logoutHandler}> Log out</StyledLogout>
