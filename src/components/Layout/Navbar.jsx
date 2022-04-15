@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import LogInOut from '../Authentification/LogInOut.jsx';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#EAEAEA'
@@ -20,7 +21,8 @@ const StyledButton = styled(Button)({
   display: 'block'
 });
 
-const pages = ['main', 'about', 'questions'];
+// const pages = ['main', 'about', 'questions'];
+const pages = { questions: '', about: 'about' };
 
 function Navbar() {
   return (
@@ -37,14 +39,15 @@ function Navbar() {
           </StyledTypography>
 
           <Grid container sx={{ flex: 1 }}>
-            {pages.map((page) => (
-              <Link key={page} to={'/' + page} style={{ textDecoration: 'none' }}>
+            {Object.keys(pages).map((page) => (
+              <Link key={page} to={'/' + pages[page]} style={{ textDecoration: 'none' }}>
                 <StyledButton key={page} sx={{ my: 2 }}>
                   {page}
                 </StyledButton>
               </Link>
             ))}
           </Grid>
+          <LogInOut type="login" />
         </Toolbar>
       </Container>
     </StyledAppBar>
