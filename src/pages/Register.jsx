@@ -1,14 +1,11 @@
 import { Alert, Avatar, Grid, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
-import useInputField, {
-  emailValidation,
-  nameValidation,
-  passwordValidation
-} from '../services/helpers.js';
+import useInputField from '../services/helpers.js';
 import InputField from '../components/Login/InputField.jsx';
 import SubmitButton from '../components/StyledUI/SubmitButton.jsx';
 import { useState } from 'react';
+import { emailValidation, nameValidation, passwordValidation } from '../services/validators.js';
 
 function Register() {
   const navigate = useNavigate();

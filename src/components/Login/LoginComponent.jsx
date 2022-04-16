@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import AuthContext from '../../store/auth-context.js';
 import InputField from './InputField.jsx';
-import useInputField, { emailValidation, passwordValidation } from '../../services/helpers.js';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
+import useInputField from '../../services/helpers.js';
+import { emailValidation, passwordValidation } from '../../services/validators.js';
 
 function LoginComponent() {
   const ctx = useContext(AuthContext);
