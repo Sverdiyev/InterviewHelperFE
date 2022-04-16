@@ -78,11 +78,10 @@ function LoginComponent() {
         <SubmitButton disabled={passwordIsTouched && emailIsTouched && !formIsValid}>
           Log In
         </SubmitButton>
-
-        <Typography variant="body2" component={Link} to="/signup">
-          Don`t have an account? Register
-        </Typography>
       </Grid>
+      <Typography variant="body2" component={Link} to="/signup">
+        Don`t have an account? Register
+      </Typography>
     </>
   );
 }
