@@ -1,88 +1,130 @@
-import { Avatar, Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Avatar, Grid, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useInputField, {
+  emailValidation,
+  nameValidation,
+  passwordValidation
+} from '../services/helpers.js';
+import InputField from '../components/Login/InputField.jsx';
+import SubmitButton from '../components/StyledUI/SubmitButton.jsx';
+import { useState } from 'react';
 
 function Register() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    });
+  const navigate = useNavigate();
+  const [successfullRegistration, setSuccessfullRegistration] = useState(null);
+
+  const [emailValue, setEmailValue, emailIsValid, emailIsTouched] = useInputField(emailValidation);
+  const [passwordValue, setPasswordValue, passwordIsValid, passwordIsTouched] =
+    useInputField(passwordValidation);
+  const [firstNameValue, setFirstNameValue, firstNameIsValid, firstNameIsTouched] =
+    useInputField(nameValidation);
+  const [lastNameValue, setLastNameValue, lastNameIsValid, lastNameIsTouched] =
+    useInputField(nameValidation);
+
+  const onChangeEmail = (e) => setEmailValue(e);
+  const onChangePassword = (e) => setPasswordValue(e);
+  const onChangeFirstName = (e) => setFirstNameValue(e);
+  const onChangeLastName = (e) => setLastNameValue(e);
+
+  const formIsValid = emailIsValid && passwordIsValid && lastNameIsValid && firstNameIsValid;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formIsValid) {
+      setEmailValue();
+      setPasswordValue();
+      setFirstNameValue();
+      setLastNameValue();
+      return console.log('invalid form');
+    }
+
+    const data = {
+      email: emailValue,
+      password: passwordValue,
+      firstName: firstNameValue,
+      lastName: lastNameValue
+    };
+
+    //send data to BE
+    console.log(data);
+    //if success
+    setSuccessfullRegistration(true);
+
+    if (successfullRegistration) return navigate('/login');
+    setSuccessfullRegistration(false);
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                name="firstName"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-              />
-            </Grid>
+    <Grid container flexDirection="column" alignItems="center" sx={{ width: '400px' }} mt={8}>
+      {successfullRegistration == false && (
+        <Alert
+          severity="error"
+          onClose={() => setSuccessfullRegistration(null)}
+          sx={{ width: '100%', boxSizing: 'border-box' }}>
+          Login Failed
+        </Alert>
+      )}
+
+      <Avatar sx={{ m: 1, backgroundColor: '#bbb' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Register
+      </Typography>
+      <Grid component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <InputField
+              id="firstName"
+              inputValue={firstNameValue}
+              onInputChange={onChangeFirstName}
+              error={firstNameIsTouched && !firstNameIsValid}
+              autofocus
+            />
           </Grid>
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Sign Up
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link to="#">Already have an account? Sign in</Link>
-            </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputField
+              id="lastName"
+              inputValue={lastNameValue}
+              onInputChange={onChangeLastName}
+              error={lastNameIsTouched && !lastNameIsValid}
+              autofocus
+            />
           </Grid>
-        </Box>
-      </Box>
-    </Container>
+          <Grid item xs={12}>
+            <InputField
+              id="email"
+              inputValue={emailValue}
+              onInputChange={onChangeEmail}
+              error={emailIsTouched && !emailIsValid}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputField
+              id="password"
+              inputValue={passwordValue}
+              onInputChange={onChangePassword}
+              error={passwordIsTouched && !passwordIsValid}
+            />
+          </Grid>
+        </Grid>
+        <SubmitButton
+          disabled={
+            passwordIsTouched &&
+            emailIsTouched &&
+            firstNameIsTouched &&
+            lastNameIsTouched &&
+            !formIsValid
+          }>
+          Register
+        </SubmitButton>
+      </Grid>
+      <Typography variant="body2" component={Link} to="/login">
+        Already have an account? Sign in
+      </Typography>
+    </Grid>
   );
 }
 

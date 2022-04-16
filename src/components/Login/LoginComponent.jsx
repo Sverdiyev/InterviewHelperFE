@@ -1,19 +1,19 @@
-import { Alert, Avatar, Button, Grid, Typography } from '@mui/material';
+import { Alert, Avatar, Grid, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import AuthContext from '../../store/auth-context.js';
 import InputField from './InputField.jsx';
-import useInputField from '../../services/helpers.js';
+import useInputField, { emailValidation, passwordValidation } from '../../services/helpers.js';
+import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
 function LoginComponent() {
   const ctx = useContext(AuthContext);
 
-  const validationCb = (value) => !value.length;
   const [successfullLogin, setSuccessfullLogin] = useState(null);
-  const [emailValue, setEmailValue, emailIsValid, emailIsTouched] = useInputField(validationCb);
+  const [emailValue, setEmailValue, emailIsValid, emailIsTouched] = useInputField(emailValidation);
   const [passwordValue, setPasswordValue, passwordIsValid, passwordIsTouched] =
-    useInputField(validationCb);
+    useInputField(passwordValidation);
 
   const formIsValid = emailIsValid && passwordIsValid;
 
@@ -74,19 +74,9 @@ function LoginComponent() {
           error={passwordIsTouched && !passwordIsValid}
         />
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          disabled={passwordIsTouched && emailIsTouched && !formIsValid}
-          sx={{
-            mt: 3,
-            mb: 2,
-            backgroundColor: '#6e6e6e',
-            [':hover']: { backgroundColor: '#545454' }
-          }}>
+        <SubmitButton disabled={passwordIsTouched && emailIsTouched && !formIsValid}>
           Log In
-        </Button>
+        </SubmitButton>
 
         <Typography variant="body2" component={Link} to="/signup">
           Don`t have an account? Register
