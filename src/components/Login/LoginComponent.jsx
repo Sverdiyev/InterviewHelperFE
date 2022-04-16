@@ -4,45 +4,30 @@ import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import AuthContext from '../../store/auth-context.js';
 import InputField from './InputField.jsx';
+import useInputField from '../../services/helpers.js';
 
 function LoginComponent() {
   const ctx = useContext(AuthContext);
 
+  const validationCb = (value) => !value.length;
   const [successfullLogin, setSuccessfullLogin] = useState(null);
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-
-  const [emailIsValid, setEmailIsValid] = useState(false);
-  const [passwordIsValid, setPasswordIsValid] = useState(false);
-
-  const [emailIsTouched, setEmailIsTouched] = useState(false);
-  const [passwordIsTouched, setPasswordIsTouched] = useState(false);
+  const [emailValue, setEmailValue, emailIsValid, emailIsTouched] = useInputField(validationCb);
+  const [passwordValue, setPasswordValue, passwordIsValid, passwordIsTouched] =
+    useInputField(validationCb);
 
   const formIsValid = emailIsValid && passwordIsValid;
 
-  const onChangeEmail = (e) => {
-    setEmailIsTouched(true);
-
-    const value = e.target.value;
-    setEmailValue(value);
-    if (!value.length) return setEmailIsValid(false);
-    setEmailIsValid(true);
-  };
-  const onChangePassword = (e) => {
-    setPasswordIsTouched(true);
-
-    const value = e.target.value;
-    setPasswordValue(value);
-    if (!value.length) return setPasswordIsValid(false);
-    setPasswordIsValid(true);
-  };
+  const onChangeEmail = (e) => setEmailValue(e);
+  const onChangePassword = (e) => setPasswordValue(e);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEmailIsTouched(true);
-    setPasswordIsTouched(true);
 
-    if (!formIsValid) return;
+    if (!formIsValid) {
+      setEmailValue();
+      setPasswordValue();
+      return console.log('invalid form');
+    }
 
     const data = { email: emailValue, password: passwordValue };
 
