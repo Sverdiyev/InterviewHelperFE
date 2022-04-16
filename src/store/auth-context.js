@@ -13,7 +13,8 @@ const AuthContext = createContext({
 const ACTIONS = {
   LOG_OUT: 'logout',
   LOG_IN: 'login',
-  TOGGLE_POPUP: 'logglePopup'
+  TOGGLE_POPUP: 'togglePopup',
+  HIDE_POPUP: 'hidePopup'
 };
 
 const initialState = {
@@ -28,13 +29,13 @@ const reducer = (state, action) => {
   if (action.type === ACTIONS.LOG_IN) {
     newState.isAuth = true;
     newState.name = { ...action.name };
-    console.log('🚀 ~ reducer ~ action', action);
-    console.log('🚀 ~ reducer ~ newState', newState);
   } else if (action.type === ACTIONS.LOG_OUT) {
     newState.isAuth = false;
     newState.name = { firstName: '', lastName: '' };
   } else if (action.type === ACTIONS.TOGGLE_POPUP) {
     newState.popupIsVisible = !state.popupIsVisible;
+  } else if (action.type === ACTIONS.HIDE_POPUP) {
+    newState.popupIsVisible = false;
   }
 
   return {
@@ -49,7 +50,7 @@ export function AuthContextProvider({ children }) {
 
   const logIn = (name) => {
     dispatch({ type: ACTIONS.LOG_IN, name });
-    dispatch({ type: ACTIONS.TOGGLE_POPUP });
+    dispatch({ type: ACTIONS.HIDE_POPUP });
 
     navigate('/');
   };

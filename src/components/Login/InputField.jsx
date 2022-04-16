@@ -5,7 +5,7 @@ function InputField({ id, error, inputValue, onInputChange, autoFocus }) {
   return (
     <>
       <TextField
-        margin="normal"
+        margin="dense"
         required
         fullWidth
         id={id}
@@ -19,7 +19,7 @@ function InputField({ id, error, inputValue, onInputChange, autoFocus }) {
         error={error}
       />
       {error && (
-        <Typography color="red" variant="body2">
+        <Typography color="red" variant="body2" component="span">
           Enter valid {id}
         </Typography>
       )}
