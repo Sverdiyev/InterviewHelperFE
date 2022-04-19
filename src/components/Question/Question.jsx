@@ -6,7 +6,7 @@ import QuestionHeading from './QuestionHeading.jsx';
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
-const StyledCard = styled(Card)({
+export const StyledCard = styled(Card)({
   textAlign: 'left',
   width: '60%',
   padding: '1rem',

@@ -1,6 +1,7 @@
 import { CircularProgress, Grid } from '@mui/material';
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
+import FloatingAddQuestions from '../components/FloatingAddQuestions.jsx';
 import Question from '../components/Question/Question.jsx';
 import Search from '../components/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
@@ -20,10 +21,10 @@ function Questions() {
           <CircularProgress size="30%" />
         </Grid>
       )}
-
       {error && <div>error</div>}
       {isSuccess && data.map((question) => <Question key={question.Id} {...question} />)}
       {isSuccess && data.length === 0 && <div>No Questions Found</div>}
+      <FloatingAddQuestions />
     </>
   );
 }
