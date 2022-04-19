@@ -61,6 +61,7 @@ function LoginComponent() {
       </Typography>
       <Grid item component="form" onSubmit={handleSubmit} noValidate>
         <InputField
+          label="email"
           id="email"
           inputValue={emailValue}
           onInputChange={onChangeEmail}
@@ -69,6 +70,7 @@ function LoginComponent() {
         />
 
         <InputField
+          label="password"
           id="password"
           inputValue={passwordValue}
           onInputChange={onChangePassword}
