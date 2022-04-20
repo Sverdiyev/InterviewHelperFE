@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Dialog, Grid } from '@mui/material';
-import AuthContext from '../../store/auth-context.js';
 import LoginComponent from './LoginComponent.jsx';
+import LoginPopupCtx from '../../store/login-popup-context.js';
 
 function LoginPopup() {
-  const { popupIsVisible, togglePopup } = useContext(AuthContext);
+  const { popupIsVisible, hidePopup } = useContext(LoginPopupCtx);
 
   return (
-    <Dialog open={popupIsVisible} onClose={togglePopup}>
+    <Dialog open={popupIsVisible} onClose={hidePopup}>
       <Grid
         container
         flexDirection="column"

@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
 import App from './App';
+import { LoginPopupCtxProvider } from './store/login-popup-context.js';
 import { AuthContextProvider } from './store/auth-context.js';
 
 const queryClient = new QueryClient();
@@ -13,9 +14,11 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
+        <LoginPopupCtxProvider>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </LoginPopupCtxProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
