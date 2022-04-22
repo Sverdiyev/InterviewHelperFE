@@ -75,6 +75,7 @@ function Register() {
           <Grid item xs={12} sm={6}>
             <InputField
               id="firstName"
+              label="First Name"
               inputValue={firstNameValue}
               onInputChange={onChangeFirstName}
               error={firstNameIsTouched && !firstNameIsValid}
@@ -84,6 +85,7 @@ function Register() {
           <Grid item xs={12} sm={6}>
             <InputField
               id="lastName"
+              label="Last Name"
               inputValue={lastNameValue}
               onInputChange={onChangeLastName}
               error={lastNameIsTouched && !lastNameIsValid}
@@ -93,6 +95,7 @@ function Register() {
           <Grid item xs={12}>
             <InputField
               id="email"
+              label="Email"
               inputValue={emailValue}
               onInputChange={onChangeEmail}
               error={emailIsTouched && !emailIsValid}
@@ -101,6 +104,8 @@ function Register() {
           <Grid item xs={12}>
             <InputField
               id="password"
+              label="Password"
+              type="password"
               inputValue={passwordValue}
               onInputChange={onChangePassword}
               error={passwordIsTouched && !passwordIsValid}

@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../store/auth-context.js';
+import LoginPopupCtx from '../../store/login-popup-context.js';
 
 const StyledButton = styled(Button)({
   padding: '0.25rem 1rem',
@@ -29,23 +30,24 @@ const StyledLogout = styled(StyledButton)({
 });
 
 function AuthActions() {
-  const ctx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
+  const loginPopupCtx = useContext(LoginPopupCtx);
 
   const navigate = useNavigate();
 
-  const loginHandler = () => ctx.togglePopup();
+  const loginHandler = () => loginPopupCtx.showPopup();
   const registerHandler = () => navigate('/signup');
-  const logoutHandler = () => ctx.logOut();
+  const logoutHandler = () => authCtx.logOut();
 
   return (
     <Grid container gap="10px" justifyContent="center" sx={{ width: '180px' }}>
-      {ctx.isAuth && (
+      {authCtx.isAuth && (
         <>
           <StyledLogout onClick={logoutHandler}> Log out</StyledLogout>
-          <Avatar>{ctx.name.firstName[0] + ctx.name.lastName[0]}</Avatar>
+          <Avatar>{authCtx.name.firstName[0] + authCtx.name.lastName[0]}</Avatar>
         </>
       )}
-      {!ctx.isAuth && (
+      {!authCtx.isAuth && (
         <>
           <StyledLogin onClick={loginHandler}>Log in</StyledLogin>
           <StyledRegister onClick={registerHandler}>Register</StyledRegister>
