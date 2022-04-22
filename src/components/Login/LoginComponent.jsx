@@ -7,9 +7,11 @@ import InputField from './InputField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import useInputField from '../../services/helpers.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
+import LoginPopupCtx from '../../store/login-popup-context.js';
 
 function LoginComponent() {
-  const ctx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
+  const loginPopupCtx = useContext(LoginPopupCtx);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
   const [emailValue, setEmailValue, emailIsValid, emailIsTouched] = useInputField(emailValidation);
@@ -38,7 +40,9 @@ function LoginComponent() {
     //fetch name from BE
     const name = { firstName: 'Sasha', lastName: 'Verdiyev' };
     //if valid, login
-    ctx.logIn(name);
+
+    authCtx.logIn(name);
+    loginPopupCtx.hidePopup();
     //if not, display message
     setSuccessfullLogin(false);
   };
@@ -61,6 +65,7 @@ function LoginComponent() {
       </Typography>
       <Grid item component="form" onSubmit={handleSubmit} noValidate>
         <InputField
+          label="email"
           id="email"
           inputValue={emailValue}
           onInputChange={onChangeEmail}
@@ -69,7 +74,9 @@ function LoginComponent() {
         />
 
         <InputField
+          label="password"
           id="password"
+          type="password"
           inputValue={passwordValue}
           onInputChange={onChangePassword}
           error={passwordIsTouched && !passwordIsValid}

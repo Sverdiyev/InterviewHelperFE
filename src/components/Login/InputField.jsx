@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, Typography } from '@mui/material';
 
-function InputField({ id, error, inputValue, onInputChange, autoFocus, label, ...rest }) {
+function InputField({ id, error, inputValue, onInputChange, autoFocus, label, type, ...rest }) {
   return (
     <>
       <TextField
@@ -9,7 +9,7 @@ function InputField({ id, error, inputValue, onInputChange, autoFocus, label, ..
         required
         fullWidth
         id={id}
-        type={id === 'password' ? 'password' : 'text'}
+        type={type || 'text'}
         label={label[0].toUpperCase() + label.slice(1)}
         name={id}
         autoComplete={id}
@@ -21,7 +21,7 @@ function InputField({ id, error, inputValue, onInputChange, autoFocus, label, ..
       />
       {error && (
         <Typography color="red" variant="body2" component="span">
-          Enter valid {id}
+          Enter valid {label.toLowerCase()}
         </Typography>
       )}
     </>

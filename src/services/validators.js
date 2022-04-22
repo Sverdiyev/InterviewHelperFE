@@ -5,6 +5,6 @@ export const emailValidation = (email) => {
 
 export const passwordValidation = (value) => !!value.length;
 export const nameValidation = (name) => {
-  const nameRegEx = new RegExp('/[1-9]/');
+  const nameRegEx = new RegExp('[1-9]');
   return !nameRegEx.test(name);
 };

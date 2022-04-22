@@ -21,7 +21,6 @@ const StyledButton = styled(Button)({
   display: 'block'
 });
 
-// const pages = ['main', 'about', 'questions'];
 const pages = { questions: '', about: 'about' };
 
 function Navbar() {
