@@ -82,7 +82,7 @@ function LoginComponent() {
           error={passwordIsTouched && !passwordIsValid}
         />
 
-        <SubmitButton disabled={passwordIsTouched && emailIsTouched && !formIsValid}>
+        <SubmitButton disabled={(passwordIsTouched || emailIsTouched) && !formIsValid}>
           Log In
         </SubmitButton>
       </Grid>

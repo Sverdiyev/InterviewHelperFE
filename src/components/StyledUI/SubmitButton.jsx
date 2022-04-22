@@ -9,9 +9,9 @@ const StyledButton = styled(Button)({
   [':hover']: { backgroundColor: '#545454' }
 });
 
-function SubmitButton({ children }) {
+function SubmitButton({ children, disabled }) {
   return (
-    <StyledButton type="submit" fullWidth variant="contained">
+    <StyledButton type="submit" fullWidth variant="contained" disabled={disabled}>
       {children}
     </StyledButton>
   );
