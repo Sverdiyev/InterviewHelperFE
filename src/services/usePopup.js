@@ -21,8 +21,6 @@ export const usePopup = () => {
 
     if (action.type === ACTIONS.SHOW_POPUP) {
       newState.popupIsVisible = true;
-      console.log('shwo');
-      console.log(state.popupIsVisible);
     } else if (action.type === ACTIONS.HIDE_POPUP) {
       newState.popupIsVisible = false;
     }

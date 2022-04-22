@@ -12,7 +12,6 @@ const StyledFab = styled(Fab)({
 
 function FloatingAddQuestions() {
   const { showPopup } = useContext(AddQuestionCtx);
-  console.log('🚀 ~ FloatingAddQuestions ~ showPopup', showPopup);
 
   return (
     <StyledFab color="primary" aria-label="add" onClick={showPopup}>
