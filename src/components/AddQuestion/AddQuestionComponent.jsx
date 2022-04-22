@@ -1,8 +1,8 @@
-import { Checkbox, FormControlLabel, Grid } from '@mui/material';
+import { Avatar, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import React from 'react';
-import useInputField from '../services/helpers.js';
-import InputField from './Login/InputField.jsx';
-import { StyledCard } from './Question/Question.jsx';
+import useInputField from '../../services/helpers.js';
+import InputField from '../Login/InputField.jsx';
+import AddIcon from '@mui/icons-material/AddCircleOutline';
 
 function AddQuestionComponent() {
   const [headingValue, setHeadingValue, headingIsValid, headingIsTouched] = useInputField(
@@ -12,8 +12,15 @@ function AddQuestionComponent() {
   const [tagsValue, setTagsValue, tagsIsValid, tagsIsTouched] = useInputField(() => true);
 
   return (
-    <StyledCard variant="outlined" component={Grid} container direction="column">
+    <>
+      <Avatar sx={{ m: 1, backgroundColor: '#a0a0a0' }}>
+        <AddIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Add Question
+      </Typography>
       <InputField
+        label="Heading"
         id="heading"
         inputValue={headingValue}
         onInputChange={setHeadingValue}
@@ -22,12 +29,14 @@ function AddQuestionComponent() {
       />
       <InputField
         id="note"
+        label="Note"
         inputValue={noteValue}
         onInputChange={setNoteValue}
         error={noteIsTouched && !noteIsValid}
       />
       <InputField
         id="tags"
+        label="Tags"
         inputValue={tagsValue}
         onInputChange={setTagsValue}
         error={tagsIsTouched && !tagsIsValid}
@@ -36,7 +45,7 @@ function AddQuestionComponent() {
         control={<Checkbox onChange={(e) => console.log(e.target.checked)} />}
         label="Easy to google"
       />
-    </StyledCard>
+    </>
   );
 }
 
