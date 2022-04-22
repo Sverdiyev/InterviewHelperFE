@@ -3,6 +3,7 @@ import React from 'react';
 import useInputField from '../../services/helpers.js';
 import InputField from '../Login/InputField.jsx';
 import AddIcon from '@mui/icons-material/AddCircleOutline';
+import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
 function AddQuestionComponent() {
   const [headingValue, setHeadingValue, headingIsValid, headingIsTouched] = useInputField(
@@ -45,6 +46,7 @@ function AddQuestionComponent() {
         control={<Checkbox onChange={(e) => console.log(e.target.checked)} />}
         label="Easy to google"
       />
+      <SubmitButton>Add Question</SubmitButton>
     </>
   );
 }

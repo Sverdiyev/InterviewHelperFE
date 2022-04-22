@@ -5,7 +5,7 @@ import AddQuestionComponent from '../components/AddQuestion/AddQuestionComponent
 function AddQuestion() {
   return (
     <Grid container flexDirection="column" alignItems="center" sx={{ width: '400px' }} mt={8}>
-      <AddQuestionComponent />;
+      <AddQuestionComponent />
     </Grid>
   );
 }
