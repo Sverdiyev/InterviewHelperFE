@@ -8,7 +8,6 @@ import About from './pages/About.jsx';
 import Login from './pages/Login.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Register from './pages/Register.jsx';
-import LoginPopup from './components/Login/LoginPopup.jsx';
 import AddQuestion from './pages/AddQuestion.jsx';
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
     <div className="App">
       <Navbar />
       <main>
-        <LoginPopup />
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
