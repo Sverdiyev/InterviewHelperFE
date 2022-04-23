@@ -1,13 +1,9 @@
 import { Dialog, Grid } from '@mui/material';
-import React, { useContext } from 'react';
-import AddQuestionCtx from '../../store/add-question-popup-context.js';
 import AddQuestionComponent from './AddQuestionComponent.jsx';
 
-function AddQuestionPopup() {
-  const { popupIsVisible, hidePopup } = useContext(AddQuestionCtx);
-
+function AddQuestionPopup({ popupIsVisible, setPopupIsVisible }) {
   return (
-    <Dialog open={popupIsVisible} onClose={hidePopup}>
+    <Dialog open={popupIsVisible} onClose={() => setPopupIsVisible(false)}>
       <Grid
         container
         flexDirection="column"

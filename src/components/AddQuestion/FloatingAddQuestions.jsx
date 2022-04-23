@@ -1,8 +1,6 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Fab } from '@mui/material';
 import { styled } from '@mui/system';
-import { useContext } from 'react';
-import AddQuestionCtx from '../../store/add-question-popup-context.js';
 
 const StyledFab = styled(Fab)({
   position: 'fixed',
@@ -10,11 +8,9 @@ const StyledFab = styled(Fab)({
   right: '20px'
 });
 
-function FloatingAddQuestions() {
-  const { showPopup } = useContext(AddQuestionCtx);
-
+function FloatingAddQuestions({ setPopupIsVisible }) {
   return (
-    <StyledFab color="primary" aria-label="add" onClick={showPopup}>
+    <StyledFab color="primary" aria-label="add" onClick={() => setPopupIsVisible(true)}>
       <AddIcon />
     </StyledFab>
   );

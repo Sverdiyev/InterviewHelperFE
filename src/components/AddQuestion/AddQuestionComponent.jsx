@@ -1,16 +1,15 @@
 import { Avatar, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import React, { useRef } from 'react';
-import useInputField from '../../services/helpers.js';
 import InputField from '../Login/InputField.jsx';
 import AddIcon from '@mui/icons-material/AddCircleOutline';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import { questionHeadingValidaton } from '../../services/validators.js';
+import useInputField from '../../services/useInputField.js';
 
 function AddQuestionComponent() {
-  const [headingValue, setHeadingValue, headingIsValid, headingIsTouched] =
-    useInputField(questionHeadingValidaton);
-  const [noteValue, setNoteValue, noteIsValid, noteIsTouched] = useInputField(() => true);
-  const [tagsValue, setTagsValue, tagsIsValid, tagsIsTouched] = useInputField(() => true);
+  const [headingValue, setHeadingValue, headingIsValid] = useInputField(questionHeadingValidaton);
+  const [noteValue, setNoteValue] = useInputField();
+  const [tagsValue, setTagsValue] = useInputField();
 
   const easyToGoogleValue = useRef(true);
   const formIsValid = headingIsValid;
@@ -54,21 +53,14 @@ function AddQuestionComponent() {
           inputValue={headingValue}
           onInputChange={setHeadingValue}
           autoFocus
-          error={headingIsTouched && !headingIsValid}
+          error={headingIsValid === false}
         />
-        <InputField
-          id="note"
-          label="Note"
-          inputValue={noteValue}
-          onInputChange={setNoteValue}
-          error={noteIsTouched && !noteIsValid}
-        />
+        <InputField id="note" label="Note" inputValue={noteValue} onInputChange={setNoteValue} />
         <InputField
           id="tags"
           label="Tags - comma-separated"
           inputValue={tagsValue}
           onInputChange={setTagsValue}
-          error={tagsIsTouched && !tagsIsValid}
         />
         <FormControlLabel
           control={
@@ -76,7 +68,7 @@ function AddQuestionComponent() {
           }
           label="Easy to google"
         />
-        <SubmitButton disabled={headingIsTouched && !headingIsValid}>Add Question</SubmitButton>
+        <SubmitButton disabled={!headingIsValid}>Add Question</SubmitButton>
       </form>
     </>
   );
