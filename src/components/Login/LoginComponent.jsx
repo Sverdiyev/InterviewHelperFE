@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import AuthContext from '../../store/auth-context.js';
 import InputField from './InputField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
-import useInputField from '../../services/helpers.js';
+import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
 import LoginPopupCtx from '../../store/login-popup-context.js';
 
@@ -14,9 +14,8 @@ function LoginComponent() {
   const loginPopupCtx = useContext(LoginPopupCtx);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
-  const [emailValue, setEmailValue, emailIsValid, emailIsTouched] = useInputField(emailValidation);
-  const [passwordValue, setPasswordValue, passwordIsValid, passwordIsTouched] =
-    useInputField(passwordValidation);
+  const [emailValue, setEmailValue, emailIsValid] = useInputField(emailValidation);
+  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField(passwordValidation);
 
   const formIsValid = emailIsValid && passwordIsValid;
 
@@ -70,7 +69,7 @@ function LoginComponent() {
           inputValue={emailValue}
           onInputChange={onChangeEmail}
           autoFocus
-          error={emailIsTouched && !emailIsValid}
+          error={emailIsValid === false}
         />
 
         <InputField
@@ -79,7 +78,7 @@ function LoginComponent() {
           type="password"
           inputValue={passwordValue}
           onInputChange={onChangePassword}
-          error={passwordIsTouched && !passwordIsValid}
+          error={passwordIsValid === false}
         />
 
         <SubmitButton disabled={!formIsValid}>Log In</SubmitButton>
