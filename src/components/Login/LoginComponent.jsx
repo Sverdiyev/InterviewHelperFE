@@ -7,11 +7,9 @@ import InputField from './InputField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
-import LoginPopupCtx from '../../store/login-popup-context.js';
 
 function LoginComponent() {
   const authCtx = useContext(AuthContext);
-  const loginPopupCtx = useContext(LoginPopupCtx);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
   const [emailValue, setEmailValue, emailIsValid] = useInputField(emailValidation);
@@ -41,7 +39,6 @@ function LoginComponent() {
     //if valid, login
 
     authCtx.logIn(name);
-    loginPopupCtx.hidePopup();
     //if not, display message
     setSuccessfullLogin(false);
   };
