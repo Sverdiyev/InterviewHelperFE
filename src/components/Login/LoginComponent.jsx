@@ -29,7 +29,7 @@ function LoginComponent() {
     if (!formIsValid) {
       setEmailValue();
       setPasswordValue();
-      return console.log('invalid form');
+      return;
     }
 
     const data = { email: emailValue, password: passwordValue };
