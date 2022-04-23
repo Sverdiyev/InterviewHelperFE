@@ -3,7 +3,6 @@ import { styled } from '@mui/system';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../store/auth-context.js';
-import LoginPopupCtx from '../../store/login-popup-context.js';
 
 const StyledButton = styled(Button)({
   padding: '0.25rem 1rem',
@@ -29,13 +28,12 @@ const StyledLogout = styled(StyledButton)({
   [':hover']: { backgroundColor: '#fff' }
 });
 
-function AuthActions() {
+function AuthActions({ setPopupIsVisible }) {
   const authCtx = useContext(AuthContext);
-  const loginPopupCtx = useContext(LoginPopupCtx);
 
   const navigate = useNavigate();
 
-  const loginHandler = () => loginPopupCtx.showPopup();
+  const loginHandler = () => setPopupIsVisible(true);
   const registerHandler = () => navigate('/signup');
   const logoutHandler = () => authCtx.logOut();
 
