@@ -82,9 +82,7 @@ function LoginComponent() {
           error={passwordIsTouched && !passwordIsValid}
         />
 
-        <SubmitButton disabled={(passwordIsTouched || emailIsTouched) && !formIsValid}>
-          Log In
-        </SubmitButton>
+        <SubmitButton disabled={!formIsValid}>Log In</SubmitButton>
       </Grid>
       <Typography variant="body2" component={Link} to="/signup">
         Don`t have an account? Register
