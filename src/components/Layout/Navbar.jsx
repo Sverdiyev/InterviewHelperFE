@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/system';
-import AuthActions from '../Login/AuthActions.jsx';
+import AuthActions from '../AuthActions.jsx';
 import LoginPopup from '../Login/LoginPopup.jsx';
 
 const StyledAppBar = styled(AppBar)({

@@ -2,7 +2,7 @@ import { Avatar, Button, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../store/auth-context.js';
+import AuthContext from '../store/auth-context.js';
 
 const StyledButton = styled(Button)({
   padding: '0.25rem 1rem',

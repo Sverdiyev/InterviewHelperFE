@@ -3,7 +3,7 @@ import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import AuthContext from '../../store/auth-context.js';
-import InputField from './InputField.jsx';
+import InputField from '../StyledUI/InputField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
