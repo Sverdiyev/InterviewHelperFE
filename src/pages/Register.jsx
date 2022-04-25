@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import RegisterComponent from '../components/RegisterComponent.jsx';
+import RegisterComponent from '../components/Register/RegisterComponent.jsx';
 
 function Register() {
   return (
