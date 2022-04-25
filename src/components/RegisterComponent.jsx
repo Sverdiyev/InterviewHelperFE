@@ -11,13 +11,10 @@ function RegisterComponent() {
   const navigate = useNavigate();
   const [successfullRegistration, setSuccessfullRegistration] = useState(null);
 
-  const [emailValue, setEmailValue, emailIsValid, emailIsTouched] = useInputField(emailValidation);
-  const [passwordValue, setPasswordValue, passwordIsValid, passwordIsTouched] =
-    useInputField(passwordValidation);
-  const [firstNameValue, setFirstNameValue, firstNameIsValid, firstNameIsTouched] =
-    useInputField(nameValidation);
-  const [lastNameValue, setLastNameValue, lastNameIsValid, lastNameIsTouched] =
-    useInputField(nameValidation);
+  const [emailValue, setEmailValue, emailIsValid] = useInputField(emailValidation);
+  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField(passwordValidation);
+  const [firstNameValue, setFirstNameValue, firstNameIsValid] = useInputField(nameValidation);
+  const [lastNameValue, setLastNameValue, lastNameIsValid] = useInputField(nameValidation);
 
   const onChangeEmail = (e) => setEmailValue(e);
   const onChangePassword = (e) => setPasswordValue(e);
@@ -34,7 +31,7 @@ function RegisterComponent() {
       setPasswordValue();
       setFirstNameValue();
       setLastNameValue();
-      return console.log('invalid form');
+      return;
     }
 
     const data = {
@@ -78,7 +75,7 @@ function RegisterComponent() {
               label="First Name"
               inputValue={firstNameValue}
               onInputChange={onChangeFirstName}
-              error={firstNameIsTouched && !firstNameIsValid}
+              error={firstNameIsValid === false}
               autofocus
             />
           </Grid>
@@ -88,7 +85,7 @@ function RegisterComponent() {
               label="Last Name"
               inputValue={lastNameValue}
               onInputChange={onChangeLastName}
-              error={lastNameIsTouched && !lastNameIsValid}
+              error={lastNameIsValid === false}
               autofocus
             />
           </Grid>
@@ -98,7 +95,7 @@ function RegisterComponent() {
               label="Email"
               inputValue={emailValue}
               onInputChange={onChangeEmail}
-              error={emailIsTouched && !emailIsValid}
+              error={emailIsValid === false}
             />
           </Grid>
           <Grid item xs={12}>
@@ -108,20 +105,11 @@ function RegisterComponent() {
               type="password"
               inputValue={passwordValue}
               onInputChange={onChangePassword}
-              error={passwordIsTouched && !passwordIsValid}
+              error={passwordIsValid === false}
             />
           </Grid>
         </Grid>
-        <SubmitButton
-          disabled={
-            passwordIsTouched &&
-            emailIsTouched &&
-            firstNameIsTouched &&
-            lastNameIsTouched &&
-            !formIsValid
-          }>
-          Register
-        </SubmitButton>
+        <SubmitButton disabled={!formIsValid}>Register</SubmitButton>
       </Grid>
       <Typography variant="body2" component={Link} to="/login">
         Already have an account? Sign in
