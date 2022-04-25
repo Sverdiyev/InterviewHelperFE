@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import AuthActions from '../Login/AuthActions.jsx';
+import LoginPopup from '../Login/LoginPopup.jsx';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#EAEAEA'
@@ -20,34 +23,39 @@ const StyledButton = styled(Button)({
   display: 'block'
 });
 
-const pages = ['main', 'about', 'questions'];
+const pages = { questions: '', about: 'about' };
 
 function Navbar() {
+  const [popupIsVisible, setPopupIsVisible] = useState(false);
   return (
-    <StyledAppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <StyledTypography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{ mr: 2, display: 'flex' }}>
-            Interview Helper
-          </StyledTypography>
+    <>
+      <LoginPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
+      <StyledAppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <StyledTypography
+              variant="h6"
+              noWrap
+              component={Link}
+              to="/"
+              sx={{ mr: 2, display: 'flex' }}>
+              Interview Helper
+            </StyledTypography>
 
-          <Grid container sx={{ flex: 1 }}>
-            {pages.map((page) => (
-              <Link key={page} to={'/' + page} style={{ textDecoration: 'none' }}>
-                <StyledButton key={page} sx={{ my: 2 }}>
-                  {page}
-                </StyledButton>
-              </Link>
-            ))}
-          </Grid>
-        </Toolbar>
-      </Container>
-    </StyledAppBar>
+            <Grid container sx={{ flex: 1 }}>
+              {Object.keys(pages).map((page) => (
+                <Link key={page} to={'/' + pages[page]} style={{ textDecoration: 'none' }}>
+                  <StyledButton key={page} sx={{ my: 2 }}>
+                    {page}
+                  </StyledButton>
+                </Link>
+              ))}
+            </Grid>
+            <AuthActions setPopupIsVisible={setPopupIsVisible} />
+          </Toolbar>
+        </Container>
+      </StyledAppBar>
+    </>
   );
 }
 

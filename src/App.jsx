@@ -2,10 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
-import About from './pages/About.jsx';
-import Main from './pages/Main.jsx';
-import NotFound from './pages/NotFound.jsx';
+
 import Questions from './pages/Questions.jsx';
+import About from './pages/About.jsx';
+import Login from './pages/Login.jsx';
+import NotFound from './pages/NotFound.jsx';
+import Register from './pages/Register.jsx';
 
 function App() {
   return (
@@ -14,9 +16,9 @@ function App() {
       <main>
         <Routes>
           <Route path="/about" element={<About />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/questions" element={<Questions />} />
-          <Route path="/" element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/" element={<Questions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
