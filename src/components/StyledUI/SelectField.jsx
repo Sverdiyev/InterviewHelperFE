@@ -8,7 +8,7 @@ function SelectField({ value, setValue, options, label }) {
       <Select
         labelId={label + '-label'}
         label="Complexity"
-        value={value}
+        value={value || 'easy'}
         onChange={(e) => setValue(e)}>
         {options.map((option) => (
           <MenuItem key={option + '-select'} value={option}>

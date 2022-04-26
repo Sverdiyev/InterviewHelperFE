@@ -12,7 +12,7 @@ function AddQuestionForm() {
   const [tagsValue, setTagsValue] = useInputField();
   const [complexityValue, setComplexityValue] = useInputField();
 
-  const easyToGoogleValue = useRef(true);
+  const easyToGoogleRef = useRef(true);
   const formIsValid = headingIsValid;
 
   const handleSubmit = (e) => {
@@ -27,19 +27,17 @@ function AddQuestionForm() {
 
     const data = {
       questionContent: headingValue,
-      Note: noteValue,
-      easyToGoogle: easyToGoogleValue,
-      tags: tagsValue.split(',').map((tag) => tag.trim())
-      //, complexity:...
+      note: noteValue,
+      easyToGoogle: easyToGoogleRef.current,
+      tags: tagsValue.split(',').map((tag) => tag.trim()),
+      complexity: complexityValue
     };
 
     console.log(data);
-    //TODO extract inputs
-
     //send data to BE
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} noValidate>
       <InputField
         id="heading"
         label="Heading"
@@ -64,7 +62,10 @@ function AddQuestionForm() {
         />
         <FormControlLabel
           control={
-            <Checkbox onChange={(e) => (easyToGoogleValue.current.value = e.target.checked)} />
+            <Checkbox
+              defaultChecked
+              onChange={(e) => (easyToGoogleRef.current = e.target.checked)}
+            />
           }
           label="Easy to google"
         />
