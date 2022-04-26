@@ -6,6 +6,7 @@ function SelectField({ value, setValue, options, label }) {
     <FormControl sx={{ width: '50%', mt: 1 }}>
       <InputLabel id={label + '-label'}>{label[0].toUpperCase() + label.slice(1)}</InputLabel>
       <Select
+        sx={{ textAlign: 'left' }}
         labelId={label + '-label'}
         label="Complexity"
         value={value || 'easy'}
