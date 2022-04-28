@@ -8,7 +8,7 @@ function AddQuestionPopup({ popupIsVisible, setPopupIsVisible }) {
         container
         flexDirection="column"
         alignItems="center"
-        sx={{ width: '400px', padding: '30px 30px 50px', boxSizing: 'border-box' }}>
+        sx={{ width: '600px', padding: '30px 30px 50px', boxSizing: 'border-box' }}>
         <AddQuestionComponent />
       </Grid>
     </Dialog>

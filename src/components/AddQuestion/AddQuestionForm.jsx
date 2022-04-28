@@ -37,7 +37,7 @@ function AddQuestionForm() {
     //send data to BE
   };
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
       <InputField
         id="heading"
         label="Heading"
@@ -45,6 +45,8 @@ function AddQuestionForm() {
         onInputChange={setHeadingValue}
         autoFocus
         error={headingIsValid === false}
+        multiline
+        rows={4}
       />
       <InputField id="note" label="Note" inputValue={noteValue} onInputChange={setNoteValue} />
       <InputField
@@ -53,7 +55,7 @@ function AddQuestionForm() {
         inputValue={tagsValue}
         onInputChange={setTagsValue}
       />
-      <Grid container justifyContent="space-between" alignItems="center">
+      <Grid container alignItems="center">
         <SelectField
           value={complexityValue}
           setValue={setComplexityValue}
@@ -61,6 +63,7 @@ function AddQuestionForm() {
           options={['easy', 'medium', 'hard']}
         />
         <FormControlLabel
+          sx={{ margin: '0 auto' }}
           control={
             <Checkbox
               defaultChecked
