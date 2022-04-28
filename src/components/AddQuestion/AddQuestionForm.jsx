@@ -57,7 +57,7 @@ function AddQuestionForm() {
       />
       <Grid container alignItems="center">
         <SelectField
-          value={complexityValue}
+          value={complexityValue || 'easy'}
           setValue={setComplexityValue}
           label="complexity"
           options={['easy', 'medium', 'hard']}

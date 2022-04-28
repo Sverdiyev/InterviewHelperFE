@@ -9,7 +9,7 @@ function SelectField({ value, setValue, options, label }) {
         sx={{ textAlign: 'left' }}
         labelId={label + '-label'}
         label="Complexity"
-        value={value || 'easy'}
+        value={value}
         onChange={(e) => setValue(e)}>
         {options.map((option) => (
           <MenuItem key={option + '-select'} value={option}>

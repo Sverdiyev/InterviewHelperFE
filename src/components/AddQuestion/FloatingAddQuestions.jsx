@@ -6,7 +6,8 @@ const StyledFab = styled(Fab)({
   position: 'fixed',
   bottom: '35px',
   right: '20px',
-  backgroundColor: '#878787'
+  backgroundColor: '#878787',
+  [':hover']: { backgroundColor: '#343434' }
 });
 
 function FloatingAddQuestions({ setPopupIsVisible }) {
