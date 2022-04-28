@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel, Grid } from '@mui/material';
 import React, { useRef } from 'react';
+import { postQuestion } from '../../services/api-requests/questions.js';
 import useInputField from '../../services/useInputField.js';
 import { questionHeadingValidaton } from '../../services/validators.js';
 import InputField from '../StyledUI/InputField.jsx';
@@ -22,7 +23,7 @@ function AddQuestionForm() {
       setHeadingValue();
       setNoteValue();
       setTagsValue();
-      return console.log('invalid form');
+      return;
     }
 
     const data = {
@@ -30,10 +31,10 @@ function AddQuestionForm() {
       note: noteValue,
       easyToGoogle: easyToGoogleRef.current,
       tags: tagsValue.split(',').map((tag) => tag.trim()),
-      complexity: complexityValue
+      complexity: complexityValue || 'easy'
     };
 
-    console.log(data);
+    postQuestion(data);
     //send data to BE
   };
   return (
