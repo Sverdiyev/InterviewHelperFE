@@ -24,3 +24,16 @@ export const postData = async (endpoint, inputData) => {
     body: JSON.stringify(inputData)
   });
 };
+
+//generic put request
+export const putData = async (endpoint, inputData) => {
+  const url = baseUrl + endpoint;
+
+  await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(inputData)
+  });
+};
