@@ -22,7 +22,7 @@ function AddQuestionForm() {
       setHeadingValue();
       setNoteValue();
       setTagsValue();
-      return console.log('invalid form');
+      return;
     }
 
     const data = {
@@ -30,7 +30,7 @@ function AddQuestionForm() {
       note: noteValue,
       easyToGoogle: easyToGoogleRef.current,
       tags: tagsValue.split(',').map((tag) => tag.trim()),
-      complexity: complexityValue
+      complexity: complexityValue || 'easy'
     };
 
     console.log(data);
