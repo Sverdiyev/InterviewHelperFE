@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-const baseUrl = 'https://6249c785fd7e30c51c0668f4.mockapi.io/';
+const baseUrl = 'https://localhost:3001';
 
 // generic get request
 export const getEndpoint = (endpoint) => {
