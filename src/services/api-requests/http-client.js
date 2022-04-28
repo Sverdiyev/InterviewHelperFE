@@ -16,24 +16,26 @@ export const getEndpoint = (endpoint) => {
 export const postData = async (endpoint, inputData) => {
   const url = baseUrl + endpoint;
 
-  await fetch(url, {
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(inputData)
   });
+  return res.ok;
 };
 
 //generic put request
 export const putData = async (endpoint, inputData) => {
   const url = baseUrl + endpoint;
 
-  await fetch(url, {
+  const res = await fetch(url, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(inputData)
   });
+  return res.ok;
 };
