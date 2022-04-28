@@ -8,7 +8,7 @@ import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
 
-function LoginComponent() {
+function LoginComponent({ popupIsVisible }) {
   const authCtx = useContext(AuthContext);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
@@ -49,7 +49,8 @@ function LoginComponent() {
         <Alert
           severity="error"
           onClose={() => setSuccessfullLogin(null)}
-          sx={{ width: '100%', boxSizing: 'border-box' }}>
+          sx={{ width: '100%', boxSizing: 'border-box' }}
+        >
           Login Failed
         </Alert>
       )}
@@ -80,7 +81,7 @@ function LoginComponent() {
 
         <SubmitButton disabled={!formIsValid}>Log In</SubmitButton>
       </Grid>
-      <Typography variant="body2" component={Link} to="/signup">
+      <Typography variant="body2" component={Link} to="/signup" onClick={!popupIsVisible}>
         Don`t have an account? Register
       </Typography>
     </>
