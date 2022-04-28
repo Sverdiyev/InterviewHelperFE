@@ -1,8 +1,9 @@
 import { Checkbox, FormControlLabel, Grid } from '@mui/material';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { postQuestion } from '../../services/api-requests/questions.js';
 import useInputField from '../../services/useInputField.js';
 import { questionHeadingValidaton } from '../../services/validators.js';
+import Alerts from '../StyledUI/Alerts.jsx';
 import InputField from '../StyledUI/InputField.jsx';
 import SelectField from '../StyledUI/SelectField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
@@ -12,6 +13,7 @@ function AddQuestionForm() {
   const [noteValue, setNoteValue] = useInputField();
   const [tagsValue, setTagsValue] = useInputField();
   const [complexityValue, setComplexityValue] = useInputField();
+  const [successfullAddition, setSuccessfullAddition] = useState(null);
 
   const easyToGoogleRef = useRef(true);
   const formIsValid = headingIsValid;
@@ -34,11 +36,17 @@ function AddQuestionForm() {
       complexity: complexityValue || 'easy'
     };
 
-    postQuestion(data);
+    setSuccessfullAddition(postQuestion(data));
     //send data to BE
   };
   return (
     <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
+      <Alerts
+        failLabel="Addition Failed"
+        successLabel="Added"
+        success={successfullAddition}
+        setSuccess={setSuccessfullAddition}
+      />
       <InputField
         id="heading"
         label="Heading"
