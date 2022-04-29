@@ -9,9 +9,8 @@ function LoginPopup({ popupIsVisible, setPopupIsVisible }) {
         container
         flexDirection="column"
         alignItems="center"
-        sx={{ width: '400px', padding: '30px 30px 50px', boxSizing: 'border-box' }}
-      >
-        <LoginComponent {...popupIsVisible} />
+        sx={{ width: '400px', padding: '30px 30px 50px', boxSizing: 'border-box' }}>
+        <LoginComponent setPopupIsVisible={setPopupIsVisible} />
       </Grid>
     </Dialog>
   );
