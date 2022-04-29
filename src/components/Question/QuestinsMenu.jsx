@@ -26,8 +26,7 @@ export default function QuestionMenu() {
         aria-controls={open ? 'long-menu' : undefined}
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
-        onClick={handleClick}
-      >
+        onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
       <Menu
@@ -43,8 +42,7 @@ export default function QuestionMenu() {
             maxHeight: ITEM_HEIGHT * 4.5,
             width: '20ch'
           }
-        }}
-      >
+        }}>
         {options.map((option) => (
           <MenuItem key={option} onClick={handleClose}>
             {option}
