@@ -41,10 +41,18 @@ function RegisterForm({ setSuccessfullRegistration }) {
 
   const navigate = useNavigate();
 
-  const [emailValue, setEmailValue, emailIsValid] = useInputField(emailValidation);
-  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField(passwordValidation);
-  const [firstNameValue, setFirstNameValue, firstNameIsValid] = useInputField(nameValidation);
-  const [lastNameValue, setLastNameValue, lastNameIsValid] = useInputField(nameValidation);
+  const [emailValue, setEmailValue, emailIsValid] = useInputField({
+    validationCb: emailValidation
+  });
+  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField({
+    validationCb: passwordValidation
+  });
+  const [firstNameValue, setFirstNameValue, firstNameIsValid] = useInputField({
+    validationCb: nameValidation
+  });
+  const [lastNameValue, setLastNameValue, lastNameIsValid] = useInputField({
+    validationCb: nameValidation
+  });
 
   const formIsValid = emailIsValid && passwordIsValid && lastNameIsValid && firstNameIsValid;
 
