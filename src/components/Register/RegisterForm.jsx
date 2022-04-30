@@ -58,7 +58,7 @@ function RegisterForm({ setSuccessfullRegistration }) {
             inputValue={firstNameValue}
             onInputChange={onChangeFirstName}
             error={firstNameIsValid === false}
-            autofocus
+            autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -68,7 +68,6 @@ function RegisterForm({ setSuccessfullRegistration }) {
             inputValue={lastNameValue}
             onInputChange={onChangeLastName}
             error={lastNameIsValid === false}
-            autofocus
           />
         </Grid>
         <Grid item xs={12}>
