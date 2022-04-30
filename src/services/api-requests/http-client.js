@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-const baseUrl = 'https://localhost:3001/';
+const baseUrl = 'https://localhost:3001';
 
 // generic get request
 export const getEndpoint = (endpoint) => {
@@ -16,14 +16,26 @@ export const getEndpoint = (endpoint) => {
 export const postData = async (endpoint, inputData) => {
   const url = baseUrl + endpoint;
 
-  const response = await fetch(url, {
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(inputData)
   });
+  return res.ok;
+};
 
-  const data = await response.json();
-  return data;
+//generic put request
+export const putData = async (endpoint, inputData) => {
+  const url = baseUrl + endpoint;
+
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(inputData)
+  });
+  return res.ok;
 };

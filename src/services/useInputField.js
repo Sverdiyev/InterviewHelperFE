@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useInputField = (validationCb) => {
+const useInputField = (validationCb = () => true) => {
   const [inputValue, setInputValue] = useState('');
 
   const [inputIsValid, setInputIsValid] = useState(null);
