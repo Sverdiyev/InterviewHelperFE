@@ -12,8 +12,12 @@ function LoginComponent() {
   const authCtx = useContext(AuthContext);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
-  const [emailValue, setEmailValue, emailIsValid] = useInputField(emailValidation);
-  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField(passwordValidation);
+  const [emailValue, setEmailValue, emailIsValid] = useInputField({
+    validationCb: emailValidation
+  });
+  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField({
+    validationCb: passwordValidation
+  });
 
   const formIsValid = emailIsValid && passwordIsValid;
 
