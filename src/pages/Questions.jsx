@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import AddQuestionPopup from '../components/AddQuestion/AddQuestionPopup.jsx';
 import FloatingAddQuestions from '../components/AddQuestion/FloatingAddQuestions.jsx';
 import Question from '../components/Question/Question.jsx';
-import Search from '../components/Search.jsx';
+import Search from '../components/Search/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
 
 function Questions() {
