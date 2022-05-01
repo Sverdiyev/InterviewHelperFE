@@ -84,7 +84,7 @@ function LoginComponent({ setPopupIsVisivle }) {
         variant="body2"
         component={Link}
         to="/signup"
-        onClick={setPopupIsVisivle ? () => setPopupIsVisivle(false) : null}>
+        onClick={() => setPopupIsVisivle(false)}>
         Don`t have an account? Register
       </Typography>
     </>
