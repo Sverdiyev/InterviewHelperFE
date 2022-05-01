@@ -8,7 +8,7 @@ import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
 
-function LoginComponent({ setPopupIsVisible }) {
+function LoginComponent({ setPopupIsVisivle }) {
   const authCtx = useContext(AuthContext);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
@@ -84,7 +84,7 @@ function LoginComponent({ setPopupIsVisible }) {
         variant="body2"
         component={Link}
         to="/signup"
-        onClick={() => setPopupIsVisible(false)}>
+        onClick={setPopupIsVisivle ? () => setPopupIsVisivle(false) : null}>
         Don`t have an account? Register
       </Typography>
     </>
