@@ -9,10 +9,12 @@ import SelectField from '../StyledUI/SelectField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
 function AddQuestionForm() {
-  const [headingValue, setHeadingValue, headingIsValid] = useInputField(questionHeadingValidaton);
+  const [headingValue, setHeadingValue, headingIsValid] = useInputField({
+    validationCb: questionHeadingValidaton
+  });
   const [noteValue, setNoteValue] = useInputField();
   const [tagsValue, setTagsValue] = useInputField();
-  const [complexityValue, setComplexityValue] = useInputField();
+  const [complexityValue, setComplexityValue] = useInputField({ defaultValue: 'easy' });
   const [successfullAddition, setSuccessfullAddition] = useState(null);
 
   const easyToGoogleRef = useRef(true);
@@ -33,7 +35,7 @@ function AddQuestionForm() {
       note: noteValue,
       easyToGoogle: easyToGoogleRef.current,
       tags: tagsValue.split(',').map((tag) => tag.trim()),
-      complexity: complexityValue || 'easy'
+      complexity: complexityValue
     };
 
     setSuccessfullAddition(postQuestion(data));
@@ -66,7 +68,7 @@ function AddQuestionForm() {
       />
       <Grid container alignItems="center">
         <SelectField
-          value={complexityValue || 'easy'}
+          value={complexityValue}
           setValue={setComplexityValue}
           label="complexity"
           options={['easy', 'medium', 'hard']}

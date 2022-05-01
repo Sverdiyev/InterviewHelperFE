@@ -8,7 +8,7 @@ function SelectField({ value, setValue, options, label }) {
       <Select
         sx={{ textAlign: 'left' }}
         labelId={label + '-label'}
-        label="Complexity"
+        label={label}
         value={value}
         onChange={(e) => setValue(e)}>
         {options.map((option) => (
