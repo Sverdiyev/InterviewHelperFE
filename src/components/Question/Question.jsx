@@ -1,5 +1,5 @@
 import React from 'react';
-import Actions from './QuestionActions.jsx';
+import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
 
@@ -18,14 +18,14 @@ const StyledCardActions = styled(CardActions)({
   '.MuiButton-root': { paddingTop: 0, paddingBottom: 0 }
 });
 
-function Question({ Complexity, QuestionContent, Note, Vote, Tags }) {
+function Question({ complexity, questionContent, note, vote, tags }) {
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
-      <QuestionHeading Complexity={Complexity} QuestionContent={QuestionContent} />
+      <QuestionHeading complexity={complexity} questionContent={questionContent} />
       <Grid container justifyContent="space-between" alignContent="space-between">
-        <QuestionBody Note={Note || 'No Description Added'} Tags={Tags} />
+        <QuestionBody note={note || 'No Description Added'} tags={tags} />
         <StyledCardActions>
-          <Actions Vote={Vote} />
+          <QuestionActions vote={vote} />
         </StyledCardActions>
       </Grid>
     </StyledCard>

@@ -41,10 +41,18 @@ function RegisterForm({ setSuccessfullRegistration }) {
 
   const navigate = useNavigate();
 
-  const [emailValue, setEmailValue, emailIsValid] = useInputField(emailValidation);
-  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField(passwordValidation);
-  const [firstNameValue, setFirstNameValue, firstNameIsValid] = useInputField(nameValidation);
-  const [lastNameValue, setLastNameValue, lastNameIsValid] = useInputField(nameValidation);
+  const [emailValue, setEmailValue, emailIsValid] = useInputField({
+    validationCb: emailValidation
+  });
+  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField({
+    validationCb: passwordValidation
+  });
+  const [firstNameValue, setFirstNameValue, firstNameIsValid] = useInputField({
+    validationCb: nameValidation
+  });
+  const [lastNameValue, setLastNameValue, lastNameIsValid] = useInputField({
+    validationCb: nameValidation
+  });
 
   const formIsValid = emailIsValid && passwordIsValid && lastNameIsValid && firstNameIsValid;
 
@@ -58,7 +66,7 @@ function RegisterForm({ setSuccessfullRegistration }) {
             inputValue={firstNameValue}
             onInputChange={onChangeFirstName}
             error={firstNameIsValid === false}
-            autofocus
+            autoFocus
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -68,7 +76,6 @@ function RegisterForm({ setSuccessfullRegistration }) {
             inputValue={lastNameValue}
             onInputChange={onChangeLastName}
             error={lastNameIsValid === false}
-            autofocus
           />
         </Grid>
         <Grid item xs={12}>

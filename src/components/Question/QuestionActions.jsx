@@ -7,10 +7,10 @@ import Checkbox from '@mui/material/Checkbox';
 import { yellow, grey } from '@mui/material/colors';
 import { Button, Grid } from '@mui/material';
 
-function Actions({ Vote }) {
+function QuestionActions({ vote }) {
   return (
     <>
-      <span>{Vote > 0 ? '+' + Vote : Vote}</span>
+      <span>{vote > 0 ? '+' + vote : vote}</span>
       <Grid container direction="column">
         <Button size="small">
           <ArrowUp fontSize="large" sx={{ color: '#549f60' }} />
@@ -36,4 +36,4 @@ function Actions({ Vote }) {
   );
 }
 
-export default Actions;
+export default QuestionActions;

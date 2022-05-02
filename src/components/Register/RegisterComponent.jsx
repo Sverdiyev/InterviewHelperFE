@@ -1,22 +1,21 @@
-import { Alert, Avatar, Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import RegisterForm from './RegisterForm.jsx';
 import { useState } from 'react';
+import Alerts from '../StyledUI/Alerts.jsx';
 
 function RegisterComponent() {
   const [successfullRegistration, setSuccessfullRegistration] = useState(null);
 
   return (
     <>
-      {successfullRegistration == false && (
-        <Alert
-          severity="error"
-          onClose={() => setSuccessfullRegistration(null)}
-          sx={{ width: '100%', boxSizing: 'border-box' }}>
-          Registration Failed
-        </Alert>
-      )}
+      <Alerts
+        failLabel="Registration Failed"
+        successLabel="Registered"
+        success={successfullRegistration}
+        setSuccess={setSuccessfullRegistration}
+      />
 
       <Avatar sx={{ m: 1, backgroundColor: '#bbb' }}>
         <LockOutlinedIcon />
