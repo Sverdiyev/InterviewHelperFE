@@ -1,4 +1,4 @@
-import { Alert, Avatar, Grid, Typography } from '@mui/material';
+import { Avatar, Grid, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
@@ -7,13 +7,18 @@ import InputField from '../StyledUI/InputField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
+import Alerts from '../StyledUI/Alerts.jsx';
 
-function LoginComponent() {
+function LoginComponent({ setPopupIsVisible = () => null }) {
   const authCtx = useContext(AuthContext);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
-  const [emailValue, setEmailValue, emailIsValid] = useInputField(emailValidation);
-  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField(passwordValidation);
+  const [emailValue, setEmailValue, emailIsValid] = useInputField({
+    validationCb: emailValidation
+  });
+  const [passwordValue, setPasswordValue, passwordIsValid] = useInputField({
+    validationCb: passwordValidation
+  });
 
   const formIsValid = emailIsValid && passwordIsValid;
 
@@ -45,14 +50,12 @@ function LoginComponent() {
 
   return (
     <>
-      {successfullLogin == false && (
-        <Alert
-          severity="error"
-          onClose={() => setSuccessfullLogin(null)}
-          sx={{ width: '100%', boxSizing: 'border-box' }}>
-          Login Failed
-        </Alert>
-      )}
+      <Alerts
+        failLabel="Login Failed"
+        successLabel="Logged in"
+        success={successfullLogin}
+        setSuccess={setSuccessfullLogin}
+      />
       <Avatar sx={{ m: 1, backgroundColor: '#bbb' }}>
         <LockOutlinedIcon />
       </Avatar>
@@ -80,7 +83,11 @@ function LoginComponent() {
 
         <SubmitButton disabled={!formIsValid}>Log In</SubmitButton>
       </Grid>
-      <Typography variant="body2" component={Link} to="/signup">
+      <Typography
+        variant="body2"
+        component={Link}
+        to="/signup"
+        onClick={() => setPopupIsVisible(false)}>
         Don`t have an account? Register
       </Typography>
     </>

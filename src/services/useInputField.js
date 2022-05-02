@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
-const useInputField = (validationCb) => {
-  const [inputValue, setInputValue] = useState('');
+const useInputField = (
+  { defaultValue = '', validationCb = () => true } = { defaultValue: '', validationCb: () => true }
+) => {
+  const [inputValue, setInputValue] = useState(defaultValue);
 
   const [inputIsValid, setInputIsValid] = useState(null);
 
