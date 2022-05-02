@@ -27,7 +27,6 @@ function QuestionMenu() {
             width: '100px'
           }
         }}>
-        <MenuItem onClick={handleClose}>Add to cart</MenuItem>
         <MenuItem onClick={handleClose}>Edit</MenuItem>
         <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
