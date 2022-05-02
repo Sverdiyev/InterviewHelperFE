@@ -1,5 +1,5 @@
 import React from 'react';
-import Actions from './QuestionActions.jsx';
+import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
 
@@ -23,9 +23,9 @@ function Question({ complexity, questionContent, note, vote, tags }) {
     <StyledCard variant="outlined" component={Grid} container direction="column">
       <QuestionHeading complexity={complexity} questionContent={questionContent} />
       <Grid container justifyContent="space-between" alignContent="space-between">
-        <QuestionBody Note={note || 'No Description Added'} Tags={tags} />
+        <QuestionBody note={note || 'No Description Added'} tags={tags} />
         <StyledCardActions>
-          <Actions Vote={vote} />
+          <QuestionActions vote={vote} />
         </StyledCardActions>
       </Grid>
     </StyledCard>

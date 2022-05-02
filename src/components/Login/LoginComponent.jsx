@@ -1,4 +1,4 @@
-import { Alert, Avatar, Grid, Typography } from '@mui/material';
+import { Avatar, Grid, Typography } from '@mui/material';
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
@@ -7,6 +7,7 @@ import InputField from '../StyledUI/InputField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
+import Alerts from '../StyledUI/Alerts.jsx';
 
 function LoginComponent() {
   const authCtx = useContext(AuthContext);
@@ -49,14 +50,12 @@ function LoginComponent() {
 
   return (
     <>
-      {successfullLogin == false && (
-        <Alert
-          severity="error"
-          onClose={() => setSuccessfullLogin(null)}
-          sx={{ width: '100%', boxSizing: 'border-box' }}>
-          Login Failed
-        </Alert>
-      )}
+      <Alerts
+        failLabel="Login Failed"
+        successLabel="Logged in"
+        success={successfullLogin}
+        setSuccess={setSuccessfullLogin}
+      />
       <Avatar sx={{ m: 1, backgroundColor: '#bbb' }}>
         <LockOutlinedIcon />
       </Avatar>
