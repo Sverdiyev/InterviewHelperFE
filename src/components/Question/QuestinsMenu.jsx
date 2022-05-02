@@ -2,8 +2,6 @@ import * as React from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const ITEM_HEIGHT = 48;
-
 function QuestionMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -16,7 +14,7 @@ function QuestionMenu() {
 
   return (
     <div>
-      <IconButton aria-label="more" onClick={handleClick}>
+      <IconButton onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
       <Menu
@@ -25,8 +23,8 @@ function QuestionMenu() {
         onClose={handleClose}
         PaperProps={{
           style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch'
+            maxHeight: 216,
+            width: '100px'
           }
         }}>
         <MenuItem onClick={handleClose}>Add to cart</MenuItem>
