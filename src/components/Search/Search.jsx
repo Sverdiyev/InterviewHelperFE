@@ -11,7 +11,7 @@ function Search({ setSearchValue }) {
       <Grid item xs={8}>
         <BasicSearch setSearchValue={setSearchValue} />
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={4} sx={{ pt: 1 }}>
         <Button variant="outlined" onClick={() => setAdvSearchIsOpen((prevState) => !prevState)}>
           Advanced Search
         </Button>
