@@ -35,7 +35,7 @@ function AddQuestionForm() {
       note: noteValue,
       easyToGoogle: easyToGoogleRef.current,
       tags: tagsValue.split(',').map((tag) => tag.trim()),
-      complexity: complexityValue || 'easy'
+      complexity: complexityValue
     };
 
     setSuccessfullAddition(postQuestion(data));

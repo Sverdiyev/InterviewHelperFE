@@ -9,7 +9,7 @@ import useInputField from '../../services/useInputField.js';
 import { emailValidation, passwordValidation } from '../../services/validators.js';
 import Alerts from '../StyledUI/Alerts.jsx';
 
-function LoginComponent() {
+function LoginComponent({ setPopupIsVisivle }) {
   const authCtx = useContext(AuthContext);
 
   const [successfullLogin, setSuccessfullLogin] = useState(null);
@@ -83,7 +83,11 @@ function LoginComponent() {
 
         <SubmitButton disabled={!formIsValid}>Log In</SubmitButton>
       </Grid>
-      <Typography variant="body2" component={Link} to="/signup">
+      <Typography
+        variant="body2"
+        component={Link}
+        to="/signup"
+        onClick={() => setPopupIsVisivle(false)}>
         Don`t have an account? Register
       </Typography>
     </>
