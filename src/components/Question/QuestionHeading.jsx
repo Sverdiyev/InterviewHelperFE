@@ -40,10 +40,18 @@ function QuestionHeading({ complexity, questionContent }) {
       justifyContent="space-between"
       sx={{ padding: '0', marginBottom: '1rem' }}>
       <h4 style={{ margin: 0, maxWidth: '80%', fontSize: '1.3rem' }}>{questionContent}</h4>
-      <StyledComplexity complexity={complexity.toLowerCase()}>
-        {complexity.toLowerCase()}
-      </StyledComplexity>
-      <QuestionMenu />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+        <StyledComplexity complexity={complexity.toLowerCase()}>
+          {complexity.toLowerCase()}
+        </StyledComplexity>
+        <QuestionMenu />
+      </div>
     </CardContent>
   );
 }
