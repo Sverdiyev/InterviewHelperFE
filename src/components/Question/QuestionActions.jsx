@@ -22,32 +22,28 @@ function QuestionActions({ vote }) {
         </Button>
       </Grid>
       <Grid container direction="column">
-        <span>
-          <Checkbox
-            icon={<PlaylistAddIcon />}
-            checkedIcon={<PlaylistAddCheckIcon />}
-            sx={{
-              '& .MuiSvgIcon-root': { fontSize: 32 },
-              color: grey[800],
-              '&.Mui-checked': {
-                color: green[600]
-              }
-            }}
-          />
-        </span>
-        <span>
-          <Checkbox
-            icon={<StarOutlineIcon />}
-            checkedIcon={<StarIcon />}
-            sx={{
-              '& .MuiSvgIcon-root': { fontSize: 32 },
-              color: grey[800],
-              '&.Mui-checked': {
-                color: yellow[600]
-              }
-            }}
-          />
-        </span>
+        <Checkbox
+          icon={<PlaylistAddIcon />}
+          checkedIcon={<PlaylistAddCheckIcon />}
+          sx={{
+            '& .MuiSvgIcon-root': { fontSize: 32 },
+            color: grey[800],
+            '&.Mui-checked': {
+              color: green[600]
+            }
+          }}
+        />
+        <Checkbox
+          icon={<StarOutlineIcon />}
+          checkedIcon={<StarIcon />}
+          sx={{
+            '& .MuiSvgIcon-root': { fontSize: 32 },
+            color: grey[800],
+            '&.Mui-checked': {
+              color: yellow[600]
+            }
+          }}
+        />
       </Grid>
     </>
   );
