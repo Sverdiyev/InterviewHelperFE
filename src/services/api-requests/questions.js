@@ -3,8 +3,8 @@ import { getEndpoint, postData, putData } from './http-client.js';
 //get all questions
 export const useQuestions = (searchParams) => {
   let query = '';
-  for (let key in Object.keys(searchParams)) {
-    query += searchParams[key] ?? `${key}=${searchParams[key]}`;
+  for (let key in searchParams) {
+    query = `${key}=${searchParams[key]}`;
   }
 
   const url = `/questions${query ? '?' + query : ''}  `;
