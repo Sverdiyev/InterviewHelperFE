@@ -11,7 +11,7 @@ function Questions() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchValue = searchParams.get('search');
 
-  const { data, error, isSuccess, isLoading } = useQuestions(searchValue);
+  const { data, error, isSuccess, isLoading } = useQuestions({ search: searchValue });
 
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const setSearchValue = (value) => setSearchParams({ search: value });
