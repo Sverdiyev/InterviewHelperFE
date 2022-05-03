@@ -4,7 +4,7 @@ import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
 
 function BasicSearch({ setSearchValue }) {
   const [inputValue, setInputValue] = useState('');
-  const searchHandler = () => setSearchValue(inputValue);
+  const searchHandler = () => setSearchValue({ search: inputValue });
 
   const clearHandler = () => {
     setInputValue('');

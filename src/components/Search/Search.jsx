@@ -18,7 +18,7 @@ function Search({ setSearchValue }) {
       </Grid>
       {advSearchIsOpen && (
         <Grid item xs={12}>
-          <AdvancedSearch />
+          <AdvancedSearch setSearchValue={setSearchValue} />
         </Grid>
       )}
     </Grid>

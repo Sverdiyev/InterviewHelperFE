@@ -9,12 +9,17 @@ import { useQuestions } from '../services/api-requests/questions.js';
 
 function Questions() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchValue = searchParams.get('search');
+  const allSearchValues = {};
+  searchParams.forEach((value, key) => {
+    if (value) allSearchValues[key] = value;
+  });
 
-  const { data, error, isSuccess, isLoading } = useQuestions({ search: searchValue });
+  const { data, error, isSuccess, isLoading } = useQuestions(allSearchValues);
 
   const [popupIsVisible, setPopupIsVisible] = useState(false);
-  const setSearchValue = (value) => setSearchParams({ search: value });
+  const setSearchValue = (searchObj) => {
+    setSearchParams(searchObj);
+  };
 
   return (
     <>
