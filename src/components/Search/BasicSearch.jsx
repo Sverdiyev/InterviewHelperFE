@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
+import { useSearchParams } from 'react-router-dom';
 
-function BasicSearch({ setSearchValue }) {
-  const [inputValue, setInputValue] = useState('');
-  const searchHandler = () => setSearchValue({ search: inputValue });
+function BasicSearch() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState(searchParams.get('search') || '');
+  const searchHandler = () => setSearchParams({ search: inputValue });
 
   const clearHandler = () => {
     setInputValue('');
-    setSearchValue('');
+    setSearchParams({});
   };
 
   return (

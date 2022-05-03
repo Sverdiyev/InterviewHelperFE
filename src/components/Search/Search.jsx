@@ -4,12 +4,12 @@ import AdvancedSearch from './AdvancedSearch.jsx';
 
 import BasicSearch from './BasicSearch.jsx';
 
-function Search({ setSearchValue }) {
+function Search() {
   const [advSearchIsOpen, setAdvSearchIsOpen] = useState(false);
   return (
     <Grid container sx={{ width: '60%' }} alignItems="center">
       <Grid item xs={8}>
-        <BasicSearch setSearchValue={setSearchValue} />
+        <BasicSearch />
       </Grid>
       <Grid item xs={4} sx={{ pt: 1 }}>
         <Button variant="outlined" onClick={() => setAdvSearchIsOpen((prevState) => !prevState)}>
@@ -18,7 +18,7 @@ function Search({ setSearchValue }) {
       </Grid>
       {advSearchIsOpen && (
         <Grid item xs={12}>
-          <AdvancedSearch setSearchValue={setSearchValue} />
+          <AdvancedSearch />
         </Grid>
       )}
     </Grid>

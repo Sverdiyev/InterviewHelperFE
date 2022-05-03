@@ -8,7 +8,7 @@ import Search from '../components/Search/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
 
 function Questions() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const allSearchValues = {};
   searchParams.forEach((value, key) => {
     if (value) allSearchValues[key] = value;
@@ -17,14 +17,11 @@ function Questions() {
   const { data, error, isSuccess, isLoading } = useQuestions(allSearchValues);
 
   const [popupIsVisible, setPopupIsVisible] = useState(false);
-  const setSearchValue = (searchObj) => {
-    setSearchParams(searchObj);
-  };
 
   return (
     <>
       <AddQuestionPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
-      <Search setSearchValue={setSearchValue} />
+      <Search />
       {isLoading && (
         <Grid container alignItems="center" flexGrow="1" sx={{ paddingBottom: '5%', width: '15%' }}>
           <CircularProgress size="30%" />
