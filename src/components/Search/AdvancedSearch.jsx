@@ -2,11 +2,10 @@ import { Checkbox, FormControlLabel, Grid } from '@mui/material';
 import { useRef } from 'react';
 import useInputField from '../../services/useInputField.js';
 import MultipleSelectField from '../StyledUI/MultipleSelectField.jsx';
-import SelectField from '../StyledUI/SelectField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
 function AdvancedSearch() {
-  const [complexityValue, setComplexityValue] = useInputField({ defaultValue: 'Not Relevant' });
+  const [complexityValue, setComplexityValue] = useInputField({ defaultValue: [] });
   const hardToGoogleRef = useRef(true);
   const [tagsValue, setTagsValue] = useInputField({ defaultValue: [] });
 
@@ -29,29 +28,34 @@ function AdvancedSearch() {
 
   return (
     <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
-      <MultipleSelectField
-        values={tagsValue}
-        setValue={setTagsValue}
-        label="Tags"
-        options={allTags}
-      />
-      <Grid container alignItems="center">
-        <SelectField
-          value={complexityValue}
-          setValue={setComplexityValue}
-          label="complexity"
-          options={['Not Relevant', 'easy', 'medium', 'hard']}
-        />
-        <FormControlLabel
-          sx={{ margin: '0 auto' }}
-          control={
-            <Checkbox
-              defaultChecked
-              onChange={(e) => (hardToGoogleRef.current = e.target.checked)}
-            />
-          }
-          label="Hard to google"
-        />
+      <Grid container alignItems="center" spacing={2} justifyContent="space-between">
+        <Grid item xs={4}>
+          <MultipleSelectField
+            values={tagsValue}
+            setValue={setTagsValue}
+            label="Tags"
+            options={allTags}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <MultipleSelectField
+            values={complexityValue}
+            setValue={setComplexityValue}
+            label="Complexity"
+            options={['easy', 'medium', 'hard']}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                defaultChecked
+                onChange={(e) => (hardToGoogleRef.current = e.target.checked)}
+              />
+            }
+            label="Hard to google"
+          />
+        </Grid>
       </Grid>
       <SubmitButton>Search by Paramaters</SubmitButton>
     </form>
