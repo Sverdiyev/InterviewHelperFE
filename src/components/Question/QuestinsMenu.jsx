@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 function QuestionMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,7 +23,6 @@ function QuestionMenu() {
         onClose={handleClose}
         PaperProps={{
           style: {
-            maxHeight: 216,
             width: '100px'
           }
         }}>
