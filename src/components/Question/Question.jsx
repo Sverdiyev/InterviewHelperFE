@@ -25,7 +25,7 @@ function Question({ complexity, questionContent, note, vote, tags }) {
       <Grid container justifyContent="space-between" alignContent="space-between">
         <QuestionBody note={note || 'No Description Added'} tags={tags} />
         <StyledCardActions>
-          <QuestionActions vote={vote} />
+          <QuestionActions questionVote={vote} userVote={null} />
         </StyledCardActions>
       </Grid>
     </StyledCard>
