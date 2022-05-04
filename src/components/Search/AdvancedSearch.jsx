@@ -1,13 +1,21 @@
 import { Checkbox, FormControlLabel, Grid } from '@mui/material';
 import { useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import useInputField from '../../services/useInputField.js';
 import MultipleSelectField from '../StyledUI/MultipleSelectField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
 function AdvancedSearch() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const allSearchValues = {};
+  searchParams.forEach((value, key) => {
+    if (value) allSearchValues[key] = value;
+  });
+
   const [complexityValue, setComplexityValue] = useInputField({ defaultValue: [] });
-  const hardToGoogleRef = useRef(true);
   const [tagsValue, setTagsValue] = useInputField({ defaultValue: [] });
+  const hardToGoogleRef = useRef(true);
 
   //get all tags
   const allTags = ['tag1', 'tag2', 'tag3', 'tag4'];
@@ -15,6 +23,7 @@ function AdvancedSearch() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setSearchParams({ search: searchParams.get('search'), hardToGoogle: ['asdasd', 'asdasd'] });
     const data = {
       hardToGoogle: hardToGoogleRef.current,
       // tags: tagsValue.split(',').map((tag) => tag.trim()),
