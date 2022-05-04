@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { CardContent, Grid } from '@mui/material';
 import React from 'react';
+import QuestionMenu from './QuestinsMenu';
 
 const StyledComplexity = styled('span')(({ complexity }) => {
   let bgColor;
@@ -38,10 +39,21 @@ function QuestionHeading({ complexity, questionContent }) {
       alignItems="center"
       justifyContent="space-between"
       sx={{ padding: '0', marginBottom: '1rem' }}>
-      <h4 style={{ margin: 0, maxWidth: '80%', fontSize: '1.3rem' }}>{questionContent}</h4>
-      <StyledComplexity complexity={complexity.toLowerCase()}>
-        {complexity.toLowerCase()}
-      </StyledComplexity>
+      <h4 style={{ wordBreak: 'break-all', margin: 0, maxWidth: '80%', fontSize: '1.3rem' }}>
+        {questionContent}
+      </h4>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+        <StyledComplexity complexity={complexity.toLowerCase()}>
+          {complexity.toLowerCase()}
+        </StyledComplexity>
+        <QuestionMenu />
+      </div>
     </CardContent>
   );
 }
