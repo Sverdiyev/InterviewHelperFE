@@ -20,7 +20,7 @@ function AdvancedSearch({
 
   return (
     <>
-      <Grid item xs={9} container alignItems="center" justifyContent="space-around">
+      <Grid item xs={8} container alignItems="center" justifyContent="space-around">
         <Grid item xs={5}>
           <MultipleSelectField
             values={tagsValue}
@@ -49,9 +49,8 @@ function AdvancedSearch({
           />
         </Grid>
       </Grid>
-      <Grid item xs={3} container>
+      <Grid item xs={4} container flexDirection="column" sx={{ paddingLeft: '3%' }}>
         <FormControlLabel
-          sx={{ marginBottom: '15px' }}
           control={
             <Checkbox
               onChange={(e) => setHardToGoogle(e.target.checked)}
