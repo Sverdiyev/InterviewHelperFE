@@ -7,50 +7,70 @@ function AdvancedSearch({
   allTags,
   complexityValue,
   setComplexityValue,
+  hardToGoogleValue,
   setHardToGoogle,
   questionRating,
-  setQuestionRating
+  setQuestionRating,
+  favoriteValue,
+  setFavorite
 }) {
   const handleSlider = (_, newValue) => {
     setQuestionRating(newValue);
   };
 
   return (
-    <Grid item xs={12} container alignItems="center" justifyContent="space-between">
-      <Grid item xs={4}>
-        <MultipleSelectField
-          values={tagsValue}
-          setValue={setTagsValue}
-          label="Tags"
-          options={allTags}
-        />
+    <>
+      <Grid item xs={9} container alignItems="center" justifyContent="space-around">
+        <Grid item xs={5}>
+          <MultipleSelectField
+            values={tagsValue}
+            setValue={setTagsValue}
+            label="Tags"
+            options={allTags}
+          />
+        </Grid>
+        <Grid item xs={5}>
+          <MultipleSelectField
+            values={complexityValue}
+            setValue={setComplexityValue}
+            label="Complexity"
+            options={['easy', 'medium', 'hard']}
+          />
+        </Grid>
+        <Grid item xs={11} sx={{ padding: '1% 2%' }}>
+          <Typography>Question Rating</Typography>
+          <Slider
+            min={-30}
+            max={100}
+            value={[+questionRating[0], +questionRating[1]]}
+            onChange={handleSlider}
+            valueLabelDisplay="auto"
+            disableSwap
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <MultipleSelectField
-          values={complexityValue}
-          setValue={setComplexityValue}
-          label="Complexity"
-          options={['easy', 'medium', 'hard']}
-        />
-      </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={3} container>
         <FormControlLabel
-          control={<Checkbox onChange={(e) => setHardToGoogle(e.target.checked)} />}
+          sx={{ marginBottom: '15px' }}
+          control={
+            <Checkbox
+              onChange={(e) => setHardToGoogle(e.target.checked)}
+              defaultChecked={hardToGoogleValue}
+            />
+          }
           label="Hard to google"
         />
-      </Grid>
-      <Grid item xs={12} sx={{ padding: '1% 2%' }}>
-        <Typography>Question Rating</Typography>
-        <Slider
-          min={-30}
-          max={100}
-          value={[+questionRating[0], +questionRating[1]]}
-          onChange={handleSlider}
-          valueLabelDisplay="auto"
-          disableSwap
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={(e) => setFavorite(e.target.checked)}
+              defaultChecked={favoriteValue}
+            />
+          }
+          label="Favorite"
         />
       </Grid>
-    </Grid>
+    </>
   );
 }
 
