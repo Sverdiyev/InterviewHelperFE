@@ -44,7 +44,6 @@ function AddQuestionForm({ setPopupIsVisible }) {
       tags: tagsValue.split(',').map((tag) => tag.trim()),
       complexity: complexityValue
     };
-    //send data to BE
     addMutation.mutate(data, {
       onSuccess: () => {
         setSuccessfullAddition(data);

@@ -26,10 +26,7 @@ function Questions() {
         </Grid>
       )}
       {error && <div>error</div>}
-      {isSuccess &&
-        data.map((question) => (
-          <Question key={question.id} {...question} questionId={question.id} />
-        ))}
+      {isSuccess && data.map((question) => <Question key={question.id} {...question} />)}
       {isSuccess && data.length === 0 && <div>No Questions Found</div>}
       <FloatingAddQuestions setPopupIsVisible={setPopupIsVisible} />
     </>
