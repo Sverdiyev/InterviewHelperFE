@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import ArrowDropUpSharpIcon from '@mui/icons-material/ArrowDropUpSharp';
-import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useQueryClient, useMutation } from 'react-query';
 import { postUpVote, postDownVote, deleteVote } from '../../services/api-requests/questions.js';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
@@ -74,12 +76,12 @@ function QuestionActions({ questionVote, userVote, questionId }) {
       <span>{voteCount > 0 ? '+' + voteCount : voteCount}</span>
       <Grid container direction="column">
         <Checkbox
-          icon={<ArrowDropUpSharpIcon />}
-          checkedIcon={<ArrowDropUpSharpIcon />}
+          icon={<ThumbUpOffAltIcon />}
+          checkedIcon={<ThumbUpAltIcon />}
           checked={currentUserVote == 'up'}
           onClick={() => handleVote('up')}
           sx={{
-            '& .MuiSvgIcon-root': { fontSize: 50 },
+            '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],
             '&.Mui-checked': {
               color: green[600]
@@ -87,12 +89,12 @@ function QuestionActions({ questionVote, userVote, questionId }) {
           }}
         />
         <Checkbox
-          icon={<ArrowDropDownSharpIcon />}
-          checkedIcon={<ArrowDropDownSharpIcon />}
+          icon={<ThumbDownOffAltIcon />}
+          checkedIcon={<ThumbDownAltIcon />}
           checked={currentUserVote == 'down'}
           onClick={() => handleVote('down')}
           sx={{
-            '& .MuiSvgIcon-root': { fontSize: 50 },
+            '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],
             '&.Mui-checked': {
               color: red[600]
