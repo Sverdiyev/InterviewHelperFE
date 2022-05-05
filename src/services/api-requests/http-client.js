@@ -39,7 +39,23 @@ export const putData = async (endpoint, inputData) => {
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    },
+    body: JSON.stringify(inputData)
+  });
+  return res.ok;
+};
+
+//generic delete request
+export const deleteData = async (endpoint, inputData) => {
+  const url = baseUrl + endpoint;
+
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
     },
     body: JSON.stringify(inputData)
   });

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import ArrowDropUpSharpIcon from '@mui/icons-material/ArrowDropUpSharp';
 import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
+import { useQueryClient, useMutation } from 'react-query';
+import { postUpVote, postDownVote, deleteVote } from '../../services/api-requests/questions.js';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -9,30 +11,61 @@ import Checkbox from '@mui/material/Checkbox';
 import { yellow, grey, green, red } from '@mui/material/colors';
 import { Grid } from '@mui/material';
 
-function QuestionActions({ questionVote, userVote }) {
+function QuestionActions({ questionVote, userVote, questionId }) {
   const [voteCount, setVoteCount] = useState(questionVote);
   const [currentUserVote, setCurrentUserVote] = useState(userVote);
+  const queryClient = useQueryClient();
+
+  const upVoteMutation = useMutation((value) => postUpVote(value), {
+    onSuccess: () => queryClient.invalidateQueries('questions')
+  });
+
+  const downVoteMutation = useMutation((value) => postDownVote(value), {
+    onSuccess: () => queryClient.invalidateQueries('questions')
+  });
+
+  const deleteMutation = useMutation((value) => deleteVote(value), {
+    onSuccess: () => queryClient.invalidateQueries('questions')
+  });
 
   const handleVote = (value) => {
+    // insert logged in user id and here
+    const data = { userId: 1, questionId: questionId };
     if (currentUserVote == value) {
-      setCurrentUserVote(null);
-      if (value == 'up') {
-        setVoteCount(voteCount - 1);
-      } else {
-        setVoteCount(voteCount + 1);
-      }
+      deleteMutation.mutate(data, {
+        onSuccess: () => {
+          setCurrentUserVote(null);
+          value == 'up' ? setVoteCount(voteCount - 1) : setVoteCount(voteCount + 1);
+        }
+      });
     } else if (value == 'up' && currentUserVote == 'down') {
-      setCurrentUserVote('up');
-      setVoteCount(voteCount + 2);
+      upVoteMutation.mutate(data, {
+        onSuccess: () => {
+          setCurrentUserVote(value);
+          setVoteCount(voteCount + 2);
+        }
+      });
     } else if (value == 'down' && currentUserVote == 'up') {
-      setCurrentUserVote('down');
-      setVoteCount(voteCount - 2);
+      downVoteMutation.mutate(data, {
+        onSuccess: () => {
+          setCurrentUserVote(value);
+          setVoteCount(voteCount - 2);
+        }
+      });
     } else if (value == 'up') {
-      setCurrentUserVote('up');
-      setVoteCount(voteCount + 1);
+      upVoteMutation.mutate(data, {
+        onSuccess: () => {
+          setCurrentUserVote(value);
+          setVoteCount(voteCount + 1);
+        }
+      });
     } else if (value == 'down') {
-      setCurrentUserVote('down');
-      setVoteCount(voteCount - 1);
+      downVoteMutation.mutate(data, {
+        onSuccess: () => {
+          setCurrentUserVote(value);
+          setVoteCount(voteCount - 1);
+        }
+      });
     }
   };
 
