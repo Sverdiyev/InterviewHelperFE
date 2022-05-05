@@ -46,7 +46,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
     };
     addMutation.mutate(data, {
       onSuccess: () => {
-        setSuccessfullAddition(data);
+        setSuccessfullAddition(true);
       }
     });
   };

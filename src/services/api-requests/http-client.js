@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import token from './token';
+import { autheticate } from './token';
 
 const baseUrl = 'https://localhost:3001';
 
@@ -10,7 +10,7 @@ export const getEndpoint = (endpoint, dataIdentifier) => {
   return useQuery(dataIdentifier, async () => {
     const data = await fetch(url, {
       headers: {
-        Authorization: 'Bearer ' + token
+        Authorization: 'Bearer ' + (await autheticate({ email: 'test@test', password: 'test' }))
       }
     });
     return data.json();
@@ -25,7 +25,7 @@ export const postData = async (endpoint, inputData) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + (await autheticate({ email: 'test@test', password: 'test' }))
     },
     body: JSON.stringify(inputData)
   });
@@ -40,7 +40,7 @@ export const putData = async (endpoint, inputData) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + (await autheticate({ email: 'test@test', password: 'test' }))
     },
     body: JSON.stringify(inputData)
   });
@@ -55,7 +55,7 @@ export const deleteData = async (endpoint, inputData) => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + (await autheticate({ email: 'test@test', password: 'test' }))
     },
     body: JSON.stringify(inputData)
   });
