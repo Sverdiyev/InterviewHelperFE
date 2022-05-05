@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
 import MultipleSelectField from '../StyledUI/MultipleSelectField.jsx';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 
 function Search() {
   const [advSearchIsOpen, setAdvSearchIsOpen] = useState(false);
@@ -24,27 +25,27 @@ function Search() {
 
   const searchHandler = () => {
     const searchQuery = {};
-    if (tagsValue.length > 0) searchQuery.tag = tagsValue;
-    if (complexityValue.length > 0) searchQuery.complexity = complexityValue;
+    if (tagsValue.length > 0) searchQuery.tag = tagsValue.join(',');
+    if (complexityValue.length > 0) searchQuery.complexity = complexityValue.join(',');
     if (hardToGoogle) searchQuery.hardToGoogle = hardToGoogle;
 
-    console.log('🚀 ~ searchHandler ~ searchQuery', searchQuery);
     setSearchParams({ search: searchValue, ...searchQuery });
   };
 
   const clearHandler = () => {
     setSearchValue('');
+    setTagsValue([]);
+    setComplexityValue([]);
+    setHardToGoogle('');
     setSearchParams({});
   };
-
-  //adv
 
   //get all tags
   const allTags = ['tag1', 'tag2', 'tag3', 'tag4'];
 
   return (
     <Grid container sx={{ width: '60%', mb: 1 }} alignItems="center">
-      <Grid item xs={9}>
+      <Grid item xs={8}>
         <TextField
           fullWidth
           size="small"
@@ -73,9 +74,17 @@ function Search() {
           }}
         />
       </Grid>
-      <Grid item xs={3} sx={{ pt: 1 }}>
-        <Button variant="outlined" onClick={() => setAdvSearchIsOpen((prevState) => !prevState)}>
-          Advanced Search
+      <Grid item xs={2} sx={{ pt: 1 }}>
+        <Button variant="outlined" startIcon={<SearchIcon />} onClick={searchHandler}>
+          Search
+        </Button>
+      </Grid>
+      <Grid item xs={2} sx={{ pt: 1 }}>
+        <Button
+          variant="outlined"
+          startIcon={<SettingsSuggestIcon />}
+          onClick={() => setAdvSearchIsOpen((prevState) => !prevState)}>
+          Options
         </Button>
       </Grid>
       {advSearchIsOpen && (

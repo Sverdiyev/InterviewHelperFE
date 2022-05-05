@@ -21,6 +21,9 @@ function Questions() {
   return (
     <>
       <AddQuestionPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
+      {/*Key below is provided so the search component rerenders 
+      when clicking on Question or Home NavLink.
+      Without this key the state does not rerender.*/}
       <Search key={JSON.stringify(allSearchValues)} />
       {isLoading && (
         <Grid container alignItems="center" flexGrow="1" sx={{ paddingBottom: '5%', width: '15%' }}>
