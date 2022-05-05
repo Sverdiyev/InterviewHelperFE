@@ -21,7 +21,7 @@ function Questions() {
   return (
     <>
       <AddQuestionPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
-      <Search />
+      <Search key={JSON.stringify(allSearchValues)} />
       {isLoading && (
         <Grid container alignItems="center" flexGrow="1" sx={{ paddingBottom: '5%', width: '15%' }}>
           <CircularProgress size="30%" />
