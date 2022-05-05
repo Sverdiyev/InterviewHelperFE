@@ -1,18 +1,7 @@
-import { useState } from 'react';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
-import { useSearchParams } from 'react-router-dom';
 
-function BasicSearch() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState(searchParams.get('search') || '');
-  const searchHandler = () => setSearchParams({ search: inputValue });
-
-  const clearHandler = () => {
-    setInputValue('');
-    setSearchParams({});
-  };
-
+function BasicSearch({ setSearchValue, searchValue, searchHandler, clearHandler }) {
   return (
     <TextField
       fullWidth
@@ -21,8 +10,8 @@ function BasicSearch() {
       id="search"
       variant="outlined"
       placeholder="Search"
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
+      value={searchValue}
+      onChange={(e) => setSearchValue(e.target.value)}
       onKeyPress={(e) => {
         if (e.key === 'Enter') searchHandler();
       }}
@@ -32,7 +21,7 @@ function BasicSearch() {
             <SearchIcon />
           </InputAdornment>
         ),
-        endAdornment: inputValue && (
+        endAdornment: searchValue && (
           <InputAdornment position="end">
             <IconButton onClick={clearHandler}>
               <ClearIcon />
