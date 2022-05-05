@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import token from './token';
 
 const baseUrl = 'https://localhost:3001';
 
@@ -6,9 +7,13 @@ const baseUrl = 'https://localhost:3001';
 export const getEndpoint = (endpoint) => {
   const url = baseUrl + endpoint;
 
-  return useQuery(endpoint, async () => {
-    const data = await (await fetch(url)).json();
-    return data;
+  return useQuery('questions', async () => {
+    const data = await fetch(url, {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    });
+    return data.json();
   });
 };
 
@@ -19,7 +24,8 @@ export const postData = async (endpoint, inputData) => {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
     },
     body: JSON.stringify(inputData)
   });

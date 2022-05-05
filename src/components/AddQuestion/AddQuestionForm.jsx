@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel, Grid } from '@mui/material';
 import React, { useRef, useState } from 'react';
+import { useQueryClient, useMutation } from 'react-query';
 import { postQuestion } from '../../services/api-requests/questions.js';
 import useInputField from '../../services/useInputField.js';
 import { questionHeadingValidaton } from '../../services/validators.js';
@@ -8,7 +9,7 @@ import InputField from '../StyledUI/InputField.jsx';
 import SelectField from '../StyledUI/SelectField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
-function AddQuestionForm() {
+function AddQuestionForm({ setPopupIsVisible }) {
   const [headingValue, setHeadingValue, headingIsValid] = useInputField({
     validationCb: questionHeadingValidaton
   });
@@ -16,9 +17,14 @@ function AddQuestionForm() {
   const [tagsValue, setTagsValue] = useInputField();
   const [complexityValue, setComplexityValue] = useInputField({ defaultValue: 'easy' });
   const [successfullAddition, setSuccessfullAddition] = useState(null);
+  const queryClient = useQueryClient();
 
   const easyToGoogleRef = useRef(true);
   const formIsValid = headingIsValid;
+
+  const addMutation = useMutation((value) => postQuestion(value), {
+    onSuccess: () => queryClient.invalidateQueries('questions')
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +35,7 @@ function AddQuestionForm() {
       setTagsValue();
       return;
     }
+    setPopupIsVisible(false);
 
     const data = {
       questionContent: headingValue,
@@ -37,9 +44,12 @@ function AddQuestionForm() {
       tags: tagsValue.split(',').map((tag) => tag.trim()),
       complexity: complexityValue
     };
-
-    setSuccessfullAddition(postQuestion(data));
     //send data to BE
+    addMutation.mutate(data, {
+      onSuccess: () => {
+        setSuccessfullAddition(data);
+      }
+    });
   };
   return (
     <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>

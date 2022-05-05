@@ -18,14 +18,14 @@ const StyledCardActions = styled(CardActions)({
   '.MuiButton-root': { paddingTop: 0, paddingBottom: 0 }
 });
 
-function Question({ complexity, questionContent, note, vote, tags }) {
+function Question({ complexity, questionContent, note, vote, tags, userVote }) {
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
       <QuestionHeading complexity={complexity} questionContent={questionContent} />
       <Grid container justifyContent="space-between" alignContent="space-between">
         <QuestionBody note={note || 'No Description Added'} tags={tags} />
         <StyledCardActions>
-          <QuestionActions questionVote={vote} userVote={null} />
+          <QuestionActions questionVote={vote} userVote={userVote} />
         </StyledCardActions>
       </Grid>
     </StyledCard>

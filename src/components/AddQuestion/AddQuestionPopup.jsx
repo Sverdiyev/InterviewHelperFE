@@ -9,7 +9,7 @@ function AddQuestionPopup({ popupIsVisible, setPopupIsVisible }) {
         flexDirection="column"
         alignItems="center"
         sx={{ width: '600px', padding: '30px 30px 50px', boxSizing: 'border-box' }}>
-        <AddQuestionComponent />
+        <AddQuestionComponent setPopupIsVisible={setPopupIsVisible} />
       </Grid>
     </Dialog>
   );
