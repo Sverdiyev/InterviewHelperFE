@@ -11,7 +11,7 @@ function MultipleSelectField({ values, setValue, options, label }) {
         id="demo-multiple-checkbox"
         multiple
         value={values}
-        onChange={(e) => setValue(e)}
+        onChange={(e) => setValue(e.target.value)}
         renderValue={(selected) => selected.join(', ')}>
         {options.map((option) => (
           <MenuItem key={option} value={option}>
