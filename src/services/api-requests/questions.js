@@ -3,7 +3,7 @@ import { getEndpoint, postData, putData } from './http-client.js';
 //get all questions
 export const useQuestions = (query) => {
   const url = `/questions${query ? '?search=' + query : ''}  `;
-  return getEndpoint(url);
+  return getEndpoint(url, 'questions');
 };
 
 //post new question
