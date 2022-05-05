@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, Grid } from '@mui/material';
+import { Checkbox, FormControlLabel, Grid, Slider, Typography } from '@mui/material';
 import MultipleSelectField from '../StyledUI/MultipleSelectField.jsx';
 
 function AdvancedSearch({
@@ -7,10 +7,16 @@ function AdvancedSearch({
   allTags,
   complexityValue,
   setComplexityValue,
-  setHardToGoogle
+  setHardToGoogle,
+  questionRating,
+  setQuestionRating
 }) {
+  const handleSlider = (_, newValue) => {
+    setQuestionRating(newValue);
+  };
+
   return (
-    <Grid item xs={12} container alignItems="center" spacing={2} justifyContent="space-between">
+    <Grid item xs={12} container alignItems="center" justifyContent="space-between">
       <Grid item xs={4}>
         <MultipleSelectField
           values={tagsValue}
@@ -31,6 +37,17 @@ function AdvancedSearch({
         <FormControlLabel
           control={<Checkbox onChange={(e) => setHardToGoogle(e.target.checked)} />}
           label="Hard to google"
+        />
+      </Grid>
+      <Grid item xs={12} sx={{ padding: '1% 2%' }}>
+        <Typography>Question Rating</Typography>
+        <Slider
+          min={-30}
+          max={100}
+          value={[+questionRating[0], +questionRating[1]]}
+          onChange={handleSlider}
+          valueLabelDisplay="auto"
+          disableSwap
         />
       </Grid>
     </Grid>

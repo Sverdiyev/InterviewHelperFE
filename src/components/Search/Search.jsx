@@ -11,16 +11,25 @@ function Search() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [searchValue, setSearchValue] = useState(searchParams.get('search') || '');
-  const [tagsValue, setTagsValue] = useState(searchParams.getAll('tag') || []);
-  const [complexityValue, setComplexityValue] = useState(searchParams.getAll('complexity') || []);
-  const [hardToGoogle, setHardToGoogle] = useState(searchParams.get('hardToGoogle') || false);
+  const searchParam = searchParams.get('search');
+  const tagsParam = searchParams.get('tags')?.split(',');
+  const complexityParam = searchParams.get('complexity')?.split(',');
+  const hardToGoogleParam = searchParams.get('hardToGoogle');
+  const questionRatingParam = searchParams.get('questionRating')?.split(',');
+
+  const [searchValue, setSearchValue] = useState(searchParam || '');
+  const [tagsValue, setTagsValue] = useState(tagsParam || []);
+  const [complexityValue, setComplexityValue] = useState(complexityParam || []);
+  const [hardToGoogle, setHardToGoogle] = useState(hardToGoogleParam || false);
+
+  const [questionRating, setQuestionRating] = useState(questionRatingParam || [-30, 100]);
 
   const searchHandler = () => {
     const searchQuery = {};
-    if (tagsValue.length > 0) searchQuery.tag = tagsValue.join(',');
+    if (tagsValue.length > 0) searchQuery.tags = tagsValue.join(',');
     if (complexityValue.length > 0) searchQuery.complexity = complexityValue.join(',');
     if (hardToGoogle) searchQuery.hardToGoogle = hardToGoogle;
+    if (questionRating.length === 2) searchQuery.questionRating = questionRating.join(',');
 
     setSearchParams({ search: searchValue, ...searchQuery });
   };
@@ -31,6 +40,7 @@ function Search() {
     setComplexityValue([]);
     setHardToGoogle('');
     setSearchParams({});
+    setQuestionRating([-30, 100]);
   };
 
   //get all tags
@@ -67,6 +77,8 @@ function Search() {
           complexityValue={complexityValue}
           setComplexityValue={setComplexityValue}
           setHardToGoogle={setHardToGoogle}
+          questionRating={questionRating}
+          setQuestionRating={setQuestionRating}
         />
       )}
     </Grid>
