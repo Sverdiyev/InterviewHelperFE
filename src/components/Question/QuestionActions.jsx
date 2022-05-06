@@ -37,35 +37,37 @@ function QuestionActions({ questionVote, userVote, questionId }) {
       deleteMutation.mutate(data, {
         onSuccess: () => {
           setCurrentUserVote(null);
-          value == 'up' ? setVoteCount(voteCount - 1) : setVoteCount(voteCount + 1);
+          value == 'up'
+            ? setVoteCount((voteCount) => voteCount - 1)
+            : setVoteCount((voteCount) => voteCount + 1);
         }
       });
     } else if (value == 'up' && currentUserVote == 'down') {
       upVoteMutation.mutate(data, {
         onSuccess: () => {
           setCurrentUserVote(value);
-          setVoteCount(voteCount + 2);
+          setVoteCount((voteCount) => voteCount + 2);
         }
       });
     } else if (value == 'down' && currentUserVote == 'up') {
       downVoteMutation.mutate(data, {
         onSuccess: () => {
           setCurrentUserVote(value);
-          setVoteCount(voteCount - 2);
+          setVoteCount((voteCount) => voteCount - 2);
         }
       });
     } else if (value == 'up') {
       upVoteMutation.mutate(data, {
         onSuccess: () => {
           setCurrentUserVote(value);
-          setVoteCount(voteCount + 1);
+          setVoteCount((voteCount) => voteCount + 1);
         }
       });
     } else if (value == 'down') {
       downVoteMutation.mutate(data, {
         onSuccess: () => {
           setCurrentUserVote(value);
-          setVoteCount(voteCount - 1);
+          setVoteCount((voteCount) => voteCount - 1);
         }
       });
     }
