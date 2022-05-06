@@ -55,7 +55,7 @@ export const putData = async (endpoint, inputData) => {
 export const deleteData = async (endpoint, inputData) => {
   const url = baseUrl + endpoint;
 
-  const res = await fetch(url, {
+  const response = await fetch(url, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -63,7 +63,8 @@ export const deleteData = async (endpoint, inputData) => {
     },
     body: JSON.stringify(inputData)
   });
-  return res.ok;
+  handleErrors(response);
+  return response.ok;
 };
 
 // error handler

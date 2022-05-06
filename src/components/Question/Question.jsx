@@ -21,7 +21,7 @@ const StyledCardActions = styled(CardActions)({
 function Question({ id, complexity, questionContent, note, vote, tags, userVote }) {
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
-      <QuestionHeading complexity={complexity} questionContent={questionContent} />
+      <QuestionHeading questionId={id} complexity={complexity} questionContent={questionContent} />
       <Grid container justifyContent="space-between" alignContent="space-between">
         <QuestionBody note={note || 'No Description Added'} tags={tags} />
         <StyledCardActions>
