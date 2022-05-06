@@ -1,18 +1,2 @@
-// temp token function until login is connected
-//autheticate post request
-export const autheticate = async (inputData) => {
-  const url = 'https://localhost:3001/User/authenticate';
-
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(inputData)
-  });
-  const data = await res.json();
-  return data.token;
-};
-
-export const userEmail = 'test@test';
-export const password = 'test';
+export const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdCIsImV4cCI6MTY1MTg2MTAyN30.qM5QsKoM4FhPgBkx5Lx4nAKSqQXTH9luRBWYQ0q_xW4';

@@ -4,7 +4,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useQueryClient, useMutation } from 'react-query';
-import { postUpVote, postDownVote, deleteVote } from '../../services/api-requests/questions.js';
+import { postVote, deleteVote } from '../../services/api-requests/questions.js';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -18,7 +18,7 @@ function QuestionActions({ questionVote, userVote, questionId }) {
   const [currentUserVote, setCurrentUserVote] = useState(userVote);
   const queryClient = useQueryClient();
 
-  const upVoteMutation = useMutation((value) => postUpVote(value), {
+  const upVoteMutation = useMutation((value) => postVote(value, 'upvote'), {
     onSuccess: () => {
       currentUserVote == 'down'
         ? setVoteCount((voteCount) => voteCount + 2)
@@ -28,7 +28,7 @@ function QuestionActions({ questionVote, userVote, questionId }) {
     }
   });
 
-  const downVoteMutation = useMutation((value) => postDownVote(value), {
+  const downVoteMutation = useMutation((value) => postVote(value, 'downvote'), {
     onSuccess: () => {
       currentUserVote == 'up'
         ? setVoteCount((voteCount) => voteCount - 2)

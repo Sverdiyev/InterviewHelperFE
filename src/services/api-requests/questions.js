@@ -13,11 +13,8 @@ export const postQuestion = async (question) => postData('/questions', question)
 export const putQuestion = async (question) => putData('/questions', question);
 
 //post user vote
-export const postUpVote = async (userQuestion) => postData('/questions/votes/upvote', userQuestion);
-
-//post user dwon vote
-export const postDownVote = async (userQuestion) =>
-  postData('/questions/votes/downvote', userQuestion);
+export const postVote = async (userVote, voteType) =>
+  postData(`/questions/votes/${voteType}`, userVote);
 
 //delete user vote
 export const deleteVote = async (userQuestion) => deleteData('/questions/votes', userQuestion);
