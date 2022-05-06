@@ -35,8 +35,6 @@ function AddQuestionForm({ setPopupIsVisible }) {
       setTagsValue();
       return;
     }
-    setPopupIsVisible(false);
-
     const data = {
       questionContent: headingValue,
       note: noteValue,
@@ -47,6 +45,12 @@ function AddQuestionForm({ setPopupIsVisible }) {
     addMutation.mutate(data, {
       onSuccess: () => {
         setSuccessfullAddition(true);
+        setTimeout(() => {
+          setPopupIsVisible(false);
+        }, 2000); // pause for 2 seconds so the user sees prompt for seccessful addition
+      },
+      onError: () => {
+        setSuccessfullAddition(false);
       }
     });
   };
@@ -55,8 +59,8 @@ function AddQuestionForm({ setPopupIsVisible }) {
       <Alerts
         failLabel="Addition Failed"
         successLabel="Added"
+        fail={successfullAddition == false}
         success={successfullAddition}
-        setSuccess={setSuccessfullAddition}
       />
       <InputField
         id="heading"
