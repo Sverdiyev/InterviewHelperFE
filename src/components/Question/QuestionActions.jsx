@@ -19,57 +19,44 @@ function QuestionActions({ questionVote, userVote, questionId }) {
   const queryClient = useQueryClient();
 
   const upVoteMutation = useMutation((value) => postUpVote(value), {
-    onSuccess: () => queryClient.invalidateQueries('questions')
+    onSuccess: () => {
+      currentUserVote == 'down'
+        ? setVoteCount((voteCount) => voteCount + 2)
+        : setVoteCount((voteCount) => voteCount + 1);
+      setCurrentUserVote('up');
+      queryClient.invalidateQueries('questions');
+    }
   });
 
   const downVoteMutation = useMutation((value) => postDownVote(value), {
-    onSuccess: () => queryClient.invalidateQueries('questions')
+    onSuccess: () => {
+      currentUserVote == 'up'
+        ? setVoteCount((voteCount) => voteCount - 2)
+        : setVoteCount((voteCount) => voteCount - 1);
+      setCurrentUserVote('down');
+      queryClient.invalidateQueries('questions');
+    }
   });
 
   const deleteMutation = useMutation((value) => deleteVote(value), {
-    onSuccess: () => queryClient.invalidateQueries('questions')
+    onSuccess: () => {
+      setCurrentUserVote(null);
+      currentUserVote == 'up'
+        ? setVoteCount((voteCount) => voteCount - 1)
+        : setVoteCount((voteCount) => voteCount + 1);
+      queryClient.invalidateQueries('questions');
+    }
   });
 
   const handleVote = (value) => {
     // insert logged in user id and here
     const data = { userId: 1, questionId: questionId };
     if (currentUserVote == value) {
-      deleteMutation.mutate(data, {
-        onSuccess: () => {
-          setCurrentUserVote(null);
-          value == 'up'
-            ? setVoteCount((voteCount) => voteCount - 1)
-            : setVoteCount((voteCount) => voteCount + 1);
-        }
-      });
-    } else if (value == 'up' && currentUserVote == 'down') {
-      upVoteMutation.mutate(data, {
-        onSuccess: () => {
-          setCurrentUserVote(value);
-          setVoteCount((voteCount) => voteCount + 2);
-        }
-      });
-    } else if (value == 'down' && currentUserVote == 'up') {
-      downVoteMutation.mutate(data, {
-        onSuccess: () => {
-          setCurrentUserVote(value);
-          setVoteCount((voteCount) => voteCount - 2);
-        }
-      });
+      deleteMutation.mutate(data);
     } else if (value == 'up') {
-      upVoteMutation.mutate(data, {
-        onSuccess: () => {
-          setCurrentUserVote(value);
-          setVoteCount((voteCount) => voteCount + 1);
-        }
-      });
+      upVoteMutation.mutate(data);
     } else if (value == 'down') {
-      downVoteMutation.mutate(data, {
-        onSuccess: () => {
-          setCurrentUserVote(value);
-          setVoteCount((voteCount) => voteCount - 1);
-        }
-      });
+      downVoteMutation.mutate(data);
     }
   };
 
