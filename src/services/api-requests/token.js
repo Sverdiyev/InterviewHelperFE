@@ -14,5 +14,5 @@ export const autheticate = async (inputData) => {
   return data.token;
 };
 
-export const userEmail = 'test2@test';
+export const userEmail = 'test@test';
 export const password = 'test';
