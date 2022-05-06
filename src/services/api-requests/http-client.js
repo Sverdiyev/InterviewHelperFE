@@ -8,12 +8,13 @@ export const getEndpoint = (endpoint, dataIdentifier) => {
   const url = baseUrl + endpoint;
 
   return useQuery(dataIdentifier, async () => {
-    const data = await fetch(url, {
+    const response = await fetch(url, {
       headers: {
         Authorization: 'Bearer ' + (await autheticate({ email: userEmail, password: password }))
       }
     });
-    return data.json();
+    handleErrors(response);
+    return response.json();
   });
 };
 
@@ -21,7 +22,7 @@ export const getEndpoint = (endpoint, dataIdentifier) => {
 export const postData = async (endpoint, inputData) => {
   const url = baseUrl + endpoint;
 
-  const res = await fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,14 +30,15 @@ export const postData = async (endpoint, inputData) => {
     },
     body: JSON.stringify(inputData)
   });
-  return res.ok;
+  handleErrors(response);
+  return response.ok;
 };
 
 //generic put request
 export const putData = async (endpoint, inputData) => {
   const url = baseUrl + endpoint;
 
-  const res = await fetch(url, {
+  const response = await fetch(url, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -44,7 +46,9 @@ export const putData = async (endpoint, inputData) => {
     },
     body: JSON.stringify(inputData)
   });
-  return res.ok;
+
+  handleErrors(response);
+  return response.ok;
 };
 
 //generic delete request
@@ -61,3 +65,10 @@ export const deleteData = async (endpoint, inputData) => {
   });
   return res.ok;
 };
+
+// error handler
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+}
