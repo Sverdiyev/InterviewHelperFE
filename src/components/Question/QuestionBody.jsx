@@ -1,6 +1,6 @@
 import { CardContent, Chip, Grid } from '@mui/material';
 
-function QuestionBody({ note, tags }) {
+function QuestionBody({ creationDate, note, tags }) {
   return (
     <CardContent
       component={Grid}
@@ -19,8 +19,31 @@ function QuestionBody({ note, tags }) {
             />
           ))}
       </Grid>
+      <span style={{ fontSize: '0.7rem', fontStyle: 'italic' }}>
+        {calculateElapedPostTime(new Date(), new Date(creationDate))}
+      </span>
     </CardContent>
   );
 }
 
 export default QuestionBody;
+
+function calculateElapedPostTime(dt2, dt1) {
+  let diff = (dt2.getTime() - dt1.getTime()) / 1000;
+  diff /= 60 * 60;
+  const hour = Math.abs(Math.round(diff));
+  if (hour == 0) {
+    return 'posted less than 1 hour ago.';
+  } else if (hour <= 24) {
+    // less than one day ago, show hours
+    return `posted ${hour} hours ago.`;
+  } else if (hour < 720) {
+    // less than 1 month ago, show days
+    return `posted ${Math.round(hour % 24)} days ago.`;
+  } else if (hour < 262800) {
+    // less than 1 year ago, show months
+    return `posted ${Math.round(hour % 720)} months ago.`;
+  } else {
+    return `posted ${Math.round(hour % 262800)} years ago.`;
+  }
+}
