@@ -39,11 +39,12 @@ function calculateElapedPostTime(dt2, dt1) {
     return `posted ${hour} hours ago.`;
   } else if (hour < 720) {
     // less than 1 month ago, show days
-    return `posted ${Math.round(hour % 24)} days ago.`;
-  } else if (hour < 262800) {
+    return `posted ${Math.round(hour / 24)} days ago.`;
+  } else if (hour < 8640) {
     // less than 1 year ago, show months
-    return `posted ${Math.round(hour % 720)} months ago.`;
+    return `posted ${Math.round(hour / 720)} months ago.`;
   } else {
-    return `posted ${Math.round(hour % 262800)} years ago.`;
+    // more than one year
+    return `posted ${Math.round(hour / 8640)} years ago.`;
   }
 }
