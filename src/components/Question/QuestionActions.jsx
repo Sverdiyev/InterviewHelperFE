@@ -80,6 +80,9 @@ function QuestionActions({ questionVote, userVote, questionId }) {
             color: grey[800],
             '&.Mui-checked': {
               color: green[600]
+            },
+            '&.Mui-disabled': {
+              color: grey[800]
             }
           }}
         />
@@ -94,6 +97,9 @@ function QuestionActions({ questionVote, userVote, questionId }) {
             color: grey[800],
             '&.Mui-checked': {
               color: red[600]
+            },
+            '&.Mui-disabled': {
+              color: grey[800]
             }
           }}
         />
