@@ -37,11 +37,7 @@ export default function QuestionDeletionPopup({
   };
   return (
     <>
-      <Dialog
-        open={popupIsVisible}
-        onClose={() => handleClose('backdropClick')}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description">
+      <Dialog open={popupIsVisible} onClose={() => handleClose('backdropClick')}>
         <DialogTitle id="alert-dialog-title">
           {'Are you sure you want to delete this question?'}
         </DialogTitle>
