@@ -1,19 +1,15 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from '@mui/material';
 import { deleteQuestion } from '../../services/api-requests/questions.js';
 import { useQueryClient, useMutation } from 'react-query';
 
-export default function QuestionDeletionPopup({
-  questionId,
-  popupIsVisible,
-  setPopupIsVisible,
-  setAnchorEl
-}) {
+function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, setAnchorEl }) {
   const queryClient = new useQueryClient();
 
   const deleteMutation = useMutation((value) => deleteQuestion(value), {
@@ -27,13 +23,13 @@ export default function QuestionDeletionPopup({
     }
   };
 
-  const handleCancel = (reason) => {
-    handleClose(reason);
+  const handleCancel = () => {
+    handleClose('cancel');
   };
 
-  const handleDelete = (reason) => {
+  const handleDelete = () => {
     deleteMutation.mutate(questionId);
-    handleClose(reason);
+    handleClose('confirm');
   };
   return (
     <>
@@ -47,10 +43,12 @@ export default function QuestionDeletionPopup({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleCancel('cancel')}>Cancel</Button>
-          <Button onClick={() => handleDelete('confirm')}>Confirm</Button>
+          <Button onClick={() => handleCancel()}>Cancel</Button>
+          <Button onClick={() => handleDelete()}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </>
   );
 }
+
+export default QuestionDeletionPopup;
