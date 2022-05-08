@@ -22,9 +22,9 @@ export const logOutRequest = () => {
   Cookies.remove('jwt');
 };
 
-export const addUserRequest = async ({ firstName, email, password }) => {
+export const addUserRequest = async ({ name, email, password }) => {
   //! add lastName support for BE
-  const res = await requestData('/user/add', 'POST', { name: firstName, email, password });
+  const res = await requestData('/user/add', 'POST', { name, email, password });
   if (res.ok) {
     const data = await res.json();
     const user = { firstName: data.name, lastName: 'Verdiyev' };

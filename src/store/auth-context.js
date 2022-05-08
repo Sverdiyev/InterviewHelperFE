@@ -1,18 +1,20 @@
 import { createContext, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginRequest, logOutRequest } from '../services/api-requests/auth.js';
+import { addUserRequest, loginRequest, logOutRequest } from '../services/api-requests/auth.js';
 import Cookies from 'js-cookie';
 
 const AuthContext = createContext({
   isAuth: false,
   name: { firstName: '', lastName: '' },
   logIn() {},
+  register() {},
   logOut() {}
 });
 
 const ACTIONS = {
   LOG_OUT: 'logout',
-  LOG_IN: 'login'
+  LOG_IN: 'login',
+  REGISTER: 'register'
 };
 
 const initialState = {
@@ -32,6 +34,9 @@ const reducer = (state, action) => {
   } else if (action.type === ACTIONS.LOG_OUT) {
     newState.isAuth = false;
     newState.name = { firstName: '', lastName: '' };
+  } else if (action.type === ACTIONS.REGISTER) {
+    newState.isAuth = true;
+    newState.name = { ...action.user };
   }
 
   return {
@@ -53,15 +58,28 @@ export function AuthContextProvider({ children }) {
     }
     return false;
   };
+
   const logOut = () => {
     logOutRequest();
     dispatch({ type: ACTIONS.LOG_OUT });
     navigate('/');
   };
 
+  const register = (data) => {
+    addUserRequest(data).then((res) => {
+      if (res) {
+        dispatch({ type: ACTIONS.REGISTER, user: { firstName: data.name, lastName: 'Verdiyev' } });
+        navigate('/');
+        return true;
+      }
+      return false;
+    });
+  };
+
   const contextValue = {
     logIn,
     logOut,
+    register,
     ...state
   };
 

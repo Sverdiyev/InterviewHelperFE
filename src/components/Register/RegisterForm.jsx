@@ -1,12 +1,13 @@
 import { Grid } from '@mui/material';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
 import useInputField from '../../services/useInputField.js';
 import { emailValidation, nameValidation, passwordValidation } from '../../services/validators.js';
+import AuthContext from '../../store/auth-context.js';
 import InputField from '../StyledUI/InputField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
 function RegisterForm({ setSuccessfullRegistration }) {
+  const authCtx = useContext(AuthContext);
   const onChangeEmail = (e) => setEmailValue(e);
   const onChangePassword = (e) => setPasswordValue(e);
   const onChangeFirstName = (e) => setFirstNameValue(e);
@@ -25,21 +26,14 @@ function RegisterForm({ setSuccessfullRegistration }) {
     const data = {
       email: emailValue,
       password: passwordValue,
-      firstName: firstNameValue,
-      lastName: lastNameValue
+      name: firstNameValue
+      // firstName: firstNameValue,
+      // lastName: lastNameValue
     };
 
-    //send data to BE
-    console.log(data);
-    //if success
-    setSuccessfullRegistration(true);
-    return navigate('/login');
-
-    //if failed registration
-    // setSuccessfullRegistration(false);
+    const res = authCtx.register(data);
+    setSuccessfullRegistration(res);
   };
-
-  const navigate = useNavigate();
 
   const [emailValue, setEmailValue, emailIsValid] = useInputField({
     validationCb: emailValidation
