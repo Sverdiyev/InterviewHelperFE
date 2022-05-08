@@ -35,9 +35,7 @@ function LoginComponent({ setPopupIsVisible = () => null }) {
     }
 
     const data = { email: emailValue, password: passwordValue };
-
-    authCtx.logIn(data);
-    setSuccessfullLogin(authCtx.isAuth);
+    authCtx.logIn(data).then((res) => setSuccessfullLogin(res));
   };
 
   return (

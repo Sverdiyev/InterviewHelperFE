@@ -2,13 +2,18 @@ import Cookies from 'js-cookie';
 import { requestData } from './http-client.js';
 
 export const loginRequest = async (userCredentials) => {
-  const res = await (await requestData('/user/authenticate', 'POST', userCredentials)).json();
-  const name = { firstName: res.name, lastName: 'Verdiyev' };
+  const res = await requestData('/user/authenticate', 'POST', userCredentials);
+  if (res.ok) {
+    const data = await res.json();
 
-  Cookies.set('jwt', res.token);
-  Cookies.set('user', JSON.stringify(name));
+    const user = { firstName: data.name, lastName: 'Verdiyev' };
 
-  return name;
+    Cookies.set('jwt', data.token);
+    Cookies.set('user', JSON.stringify(user));
+
+    return user;
+  }
+  return false;
   //! TO DO - add lastName to BE
 };
 

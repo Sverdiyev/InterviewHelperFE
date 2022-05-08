@@ -28,7 +28,7 @@ const reducer = (state, action) => {
 
   if (action.type === ACTIONS.LOG_IN) {
     newState.isAuth = true;
-    newState.name = { ...action.name };
+    newState.name = { ...action.user };
   } else if (action.type === ACTIONS.LOG_OUT) {
     newState.isAuth = false;
     newState.name = { firstName: '', lastName: '' };
@@ -45,9 +45,13 @@ export function AuthContextProvider({ children }) {
   const navigate = useNavigate();
 
   const logIn = async (loginData) => {
-    const name = await loginRequest(loginData);
-    dispatch({ type: ACTIONS.LOG_IN, name });
-    navigate('/');
+    const user = await loginRequest(loginData);
+    if (user) {
+      dispatch({ type: ACTIONS.LOG_IN, user });
+      navigate('/');
+      return true;
+    }
+    return false;
   };
   const logOut = () => {
     logOutRequest();
