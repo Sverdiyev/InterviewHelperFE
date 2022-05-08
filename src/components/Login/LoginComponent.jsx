@@ -36,16 +36,8 @@ function LoginComponent({ setPopupIsVisible = () => null }) {
 
     const data = { email: emailValue, password: passwordValue };
 
-    console.log(data);
-
-    //send data to BE
-    //fetch name from BE
-    const name = { firstName: 'Sasha', lastName: 'Verdiyev' };
-    //if valid, login
-
-    authCtx.logIn(name);
-    //if not, display message
-    setSuccessfullLogin(false);
+    authCtx.logIn(data);
+    setSuccessfullLogin(authCtx.isAuth);
   };
 
   return (
