@@ -9,9 +9,8 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-import Checkbox from '@mui/material/Checkbox';
 import { yellow, grey, green, red } from '@mui/material/colors';
-import { Grid } from '@mui/material';
+import { Grid, Checkbox } from '@mui/material';
 
 function QuestionActions({ questionVote, userVote, questionId }) {
   const [voteCount, setVoteCount] = useState(questionVote);
