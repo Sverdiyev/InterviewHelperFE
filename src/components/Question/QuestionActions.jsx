@@ -49,7 +49,7 @@ function QuestionActions({ questionVote, userVote, questionId }) {
 
   const handleVote = (value) => {
     // insert logged in user id and here
-    const data = { userId: 1, questionId: questionId };
+    const data = { userId: 1, questionId };
     if (currentUserVote == value) {
       deleteMutation.mutate(data);
     } else if (value == 'up') {
