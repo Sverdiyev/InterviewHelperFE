@@ -1,4 +1,4 @@
-import { getEndpoint, postData, putData } from './http-client.js';
+import { getEndpoint, requestData } from './http-client.js';
 
 //get all questions
 export const useQuestions = (query) => {
@@ -7,7 +7,7 @@ export const useQuestions = (query) => {
 };
 
 //post new question
-export const postQuestion = async (question) => postData('/questions', question);
+export const postQuestion = async (question) => requestData('/questions', 'POST', question);
 
 //put - edit question
-export const putQuestion = async (question) => putData('/questions', question);
+export const putQuestion = async (question) => requestData('/questions', 'PUT', question);

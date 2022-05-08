@@ -1,5 +1,7 @@
 import { createContext, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginRequest, logOutRequest } from '../services/api-requests/auth.js';
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext({
   isAuth: false,
@@ -14,8 +16,11 @@ const ACTIONS = {
 };
 
 const initialState = {
-  isAuth: false,
-  name: { firstName: '', lastName: '' }
+  isAuth: !!Cookies.get('jwt'),
+  name:
+    Cookies.get('user') !== undefined
+      ? JSON.parse(Cookies.get('user'))
+      : { firstName: '', lastName: '' }
 };
 
 const reducer = (state, action) => {
@@ -39,12 +44,13 @@ export function AuthContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
 
-  const logIn = (name) => {
-    dispatch({ type: ACTIONS.LOG_IN, name });
-
+  const logIn = async (loginData) => {
+    loginRequest(loginData);
+    dispatch({ type: ACTIONS.LOG_IN });
     navigate('/');
   };
   const logOut = () => {
+    logOutRequest();
     dispatch({ type: ACTIONS.LOG_OUT });
     navigate('/');
   };
