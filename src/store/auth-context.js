@@ -45,8 +45,8 @@ export function AuthContextProvider({ children }) {
   const navigate = useNavigate();
 
   const logIn = async (loginData) => {
-    loginRequest(loginData);
-    dispatch({ type: ACTIONS.LOG_IN });
+    const name = await loginRequest(loginData);
+    dispatch({ type: ACTIONS.LOG_IN, name });
     navigate('/');
   };
   const logOut = () => {

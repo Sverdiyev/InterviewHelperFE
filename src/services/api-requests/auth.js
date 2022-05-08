@@ -3,8 +3,12 @@ import { requestData } from './http-client.js';
 
 export const loginRequest = async (userCredentials) => {
   const res = await (await requestData('/user/authenticate', 'POST', userCredentials)).json();
+  const name = { firstName: res.name, lastName: 'Verdiyev' };
+
   Cookies.set('jwt', res.token);
-  Cookies.set('user', JSON.stringify({ firstName: res.name, lastName: 'Verdiyev' }));
+  Cookies.set('user', JSON.stringify(name));
+
+  return name;
   //! TO DO - add lastName to BE
 };
 
