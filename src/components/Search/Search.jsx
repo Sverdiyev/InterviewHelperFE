@@ -15,14 +15,14 @@ function Search() {
   const tagsParam = searchParams.get('tags')?.split(',');
   const complexityParam = searchParams.get('complexity')?.split(',');
   const hardToGoogleParam = searchParams.get('hardToGoogle') === 'true';
-  const favoriteParam = searchParams.get('hardToGoogle') === 'true';
+  const favoriteParam = searchParams.get('favorite') === 'true';
   const questionRatingParam = searchParams.get('questionRating')?.split(',');
 
   const [searchValue, setSearchValue] = useState(searchParam || '');
   const [tagsValue, setTagsValue] = useState(tagsParam || []);
   const [complexityValue, setComplexityValue] = useState(complexityParam || []);
   const [hardToGoogle, setHardToGoogle] = useState(hardToGoogleParam || false);
-  const [favoriteValue, setFavorite] = useState(favoriteParam || null);
+  const [favoriteValue, setFavorite] = useState(favoriteParam || false);
 
   const [questionRating, setQuestionRating] = useState(questionRatingParam || [-30, 100]);
 
@@ -32,7 +32,7 @@ function Search() {
     if (complexityValue.length > 0) searchQuery.complexity = complexityValue.join(',');
     if (hardToGoogle) searchQuery.hardToGoogle = hardToGoogle;
     if (questionRating.length === 2) searchQuery.questionRating = questionRating.join(',');
-    if (favoriteValue !== null) searchQuery.favorite = favoriteValue;
+    if (favoriteValue) searchQuery.favorite = favoriteValue;
 
     setSearchParams({ search: searchValue, ...searchQuery });
   };
