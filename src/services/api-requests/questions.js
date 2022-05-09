@@ -1,11 +1,9 @@
-import { getEndpoint, postData, putData } from './http-client.js';
+import { postData, putData, useEndpoint } from './http-client.js';
 
 //get all questions
 export const useQuestions = (searchParams) => {
-  const query = new URLSearchParams(searchParams).toString();
-
-  const url = `/questions${query ? '?' + query : ''}  `;
-  return getEndpoint(url);
+  const url = `/fetch-questions`;
+  return useEndpoint(url, 'questionsFetch', 'POST', searchParams);
 };
 
 //post new question

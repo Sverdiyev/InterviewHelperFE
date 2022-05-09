@@ -11,6 +11,8 @@ function Questions() {
   const [searchParams] = useSearchParams();
   const allSearchValues = {};
   searchParams.forEach((value, key) => {
+    if (key === 'complexity' || key === 'tags' || key === 'questionRating')
+      value = value.split(',');
     if (value) allSearchValues[key] = value;
   });
 
