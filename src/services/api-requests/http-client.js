@@ -2,16 +2,6 @@ import { useQuery } from 'react-query';
 
 const baseUrl = 'https://localhost:3001';
 
-// generic get request
-export const getEndpoint = (endpoint) => {
-  const url = baseUrl + endpoint;
-
-  return useQuery(endpoint, async () => {
-    const data = await (await fetch(url)).json();
-    return data;
-  });
-};
-
 export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData) => {
   const url = baseUrl + endpoint;
 
