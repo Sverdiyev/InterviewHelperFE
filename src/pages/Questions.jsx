@@ -11,9 +11,25 @@ function Questions() {
   const [searchParams] = useSearchParams();
   const allSearchValues = {};
   searchParams.forEach((value, key) => {
-    if (key === 'complexity' || key === 'tags' || key === 'questionRating')
-      value = value.split(',');
-    if (value) allSearchValues[key] = value;
+    let tmp;
+
+    switch (key) {
+      case 'complexity':
+      case 'tags':
+        tmp = value.split(',');
+        break;
+      case 'questionRating':
+        tmp = value.split(',').map((number) => +number);
+        break;
+      case 'favorite':
+      case 'hardToGoogle':
+        tmp = tmp !== null && value === 'true';
+        break;
+      default:
+        tmp = value;
+    }
+
+    if (tmp !== null || tmp !== '') allSearchValues[key] = tmp;
   });
 
   const { data, error, isSuccess, isLoading } = useQuestions(allSearchValues);
