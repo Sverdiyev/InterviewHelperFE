@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie';
 import { requestData } from './http-client.js';
 
+const inOneHour = () => new Date(new Date().getTime() + 60 * 60 * 1000);
+
 export const loginRequest = async (userCredentials) => {
   const res = await requestData('/user/authenticate', 'POST', userCredentials);
   if (res.ok) {
@@ -8,8 +10,8 @@ export const loginRequest = async (userCredentials) => {
 
     const user = { firstName: data.name, lastName: 'Verdiyev' };
 
-    Cookies.set('jwt', data.token);
-    Cookies.set('user', JSON.stringify(user));
+    Cookies.set('jwt', data.token, { expires: inOneHour() });
+    Cookies.set('user', JSON.stringify(user), { expires: inOneHour() });
 
     return user;
   }
@@ -29,8 +31,8 @@ export const addUserRequest = async ({ name, email, password }) => {
     const data = await res.json();
     const user = { firstName: data.name, lastName: 'Verdiyev' };
 
-    Cookies.set('jwt', data.token);
-    Cookies.set('user', JSON.stringify(user));
+    Cookies.set('jwt', data.token, { expires: inOneHour() });
+    Cookies.set('user', JSON.stringify(user), { expires: inOneHour() });
 
     return user;
   }
