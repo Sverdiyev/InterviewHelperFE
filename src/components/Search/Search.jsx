@@ -28,13 +28,14 @@ function Search() {
 
   const searchHandler = () => {
     const searchQuery = {};
+    if (searchValue.trim().length > 0) searchQuery.search = searchValue;
     if (tagsValue.length > 0) searchQuery.tags = tagsValue.join(',');
     if (complexityValue.length > 0) searchQuery.complexity = complexityValue.join(',');
     if (hardToGoogle) searchQuery.hardToGoogle = hardToGoogle;
     if (questionRating.length === 2) searchQuery.questionRating = questionRating.join(',');
     if (favoriteValue) searchQuery.favorite = favoriteValue;
 
-    setSearchParams({ search: searchValue, ...searchQuery });
+    setSearchParams({ ...searchQuery });
   };
 
   const clearHandler = () => {

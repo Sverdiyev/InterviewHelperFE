@@ -11,25 +11,26 @@ function Questions() {
   const [searchParams] = useSearchParams();
   const allSearchValues = {};
   searchParams.forEach((value, key) => {
-    let tmp;
+    if (value === null || value === '') return;
 
     switch (key) {
       case 'complexity':
       case 'tags':
-        tmp = value.split(',');
+        value = value.split(',');
         break;
       case 'questionRating':
-        tmp = value.split(',').map((number) => +number);
+        value = value.split(',').map((number) => +number);
         break;
       case 'favorite':
       case 'hardToGoogle':
-        tmp = tmp !== null && value === 'true';
+        value = value !== null && value === 'true';
+        break;
+      case 'search':
         break;
       default:
-        tmp = value;
+        console.log(`unsupported key: ${key}`);
     }
-
-    if (tmp !== null || tmp !== '') allSearchValues[key] = tmp;
+    allSearchValues[key] = value;
   });
 
   const { data, error, isSuccess, isLoading } = useQuestions(allSearchValues);
@@ -48,9 +49,11 @@ function Questions() {
           <CircularProgress size="30%" />
         </Grid>
       )}
-      {error && <div>error</div>}
-      {isSuccess && data.map((question) => <Question key={question.id} {...question} />)}
-      {isSuccess && data.length === 0 && <div>No Questions Found</div>}
+      <div style={{ width: '60%' }}>
+        {error && <div>error</div>}
+        {isSuccess && data.map((question) => <Question key={question.id} {...question} />)}
+        {isSuccess && data.length === 0 && <div>No Questions Found</div>}
+      </div>
       <FloatingAddQuestions setPopupIsVisible={setPopupIsVisible} />
     </>
   );
