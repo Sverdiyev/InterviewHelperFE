@@ -52,6 +52,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
         }, 2000); // pause for 2 seconds so the user sees prompt for seccessful addition
       },
       onError: () => {
+        setCanSubmit(true);
         setSuccessfullAddition(false);
       }
     });
@@ -61,7 +62,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
       <Alerts
         failLabel="Addition Failed"
         successLabel="Added"
-        fail={successfullAddition == false}
+        setSuccess={setSuccessfullAddition}
         success={successfullAddition}
       />
       <InputField
