@@ -32,5 +32,13 @@ export const requestData = async (endpoint, httpMethod, inputData) => {
     },
     body: JSON.stringify(inputData)
   });
+  handleErrors(res);
   return res;
 };
+
+// error handler
+function handleErrors(res) {
+  if (!res.ok) {
+    throw Error(res.statusText);
+  }
+}

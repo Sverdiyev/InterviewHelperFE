@@ -4,8 +4,8 @@ import { requestData } from './http-client.js';
 const inOneHour = () => new Date(new Date().getTime() + 60 * 60 * 1000);
 
 export const loginRequest = async (userCredentials) => {
-  const res = await requestData('/user/authenticate', 'POST', userCredentials);
-  if (res.ok) {
+  try {
+    const res = await requestData('/user/authenticate', 'POST', userCredentials);
     const data = await res.json();
 
     const user = data.name;
@@ -14,8 +14,9 @@ export const loginRequest = async (userCredentials) => {
     Cookies.set('user', user, { expires: inOneHour() });
 
     return user;
+  } catch {
+    return false;
   }
-  return false;
 };
 
 export const logOutRequest = () => {
@@ -24,8 +25,9 @@ export const logOutRequest = () => {
 };
 
 export const addUserRequest = async ({ name, email, password }) => {
-  const res = await requestData('/user/add', 'POST', { name, email, password });
-  if (res.ok) {
+  try {
+    const res = await requestData('/user/add', 'POST', { name, email, password });
+
     const data = await res.json();
     const user = data.name;
 
@@ -33,6 +35,7 @@ export const addUserRequest = async ({ name, email, password }) => {
     Cookies.set('user', user, { expires: inOneHour() });
 
     return user;
+  } catch {
+    return false;
   }
-  return false;
 };
