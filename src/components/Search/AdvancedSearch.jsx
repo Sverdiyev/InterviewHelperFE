@@ -55,7 +55,7 @@ function AdvancedSearch({
           control={
             <Checkbox
               onChange={(e) => setHardToGoogle(e.target.checked)}
-              defaultChecked={hardToGoogleValue}
+              checked={hardToGoogleValue}
             />
           }
           label="Hard to google"
@@ -63,10 +63,7 @@ function AdvancedSearch({
         <FormControlLabel
           sx={{ marginRight: 'auto' }}
           control={
-            <Checkbox
-              onChange={(e) => setFavorite(e.target.checked)}
-              defaultChecked={favoriteValue}
-            />
+            <Checkbox onChange={(e) => setFavorite(e.target.checked)} checked={favoriteValue} />
           }
           label="Favorite"
         />
