@@ -11,11 +11,11 @@ export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData)
       'Content-Type': 'application/json'
     }
   };
-  if (inputData) {
-    options.body = JSON.stringify(inputData);
-  }
 
-  return useQuery(dataIdentifier, async () => {
+  return useQuery([dataIdentifier, inputData], async () => {
+    if (Object.keys(inputData).length) {
+      options.body = JSON.stringify(inputData);
+    }
     const res = await fetch(url, options);
     const data = await res.json();
     return data;
