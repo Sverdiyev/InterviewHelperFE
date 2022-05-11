@@ -1,8 +1,7 @@
 export const setSearchParamsHandler = (setSearchParams, queryParamsObj) => {
   let tmp = {};
 
-  const filteredSearchParams = filterUnneededValues(queryParamsObj);
-  const keys = Object.keys(filteredSearchParams);
+  const keys = Object.keys(queryParamsObj);
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
     const searchElement = queryParamsObj[key];

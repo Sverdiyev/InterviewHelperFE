@@ -15,18 +15,20 @@ function Search({ searchValues, setSearchValues }) {
   const [searchValue, setSearchValue] = useState(searchValues.search || '');
   const [tagsValue, setTagsValue] = useState(searchValues.tags || []);
   const [complexityValue, setComplexityValue] = useState(searchValues.complexity || []);
-  const [hardToGoogle, setHardToGoogle] = useState(searchValues.hardToGoogle || false);
+  const [hardToGoogleValue, setHardToGoogleValue] = useState(searchValues.hardToGoogle || false);
   const [favoriteValue, setFavorite] = useState(searchValues.favorite || false);
-  const [questionRating, setQuestionRating] = useState(searchValues.questionRating || [-30, 100]);
+  const [questionRatingValue, setQuestionRatingValue] = useState(
+    searchValues.questionRating || [-30, 100]
+  );
 
   const searchHandler = () => {
     const newSearchValues = {
       search: searchValue,
       tags: tagsValue,
       complexity: complexityValue,
-      hardToGoogle,
+      hardToGoogle: hardToGoogleValue,
       favorite: favoriteValue,
-      questionRating
+      questionRating: questionRatingValue
     };
 
     const filteredNewSearchValues = filterUnneededValues(newSearchValues);
@@ -38,13 +40,11 @@ function Search({ searchValues, setSearchValues }) {
     setSearchValue('');
     setTagsValue([]);
     setComplexityValue([]);
-    setHardToGoogle('');
-    setQuestionRating([-30, 100]);
+    setHardToGoogleValue('');
+    setQuestionRatingValue([-30, 100]);
 
     setSearchParams({});
-
-    const newSearchValues = setSearchParams(setSearchParams, {});
-    setSearchValues(newSearchValues);
+    setSearchValues({});
   };
 
   //fetch all tags from BE
@@ -80,10 +80,10 @@ function Search({ searchValues, setSearchValues }) {
           allTags={allTags}
           complexityValue={complexityValue}
           setComplexityValue={setComplexityValue}
-          setHardToGoogle={setHardToGoogle}
-          hardToGoogleValue={hardToGoogle}
-          questionRating={questionRating}
-          setQuestionRating={setQuestionRating}
+          setHardToGoogle={setHardToGoogleValue}
+          hardToGoogleValue={hardToGoogleValue}
+          questionRating={questionRatingValue}
+          setQuestionRating={setQuestionRatingValue}
           setFavorite={setFavorite}
           favoriteValue={favoriteValue}
         />

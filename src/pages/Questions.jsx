@@ -12,17 +12,14 @@ function Questions() {
   const [searchParams] = useSearchParams();
 
   const [popupIsVisible, setPopupIsVisible] = useState(false);
-  const [queryParams, setQueryParams] = useState(decodeQueryParams(searchParams) || {});
+  const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams) || {});
 
-  const { data, error, isSuccess, isLoading } = useQuestions(queryParams);
+  const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 
-  const setSearchValuesHandler = (stringifiedSearchValues) => {
-    setQueryParams(stringifiedSearchValues);
-  };
   return (
     <>
       <AddQuestionPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
-      <Search searchValues={queryParams} setSearchValues={setSearchValuesHandler} />
+      <Search searchValues={searchValues} setSearchValues={setSearchValues} />
       {isLoading && (
         <Grid container alignItems="center" flexGrow="1" sx={{ paddingBottom: '5%', width: '15%' }}>
           <CircularProgress size="30%" />
