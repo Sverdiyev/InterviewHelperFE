@@ -42,9 +42,7 @@ function AuthActions({ setPopupIsVisible }) {
       {authCtx.isAuth && (
         <>
           <StyledLogout onClick={logoutHandler}> Log out</StyledLogout>
-          <Avatar>
-            {authCtx.name.firstName[0].toUpperCase() + authCtx.name.lastName[0].toUpperCase()}
-          </Avatar>
+          <Avatar>{authCtx.name[0].toUpperCase()}</Avatar>
         </>
       )}
       {!authCtx.isAuth && (

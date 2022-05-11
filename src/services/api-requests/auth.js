@@ -8,15 +8,14 @@ export const loginRequest = async (userCredentials) => {
   if (res.ok) {
     const data = await res.json();
 
-    const user = { firstName: data.name, lastName: 'Verdiyev' };
+    const user = data.name;
 
     Cookies.set('jwt', data.token, { expires: inOneHour() });
-    Cookies.set('user', JSON.stringify(user), { expires: inOneHour() });
+    Cookies.set('user', user, { expires: inOneHour() });
 
     return user;
   }
   return false;
-  //! TO DO - add lastName to BE
 };
 
 export const logOutRequest = () => {
@@ -25,14 +24,13 @@ export const logOutRequest = () => {
 };
 
 export const addUserRequest = async ({ name, email, password }) => {
-  //! add lastName support for BE
   const res = await requestData('/user/add', 'POST', { name, email, password });
   if (res.ok) {
     const data = await res.json();
-    const user = { firstName: data.name, lastName: 'Verdiyev' };
+    const user = data.name;
 
     Cookies.set('jwt', data.token, { expires: inOneHour() });
-    Cookies.set('user', JSON.stringify(user), { expires: inOneHour() });
+    Cookies.set('user', user, { expires: inOneHour() });
 
     return user;
   }
