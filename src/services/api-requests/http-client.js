@@ -13,10 +13,7 @@ export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData)
   };
 
   return useQuery([dataIdentifier, inputData], async () => {
-    if (Object.keys(inputData).length) {
-      options.body = JSON.stringify(inputData);
-    }
-    console.log('🚀 ~ returnuseQuery ~ inputData', inputData);
+    options.body = JSON.stringify(inputData);
     const res = await fetch(url, options);
     const data = await res.json();
     return data;
