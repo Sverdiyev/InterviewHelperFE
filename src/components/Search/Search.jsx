@@ -1,53 +1,53 @@
 import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { Search as SearchIcon } from '@mui/icons-material';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import BasicSearch from './BasicSearch.jsx';
 import AdvancedSearch from './AdvancedSearch.jsx';
+import { filterUnneededValues, setSearchParamsHandler } from '../../services/helpers.js';
+import { useSearchParams } from 'react-router-dom';
 
-function Search() {
+function Search({ searchValues, setSearchValues }) {
+  const [, setSearchParams] = useSearchParams();
+
   const [advSearchIsOpen, setAdvSearchIsOpen] = useState(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const searchParam = searchParams.get('search');
-  const tagsParam = searchParams.get('tags')?.split(',');
-  const complexityParam = searchParams.get('complexity')?.split(',');
-  const hardToGoogleParam = searchParams.get('hardToGoogle') === 'true';
-  const favoriteParam = searchParams.get('favorite') === 'true';
-  const questionRatingParam = searchParams.get('questionRating')?.split(',');
-
-  const [searchValue, setSearchValue] = useState(searchParam || '');
-  const [tagsValue, setTagsValue] = useState(tagsParam || []);
-  const [complexityValue, setComplexityValue] = useState(complexityParam || []);
-  const [hardToGoogle, setHardToGoogle] = useState(hardToGoogleParam || false);
-  const [favoriteValue, setFavorite] = useState(favoriteParam || false);
-
-  const [questionRating, setQuestionRating] = useState(questionRatingParam || [-30, 100]);
+  const [searchValue, setSearchValue] = useState(searchValues.search || '');
+  const [tagsValue, setTagsValue] = useState(searchValues.tags || []);
+  const [complexityValue, setComplexityValue] = useState(searchValues.complexity || []);
+  const [hardToGoogle, setHardToGoogle] = useState(searchValues.hardToGoogle || false);
+  const [favoriteValue, setFavorite] = useState(searchValues.favorite || false);
+  const [questionRating, setQuestionRating] = useState(searchValues.questionRating || [-30, 100]);
 
   const searchHandler = () => {
-    const searchQuery = {};
-    if (searchValue.trim().length > 0) searchQuery.search = searchValue;
-    if (tagsValue.length > 0) searchQuery.tags = tagsValue.join(',');
-    if (complexityValue.length > 0) searchQuery.complexity = complexityValue.join(',');
-    if (hardToGoogle) searchQuery.hardToGoogle = hardToGoogle;
-    if (questionRating.length === 2) searchQuery.questionRating = questionRating.join(',');
-    if (favoriteValue) searchQuery.favorite = favoriteValue;
+    const newSearchValues = {
+      search: searchValue,
+      tags: tagsValue,
+      complexity: complexityValue,
+      hardToGoogle,
+      favorite: favoriteValue,
+      questionRating
+    };
 
-    setSearchParams({ ...searchQuery });
+    const filteredNewSearchValues = filterUnneededValues(newSearchValues);
+    setSearchParamsHandler(setSearchParams, filteredNewSearchValues);
+
+    setSearchValues(filteredNewSearchValues);
   };
-
   const clearHandler = () => {
     setSearchValue('');
     setTagsValue([]);
     setComplexityValue([]);
     setHardToGoogle('');
-    setSearchParams({});
     setQuestionRating([-30, 100]);
+
+    setSearchParams({});
+
+    const newSearchValues = setSearchParams(setSearchParams, {});
+    setSearchValues(newSearchValues);
   };
 
-  //get all tags
+  //fetch all tags from BE
   const allTags = ['tag1', 'tag2', 'tag3', 'tag4'];
 
   return (
