@@ -59,7 +59,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
       <Alerts
         failLabel="Addition Failed"
         successLabel="Added"
-        fail={successfullAddition == false}
+        setSuccess={setSuccessfullAddition}
         success={successfullAddition}
       />
       <InputField
