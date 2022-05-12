@@ -12,7 +12,7 @@ function Questions() {
   const [searchParams] = useSearchParams();
 
   const [popupIsVisible, setPopupIsVisible] = useState(false);
-  const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams) || {});
+  const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams));
 
   const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 

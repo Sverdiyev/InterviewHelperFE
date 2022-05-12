@@ -16,7 +16,7 @@ function Search({ searchValues, setSearchValues }) {
   const [tagsValue, setTagsValue] = useState(searchValues.tags || []);
   const [complexityValue, setComplexityValue] = useState(searchValues.complexity || []);
   const [hardToGoogleValue, setHardToGoogleValue] = useState(searchValues.hardToGoogle || false);
-  const [favoriteValue, setFavorite] = useState(searchValues.favorite || false);
+  const [favoriteValue, setFavoriteValue] = useState(searchValues.favorite || false);
   const [questionRatingValue, setQuestionRatingValue] = useState(
     searchValues.questionRating || [-30, 100]
   );
@@ -42,6 +42,7 @@ function Search({ searchValues, setSearchValues }) {
     setComplexityValue([]);
     setHardToGoogleValue('');
     setQuestionRatingValue([-30, 100]);
+    setFavoriteValue(false);
 
     setSearchParams({});
     setSearchValues({});
@@ -84,7 +85,7 @@ function Search({ searchValues, setSearchValues }) {
           hardToGoogleValue={hardToGoogleValue}
           questionRating={questionRatingValue}
           setQuestionRating={setQuestionRatingValue}
-          setFavorite={setFavorite}
+          setFavorite={setFavoriteValue}
           favoriteValue={favoriteValue}
         />
       )}

@@ -44,8 +44,6 @@ export const decodeQueryParams = (searchParams) => {
     allSearchValues[key] = value;
   });
 
-  if (!Object.keys(allSearchValues)) return false;
-
   return allSearchValues;
 };
 
