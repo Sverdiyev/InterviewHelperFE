@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 const baseUrl = 'https://localhost:3001';
 
-export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData) => {
+export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData = null) => {
   const url = baseUrl + endpoint;
 
   const options = {
@@ -13,7 +13,7 @@ export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData)
   };
 
   return useQuery([dataIdentifier, inputData], async () => {
-    options.body = JSON.stringify(inputData);
+    if (inputData) options.body = JSON.stringify(inputData);
     const res = await fetch(url, options);
     const data = await res.json();
     return data;
