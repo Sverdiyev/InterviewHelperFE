@@ -6,8 +6,12 @@ import BasicSearch from './BasicSearch.jsx';
 import AdvancedSearch from './AdvancedSearch.jsx';
 import { filterUnneededValues, setSearchParamsHandler } from '../../services/helpers.js';
 import { useSearchParams } from 'react-router-dom';
+import { useQuestionTags } from '../../services/api-requests/questions.js';
 
 function Search({ searchValues, setSearchValues }) {
+  const { data, isSuccess } = useQuestionTags();
+  const allTags = isSuccess ? data.map((tag) => tag.tagName) : ['Tags are loading'];
+
   const [, setSearchParams] = useSearchParams();
 
   const [advSearchIsOpen, setAdvSearchIsOpen] = useState(false);
@@ -47,9 +51,6 @@ function Search({ searchValues, setSearchValues }) {
     setSearchParams({});
     setSearchValues({});
   };
-
-  //fetch all tags from BE
-  const allTags = ['tag1', 'tag2', 'tag3', 'tag4'];
 
   return (
     <Grid container sx={{ width: '60%', mb: 1 }} alignItems="center">

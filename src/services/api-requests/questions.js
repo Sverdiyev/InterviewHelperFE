@@ -6,6 +6,11 @@ export const useQuestions = (searchParams) => {
   return useEndpoint(url, 'questionsFetch', 'POST', searchParams);
 };
 
+export const useQuestionTags = () => {
+  const url = `/fetch-questions-tags`;
+  return useEndpoint(url, 'questionsFetch');
+};
+
 //post new question
 export const postQuestion = async (question) => postData('/questions', question);
 
