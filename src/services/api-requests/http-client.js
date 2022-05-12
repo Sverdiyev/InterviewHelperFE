@@ -2,13 +2,16 @@ import { useQuery } from 'react-query';
 
 const baseUrl = 'https://localhost:3001';
 
+const tmpToken = '';
+
 export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData = null) => {
   const url = baseUrl + endpoint;
 
   const options = {
     method: method,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + tmpToken
     }
   };
 
@@ -27,7 +30,8 @@ export const postData = async (endpoint, inputData) => {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + tmpToken
     },
     body: JSON.stringify(inputData)
   });
@@ -41,7 +45,8 @@ export const putData = async (endpoint, inputData) => {
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + tmpToken
     },
     body: JSON.stringify(inputData)
   });
