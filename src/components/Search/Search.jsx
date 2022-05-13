@@ -91,6 +91,7 @@ function Search({ searchValues, setSearchValues }) {
           setQuestionRating={setQuestionRatingValue}
           setFavorite={setFavoriteValue}
           favoriteValue={favoriteValue}
+          clearHandler={clearHandler}
         />
       )}
     </Grid>

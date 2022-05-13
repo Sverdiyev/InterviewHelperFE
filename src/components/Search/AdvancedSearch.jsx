@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, Grid, Slider, Typography } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Grid, Slider, Typography } from '@mui/material';
 import MultipleSelectField from '../StyledUI/MultipleSelectField.jsx';
 
 function AdvancedSearch({
@@ -12,7 +12,8 @@ function AdvancedSearch({
   questionRating,
   setQuestionRating,
   favoriteValue,
-  setFavorite
+  setFavorite,
+  clearHandler
 }) {
   const handleSlider = (_, newValue) => {
     setQuestionRating(newValue);
@@ -67,6 +68,9 @@ function AdvancedSearch({
           }
           label="Favorite"
         />
+        <Button variant="contained" onClick={clearHandler}>
+          Clear Filters
+        </Button>
       </Grid>
     </>
   );
