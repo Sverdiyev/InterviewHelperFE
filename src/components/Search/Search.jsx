@@ -8,6 +8,9 @@ import { filterUnneededValues, setSearchParamsHandler } from '../../services/hel
 import { useSearchParams } from 'react-router-dom';
 import { useQuestionTags } from '../../services/api-requests/questions.js';
 
+const MAX_QUESTION_RATING = 100;
+const MIN_QUESTION_RATING = -30;
+
 function Search({ searchValues, setSearchValues }) {
   const { data, isSuccess } = useQuestionTags();
   const allTags = isSuccess ? data.map((tag) => tag.tagName) : ['Tags are loading'];
@@ -22,7 +25,7 @@ function Search({ searchValues, setSearchValues }) {
   const [hardToGoogleValue, setHardToGoogleValue] = useState(searchValues.hardToGoogle || false);
   const [favoriteValue, setFavoriteValue] = useState(searchValues.favorite || false);
   const [questionRatingValue, setQuestionRatingValue] = useState(
-    searchValues.questionRating || [-30, 100]
+    searchValues.questionRating || [MIN_QUESTION_RATING, MAX_QUESTION_RATING]
   );
 
   const searchHandler = () => {
@@ -44,8 +47,8 @@ function Search({ searchValues, setSearchValues }) {
     setSearchValue('');
     setTagsValue([]);
     setComplexityValue([]);
-    setHardToGoogleValue('');
-    setQuestionRatingValue([-30, 100]);
+    setHardToGoogleValue(false);
+    setQuestionRatingValue([MIN_QUESTION_RATING, MAX_QUESTION_RATING]);
     setFavoriteValue(false);
 
     setSearchParams({});

@@ -2,7 +2,8 @@ import { useQuery } from 'react-query';
 
 const baseUrl = 'https://localhost:3001';
 
-const tmpToken = '';
+const tmpAuthToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhc2hhQGdtYWlsLmNvbSIsImV4cCI6MTY1MjQwNjE0M30.jSDjPHqVhs_7YFYzpNQYwu_eEkyQG4AQYnxyrRvm0TY';
 
 export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData = null) => {
   const url = baseUrl + endpoint;
@@ -11,7 +12,7 @@ export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData 
     method: method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + tmpToken
+      Authorization: 'Bearer ' + tmpAuthToken
     }
   };
 
@@ -31,7 +32,7 @@ export const postData = async (endpoint, inputData) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + tmpToken
+      Authorization: 'Bearer ' + tmpAuthToken
     },
     body: JSON.stringify(inputData)
   });
@@ -46,7 +47,7 @@ export const putData = async (endpoint, inputData) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + tmpToken
+      Authorization: 'Bearer ' + tmpAuthToken
     },
     body: JSON.stringify(inputData)
   });
