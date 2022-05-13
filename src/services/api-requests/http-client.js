@@ -4,10 +4,10 @@ import Cookies from 'js-cookie';
 const baseUrl = 'https://localhost:3001';
 
 // generic get request
-export const getEndpoint = (endpoint) => {
+export const getEndpoint = (endpoint, dataIdentifier) => {
   const url = baseUrl + endpoint;
 
-  return useQuery(endpoint, async () => {
+  return useQuery(dataIdentifier, async () => {
     const data = await (
       await fetch(url, {
         headers: {
