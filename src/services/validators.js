@@ -10,4 +10,4 @@ export const nameValidation = (value) => {
   return !nameRegEx.test(value);
 };
 
-export const questionHeadingValidaton = (value) => !!value.trim().length;
+export const questionHeadingValidaton = (value) => value.trim().length > 10;

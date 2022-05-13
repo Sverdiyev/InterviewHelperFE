@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import Cookies from 'js-cookie';
 
 const baseUrl = 'https://localhost:3001';
 
@@ -7,35 +8,37 @@ export const getEndpoint = (endpoint) => {
   const url = baseUrl + endpoint;
 
   return useQuery(endpoint, async () => {
-    const data = await (await fetch(url)).json();
+    const data = await (
+      await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + Cookies.get('jwt')
+        }
+      })
+    ).json();
     return data;
   });
 };
 
 //generic post request
-export const postData = async (endpoint, inputData) => {
+export const requestData = async (endpoint, httpMethod, inputData) => {
   const url = baseUrl + endpoint;
 
   const res = await fetch(url, {
-    method: 'POST',
+    method: httpMethod,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('jwt')
     },
     body: JSON.stringify(inputData)
   });
-  return res.ok;
+  handleErrors(res);
+  return res;
 };
 
-//generic put request
-export const putData = async (endpoint, inputData) => {
-  const url = baseUrl + endpoint;
-
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(inputData)
-  });
-  return res.ok;
-};
+// error handler
+function handleErrors(res) {
+  if (!res.ok) {
+    throw Error(res.statusText);
+  }
+}
