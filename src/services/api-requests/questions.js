@@ -8,7 +8,7 @@ export const useQuestions = (searchParams) => {
 
 export const useQuestionTags = () => {
   const url = `/fetch-questions-tags`;
-  return useEndpoint(url, 'questionsFetch');
+  return useEndpoint(url, 'tagsFetch');
 };
 
 //post new question
