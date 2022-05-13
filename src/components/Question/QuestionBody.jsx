@@ -14,7 +14,7 @@ function QuestionBody({ note, tags }) {
           tags.map((tag) => (
             <Chip
               key={tag.tagName}
-              label={tag.tagName[0].toUpperCase() + tag.tagName.slice(1)}
+              label={tag?.tagName[0].toUpperCase() + tag.tagName.slice(1)}
               size="small"
             />
           ))}
