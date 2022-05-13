@@ -49,7 +49,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
         setSuccessfullAddition(true);
         setTimeout(() => {
           setPopupIsVisible(false);
-        }, 2000); // pause for 2 seconds so the user sees prompt for seccessful addition
+        }, 2000);
       },
       onError: () => {
         setCanSubmit(true);
