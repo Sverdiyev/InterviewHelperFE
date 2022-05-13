@@ -10,14 +10,16 @@ function QuestionBody({ note, tags }) {
       sx={{ padding: 0, flex: 1 }}>
       <span style={{ fontSize: '0.8rem' }}>{note} </span>
       <Grid container sx={{ width: '80%', gap: '5px' }}>
-        {tags[0]?.tagName &&
-          tags.map((tag) => (
-            <Chip
-              key={tag.tagName}
-              label={tag.tagName[0].toUpperCase() + tag.tagName.slice(1)}
-              size="small"
-            />
-          ))}
+        {tags.length &&
+          tags
+            .filter((tag) => tag.tagName.length > 0)
+            .map((tag) => (
+              <Chip
+                key={tag.tagName}
+                label={tag.tagName[0].toUpperCase() + tag.tagName.slice(1)}
+                size="small"
+              />
+            ))}
       </Grid>
     </CardContent>
   );
