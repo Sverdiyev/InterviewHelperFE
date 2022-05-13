@@ -2,12 +2,12 @@ import { useEndpoint, requestData } from './http-client.js';
 
 //get all questions
 export const useQuestions = (searchParams) => {
-  const url = `/fetch-questions`;
+  const url = `/questions`;
   return useEndpoint(url, 'questionsFetch', 'POST', searchParams);
 };
 
 export const useQuestionTags = () => {
-  const url = `/fetch-questions-tags`;
+  const url = `/questions/tags`;
   return useEndpoint(url, 'tagsFetch');
 };
 
