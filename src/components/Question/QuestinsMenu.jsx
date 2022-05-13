@@ -15,6 +15,7 @@ function QuestionMenu({ questionId }) {
     setAnchorEl(null);
   };
   const handleDeleteClick = () => {
+    setAnchorEl(null);
     setPopupIsVisible(true);
   };
 
@@ -34,13 +35,13 @@ function QuestionMenu({ questionId }) {
         }}>
         <MenuItem onClick={handleClose}>Edit</MenuItem>
         <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
-        <QuestionDeletionPopup
-          questionId={questionId}
-          popupIsVisible={popupIsVisible}
-          setPopupIsVisible={setPopupIsVisible}
-          setAnchorEl={setAnchorEl}
-        />
       </Menu>
+      <QuestionDeletionPopup
+        questionId={questionId}
+        popupIsVisible={popupIsVisible}
+        setPopupIsVisible={setPopupIsVisible}
+        setAnchorEl={setAnchorEl}
+      />
     </div>
   );
 }

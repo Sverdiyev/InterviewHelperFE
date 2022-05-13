@@ -16,20 +16,18 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
     onSuccess: () => queryClient.invalidateQueries('questions')
   });
 
-  const handleClose = (reason) => {
-    if (reason != 'backdropClick') {
-      setPopupIsVisible(false);
-      setAnchorEl(null);
-    }
+  const handleClose = () => {
+    setPopupIsVisible(false);
+    setAnchorEl(null);
   };
 
   const handleCancel = () => {
-    handleClose('cancel');
+    handleClose();
   };
 
   const handleDelete = () => {
     deleteMutation.mutate(questionId);
-    handleClose('confirm');
+    handleClose();
   };
   return (
     <>
