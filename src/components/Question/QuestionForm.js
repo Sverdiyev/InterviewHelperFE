@@ -14,7 +14,8 @@ function QuestionForm({
   defaultHardToGoogle = false,
   defaultHeading = '',
   buttonText,
-  handleSubmissionCb
+  handleSubmissionCb,
+  questionId = null
 }) {
   const [headingValue, setHeadingValue, headingIsValid] = useInputField({
     defaultValue: defaultHeading,
@@ -45,7 +46,7 @@ function QuestionForm({
       tags: tagsValue.split(',').map((tag) => tag.trim()),
       complexity: complexityValue
     };
-
+    if (questionId !== null) data.id = questionId;
     const result = handleSubmissionCb(data);
     setSuccessfullAddition(result);
     //send data to BE
