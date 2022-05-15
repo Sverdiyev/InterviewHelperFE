@@ -13,6 +13,7 @@ function QuestionForm({
   defaultComplexity = 'easy',
   defaultHardToGoogle = false,
   defaultHeading = '',
+  buttonText,
   handleSubmissionCb
 }) {
   const [headingValue, setHeadingValue, headingIsValid] = useInputField({
@@ -92,7 +93,7 @@ function QuestionForm({
           label="Easy to google"
         />
       </Grid>
-      <SubmitButton disabled={!headingIsValid}>Add Question</SubmitButton>
+      <SubmitButton disabled={!headingIsValid}>{buttonText}</SubmitButton>
     </form>
   );
 }
