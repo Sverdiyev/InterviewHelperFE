@@ -31,7 +31,7 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
   };
   return (
     <>
-      <Dialog open={popupIsVisible} onClose={() => handleClose('backdropClick')}>
+      <Dialog open={popupIsVisible} onClose={() => handleClose()}>
         <DialogTitle id="alert-dialog-title">
           {'Are you sure you want to delete this question?'}
         </DialogTitle>
