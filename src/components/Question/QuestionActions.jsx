@@ -4,7 +4,12 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useQueryClient, useMutation } from 'react-query';
-import { postVote, deleteVote } from '../../services/api-requests/questions.js';
+import {
+  postVote,
+  deleteVote,
+  postFavourite,
+  deleteFavourite
+} from '../../services/api-requests/questions.js';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -12,11 +17,13 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import { yellow, grey, green, red } from '@mui/material/colors';
 import { Grid, Checkbox } from '@mui/material';
 
-function QuestionActions({ questionVote, userVote, questionId }) {
+function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }) {
   const [voteCount, setVoteCount] = useState(questionVote);
   const [currentUserVote, setCurrentUserVote] = useState(userVote);
+  const [userFavourite, setUserFavourite] = useState(isUserFavourite);
   const queryClient = useQueryClient();
   const [voteActive, setVoteActive] = useState(true);
+  const [favouriteActive, setFavouriteActive] = useState(true);
 
   const upVoteMutation = useMutation((value) => postVote(value, 'upvote'), {
     onSuccess: () => {
@@ -25,6 +32,9 @@ function QuestionActions({ questionVote, userVote, questionId }) {
         : setVoteCount((voteCount) => voteCount + 1);
       setCurrentUserVote('up');
       queryClient.invalidateQueries('questions');
+      setVoteActive(true);
+    },
+    onError: () => {
       setVoteActive(true);
     }
   });
@@ -37,10 +47,13 @@ function QuestionActions({ questionVote, userVote, questionId }) {
       setCurrentUserVote('down');
       queryClient.invalidateQueries('questions');
       setVoteActive(true);
+    },
+    onError: () => {
+      setVoteActive(true);
     }
   });
 
-  const deleteMutation = useMutation((value) => deleteVote(value), {
+  const deleteVoteMutation = useMutation((value) => deleteVote(value), {
     onSuccess: () => {
       setCurrentUserVote(null);
       currentUserVote == 'up'
@@ -48,14 +61,48 @@ function QuestionActions({ questionVote, userVote, questionId }) {
         : setVoteCount((voteCount) => voteCount + 1);
       queryClient.invalidateQueries('questions');
       setVoteActive(true);
+    },
+    onError: () => {
+      setVoteActive(true);
     }
   });
 
+  const addFavouriteMutation = useMutation(() => postFavourite({ questionId }), {
+    onSuccess: () => {
+      setUserFavourite(true);
+      queryClient.invalidateQueries('questions');
+      setFavouriteActive(true);
+    },
+    onError: () => {
+      setFavouriteActive(true);
+    }
+  });
+
+  const deleteFavouriteMutation = useMutation(() => deleteFavourite({ questionId }), {
+    onSuccess: () => {
+      setUserFavourite(false);
+      queryClient.invalidateQueries('questions');
+      setFavouriteActive(true);
+    },
+    onError: () => {
+      setFavouriteActive(true);
+    }
+  });
+
+  const handleFavourite = () => {
+    setFavouriteActive(false);
+    if (userFavourite) {
+      deleteFavouriteMutation.mutate();
+    } else {
+      addFavouriteMutation.mutate();
+    }
+  };
+
   const handleVote = (value) => {
-    // insert logged in user id and here
+    setVoteActive(false);
     const data = { questionId };
     if (currentUserVote == value) {
-      deleteMutation.mutate(data);
+      deleteVoteMutation.mutate(data);
     } else if (value == 'up') {
       upVoteMutation.mutate(data);
     } else if (value == 'down') {
@@ -117,11 +164,17 @@ function QuestionActions({ questionVote, userVote, questionId }) {
         <Checkbox
           icon={<StarOutlineIcon />}
           checkedIcon={<StarIcon />}
+          checked={userFavourite}
+          disabled={!favouriteActive}
+          onClick={() => handleFavourite()}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],
             '&.Mui-checked': {
               color: yellow[600]
+            },
+            '&.Mui-disabled': {
+              color: grey[800]
             }
           }}
         />
