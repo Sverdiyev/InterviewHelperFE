@@ -12,7 +12,7 @@ function AddQuestionComponent() {
       <Typography component="h1" variant="h5">
         Add Question
       </Typography>
-      <QuestionForm handleSubmissionCb={postQuestion} />
+      <QuestionForm handleSubmissionCb={postQuestion} buttonText="Add Question" />
     </>
   );
 }

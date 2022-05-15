@@ -38,9 +38,8 @@ function QuestionMenu({ id }) {
         <MenuItem onClick={handleEditClick}>Edit</MenuItem>
         <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
-
       <EditQuestionPopup
-        open={editPopupIsVisible}
+        editPopupIsVisible={editPopupIsVisible}
         questionId={id}
         setEditPopupIsVisible={setEditPopupIsVisible}
         setAnchorEl={setAnchorEl}

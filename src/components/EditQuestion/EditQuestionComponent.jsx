@@ -23,6 +23,7 @@ function EditQuestionComponent({ questionId }) {
         defaultComplexity={chosenQuestion.complexity}
         defaultHardToGoogle={chosenQuestion.hardToGoogle}
         defaultHeading={chosenQuestion.questionContent}
+        buttonText="Save Changes"
       />
     </>
   );

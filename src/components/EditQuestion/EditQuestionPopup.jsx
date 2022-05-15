@@ -1,12 +1,13 @@
 import { Dialog, Grid } from '@mui/material';
+import EditQuestionComponent from './EditQuestionComponent.jsx';
 
-function EditQuestionComponent({ open, questionId, setEditPopupIsVisible, setAnchorEl }) {
+function EditQuestionPopup({ editPopupIsVisible, questionId, setEditPopupIsVisible, setAnchorEl }) {
   const handleClose = () => {
     setEditPopupIsVisible(false);
     setAnchorEl(null);
   };
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={editPopupIsVisible} onClose={handleClose}>
       <Grid
         container
         flexDirection="column"
@@ -18,4 +19,4 @@ function EditQuestionComponent({ open, questionId, setEditPopupIsVisible, setAnc
   );
 }
 
-export default EditQuestionComponent;
+export default EditQuestionPopup;
