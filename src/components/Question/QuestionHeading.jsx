@@ -31,7 +31,7 @@ const StyledComplexity = styled('span')(({ complexity }) => {
   };
 });
 
-function QuestionHeading({ complexity, questionContent }) {
+function QuestionHeading({ complexity, questionContent, id }) {
   return (
     <CardContent
       component={Grid}
@@ -52,7 +52,7 @@ function QuestionHeading({ complexity, questionContent }) {
         <StyledComplexity complexity={complexity.toLowerCase()}>
           {complexity.toLowerCase()}
         </StyledComplexity>
-        <QuestionMenu />
+        <QuestionMenu id={id} />
       </div>
     </CardContent>
   );
