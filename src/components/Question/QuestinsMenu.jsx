@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditQuestionComponent from '../EditQuestion/EditQuestionComponent.js';
+import EditQuestionPopup from '../EditQuestion/EditQuestionPopup';
 
 function QuestionMenu({ id }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -17,8 +17,8 @@ function QuestionMenu({ id }) {
   };
 
   const handleEditClick = () => {
+    setAnchorEl(null);
     setEditPopupIsVisible(true);
-    console.log(id);
   };
 
   return (
@@ -39,7 +39,12 @@ function QuestionMenu({ id }) {
         <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
 
-      <EditQuestionComponent open={editPopupIsVisible} setAnchorEl={setAnchorEl} />
+      <EditQuestionPopup
+        open={editPopupIsVisible}
+        questionId={id}
+        setEditPopupIsVisible={setEditPopupIsVisible}
+        setAnchorEl={setAnchorEl}
+      />
     </div>
   );
 }

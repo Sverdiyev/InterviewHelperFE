@@ -1,6 +1,5 @@
 import { Checkbox, FormControlLabel, Grid } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import { postQuestion } from '../../services/api-requests/questions.js';
 import useInputField from '../../services/useInputField.js';
 import { questionHeadingValidaton } from '../../services/validators.js';
 import Alerts from '../StyledUI/Alerts.jsx';
@@ -8,16 +7,24 @@ import InputField from '../StyledUI/InputField.jsx';
 import SelectField from '../StyledUI/SelectField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
-function AddQuestionForm() {
+function QuestionForm({
+  defaultNote = '',
+  defaultTags = '',
+  defaultComplexity = 'easy',
+  defaultHardToGoogle = false,
+  defaultHeading = '',
+  handleSubmissionCb
+}) {
   const [headingValue, setHeadingValue, headingIsValid] = useInputField({
+    defaultValue: defaultHeading,
     validationCb: questionHeadingValidaton
   });
-  const [noteValue, setNoteValue] = useInputField();
-  const [tagsValue, setTagsValue] = useInputField();
-  const [complexityValue, setComplexityValue] = useInputField({ defaultValue: 'easy' });
+  const [noteValue, setNoteValue] = useInputField({ defaultValue: defaultNote });
+  const [tagsValue, setTagsValue] = useInputField({ defaultValue: defaultTags });
+  const [complexityValue, setComplexityValue] = useInputField({ defaultValue: defaultComplexity });
   const [successfullAddition, setSuccessfullAddition] = useState(null);
 
-  const easyToGoogleRef = useRef(true);
+  const hardToGoogleRef = useRef(defaultHardToGoogle);
   const formIsValid = headingIsValid;
 
   const handleSubmit = (e) => {
@@ -33,12 +40,13 @@ function AddQuestionForm() {
     const data = {
       questionContent: headingValue,
       note: noteValue,
-      easyToGoogle: easyToGoogleRef.current,
+      hardToGoogle: hardToGoogleRef.current,
       tags: tagsValue.split(',').map((tag) => tag.trim()),
       complexity: complexityValue
     };
 
-    setSuccessfullAddition(postQuestion(data));
+    const result = handleSubmissionCb(data);
+    setSuccessfullAddition(result);
     //send data to BE
   };
   return (
@@ -78,7 +86,7 @@ function AddQuestionForm() {
           control={
             <Checkbox
               defaultChecked
-              onChange={(e) => (easyToGoogleRef.current = e.target.checked)}
+              onChange={(e) => (hardToGoogleRef.current = e.target.checked)}
             />
           }
           label="Easy to google"
@@ -89,4 +97,4 @@ function AddQuestionForm() {
   );
 }
 
-export default AddQuestionForm;
+export default QuestionForm;

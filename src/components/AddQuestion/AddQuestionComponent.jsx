@@ -1,6 +1,7 @@
 import AddIcon from '@mui/icons-material/AddCircleOutline';
-import AddQuestionForm from './AddQuestionForm.jsx';
 import { Avatar, Typography } from '@mui/material';
+import { postQuestion } from '../../services/api-requests/questions.js';
+import QuestionForm from '../Question/QuestionForm.js';
 
 function AddQuestionComponent() {
   return (
@@ -11,7 +12,7 @@ function AddQuestionComponent() {
       <Typography component="h1" variant="h5">
         Add Question
       </Typography>
-      <AddQuestionForm />
+      <QuestionForm handleSubmissionCb={postQuestion} />
     </>
   );
 }
