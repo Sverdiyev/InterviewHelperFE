@@ -8,7 +8,7 @@ import { styled } from '@mui/system';
 
 const StyledCard = styled(Card)({
   textAlign: 'left',
-  width: '60%',
+  width: '100%',
   padding: '1rem',
   marginBottom: '1rem'
 });
