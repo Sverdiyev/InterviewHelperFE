@@ -85,13 +85,8 @@ function QuestionForm({
         </Grid>
         <FormControlLabel
           sx={{ margin: '0 auto' }}
-          control={
-            <Checkbox
-              defaultChecked
-              onChange={(e) => (hardToGoogleRef.current = e.target.checked)}
-            />
-          }
-          label="Easy to google"
+          control={<Checkbox onChange={(e) => (hardToGoogleRef.current = e.target.checked)} />}
+          label="Hard to google"
         />
       </Grid>
       <SubmitButton disabled={!headingIsValid}>{buttonText}</SubmitButton>
