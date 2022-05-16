@@ -13,7 +13,10 @@ function EditQuestionPopup({ editPopupIsVisible, questionId, setEditPopupIsVisib
         flexDirection="column"
         alignItems="center"
         sx={{ width: '600px', padding: '30px 30px 50px', boxSizing: 'border-box' }}>
-        <EditQuestionComponent questionId={questionId} />
+        <EditQuestionComponent
+          questionId={questionId}
+          setEditPopupIsVisible={setEditPopupIsVisible}
+        />
       </Grid>
     </Dialog>
   );

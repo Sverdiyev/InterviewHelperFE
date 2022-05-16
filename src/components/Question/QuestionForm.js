@@ -14,7 +14,9 @@ function QuestionForm({
   defaultHardToGoogle = false,
   defaultHeading = '',
   buttonText,
-  handleSubmissionCb
+  handleSubmissionCb,
+  alertsSuccessText,
+  alertsFailutreText
 }) {
   const [headingValue, setHeadingValue, headingIsValid] = useInputField({
     defaultValue: defaultHeading,
@@ -50,8 +52,8 @@ function QuestionForm({
   return (
     <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
       <Alerts
-        failLabel="Addition Failed"
-        successLabel="Added"
+        failLabel={alertsFailutreText}
+        successLabel={alertsSuccessText}
         setSuccess={setSuccessfullAddition}
         success={successfullAddition}
       />

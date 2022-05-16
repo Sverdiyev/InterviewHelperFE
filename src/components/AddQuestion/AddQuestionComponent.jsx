@@ -37,6 +37,8 @@ function AddQuestionComponent({ setPopupIsVisible = () => null }) {
         handleSubmissionCb={handleSubmissionCb}
         buttonText="Add Question"
         setPopupIsVisible={setPopupIsVisible}
+        alertsSuccessText="Added"
+        alertsFailutreText="Addition failed"
       />
     </>
   );
