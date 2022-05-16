@@ -67,12 +67,14 @@ function AddQuestionForm() {
         onInputChange={setTagsValue}
       />
       <Grid container alignItems="center">
-        <SelectField
-          value={complexityValue}
-          setValue={setComplexityValue}
-          label="complexity"
-          options={['easy', 'medium', 'hard']}
-        />
+        <Grid item xs={6}>
+          <SelectField
+            value={complexityValue}
+            setValue={setComplexityValue}
+            label="complexity"
+            options={['easy', 'medium', 'hard']}
+          />
+        </Grid>
         <FormControlLabel
           sx={{ margin: '0 auto' }}
           control={
