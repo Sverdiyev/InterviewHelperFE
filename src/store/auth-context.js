@@ -46,14 +46,15 @@ export function AuthContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
 
-  const logIn = async (loginData) => {
-    const user = await loginRequest(loginData);
-    if (user) {
-      dispatch({ type: ACTIONS.LOG_IN, user });
-      navigate('/');
-      return true;
-    }
-    return false;
+  const logIn = (loginData) => {
+    loginRequest(loginData).then((user) => {
+      if (user) {
+        dispatch({ type: ACTIONS.LOG_IN, user });
+        navigate('/');
+        return true;
+      }
+      return false;
+    });
   };
 
   const logOut = () => {
