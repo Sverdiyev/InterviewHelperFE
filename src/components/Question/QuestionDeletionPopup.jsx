@@ -13,7 +13,7 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
   const queryClient = new useQueryClient();
 
   const deleteMutation = useMutation((value) => deleteQuestion(value), {
-    onSuccess: () => queryClient.invalidateQueries('questions')
+    onSuccess: () => queryClient.invalidateQueries('questionsFetch')
   });
 
   const handleClose = () => {
