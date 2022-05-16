@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { requestData } from './http-client.js';
 
-const inOneHour = () => new Date(new Date().getTime() + 60 * 60 * 1000);
+const in20Minutes = () => new Date(new Date().getTime() + 20 * 60 * 1000);
 
 export const loginRequest = async (userCredentials) => {
   try {
@@ -10,8 +10,8 @@ export const loginRequest = async (userCredentials) => {
 
     const user = data.name;
 
-    Cookies.set('jwt', data.token, { expires: inOneHour() });
-    Cookies.set('user', user, { expires: inOneHour() });
+    Cookies.set('jwt', data.token, { expires: in20Minutes() });
+    Cookies.set('user', user, { expires: in20Minutes() });
 
     return user;
   } catch {
@@ -31,8 +31,8 @@ export const addUserRequest = async ({ name, email, password }) => {
     const data = await res.json();
     const user = data.name;
 
-    Cookies.set('jwt', data.token, { expires: inOneHour() });
-    Cookies.set('user', user, { expires: inOneHour() });
+    Cookies.set('jwt', data.token, { expires: in20Minutes() });
+    Cookies.set('user', user, { expires: in20Minutes() });
 
     return user;
   } catch {

@@ -3,7 +3,7 @@ import FormControl from '@mui/material/FormControl';
 
 function SelectField({ value, setValue, options, label }) {
   return (
-    <FormControl sx={{ width: '50%', mt: 1 }}>
+    <FormControl fullWidth sx={{ mt: 1 }}>
       <InputLabel id={label + '-label'}>{label[0].toUpperCase() + label.slice(1)}</InputLabel>
       <Select
         sx={{ textAlign: 'left' }}
