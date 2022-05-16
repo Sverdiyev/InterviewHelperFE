@@ -31,7 +31,7 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
         ? setVoteCount((voteCount) => voteCount + 2)
         : setVoteCount((voteCount) => voteCount + 1);
       setCurrentUserVote('up');
-      queryClient.invalidateQueries('questions');
+      queryClient.invalidateQueries('questionsFetch');
       setVoteActive(true);
     },
     onError: () => {
@@ -45,7 +45,7 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
         ? setVoteCount((voteCount) => voteCount - 2)
         : setVoteCount((voteCount) => voteCount - 1);
       setCurrentUserVote('down');
-      queryClient.invalidateQueries('questions');
+      queryClient.invalidateQueries('questionsFetch');
       setVoteActive(true);
     },
     onError: () => {
@@ -59,7 +59,7 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
       currentUserVote == 'up'
         ? setVoteCount((voteCount) => voteCount - 1)
         : setVoteCount((voteCount) => voteCount + 1);
-      queryClient.invalidateQueries('questions');
+      queryClient.invalidateQueries('questionsFetch');
       setVoteActive(true);
     },
     onError: () => {
@@ -70,7 +70,7 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
   const addFavouriteMutation = useMutation(() => postFavourite({ questionId }), {
     onSuccess: () => {
       setUserFavourite(true);
-      queryClient.invalidateQueries('questions');
+      queryClient.invalidateQueries('questionsFetch');
       setFavouriteActive(true);
     },
     onError: () => {
@@ -81,7 +81,7 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
   const deleteFavouriteMutation = useMutation(() => deleteFavourite({ questionId }), {
     onSuccess: () => {
       setUserFavourite(false);
-      queryClient.invalidateQueries('questions');
+      queryClient.invalidateQueries('questionsFetch');
       setFavouriteActive(true);
     },
     onError: () => {

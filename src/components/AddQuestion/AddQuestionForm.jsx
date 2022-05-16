@@ -24,7 +24,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
   const formIsValid = headingIsValid;
 
   const addMutation = useMutation((value) => postQuestion(value), {
-    onSuccess: () => queryClient.invalidateQueries('questions')
+    onSuccess: () => queryClient.invalidateQueries('questionsFetch')
   });
 
   const handleSubmit = (e) => {
