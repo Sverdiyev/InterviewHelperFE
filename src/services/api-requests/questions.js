@@ -16,3 +16,11 @@ export const postQuestion = async (question) => requestData('/questions/add', 'P
 
 //put - edit question
 export const putQuestion = async (question) => requestData('/questions/edit', 'PUT', question);
+
+//post user vote
+export const postVote = async (userVote, voteType) =>
+  requestData(`/questions/votes/${voteType}`, 'POST', userVote);
+
+//delete user vote
+export const deleteVote = async (userQuestion) =>
+  requestData('/questions/votes', 'DELETE', userQuestion);

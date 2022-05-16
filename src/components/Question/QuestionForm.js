@@ -14,8 +14,7 @@ function QuestionForm({
   defaultHardToGoogle = false,
   defaultHeading = '',
   buttonText,
-  handleSubmissionCb,
-  questionId = null
+  handleSubmissionCb
 }) {
   const [headingValue, setHeadingValue, headingIsValid] = useInputField({
     defaultValue: defaultHeading,
@@ -38,7 +37,6 @@ function QuestionForm({
       setTagsValue();
       return;
     }
-
     const data = {
       questionContent: headingValue,
       note: noteValue,
@@ -46,18 +44,16 @@ function QuestionForm({
       tags: tagsValue.split(',').map((tag) => tag.trim()),
       complexity: complexityValue
     };
-    if (questionId !== null) data.id = questionId;
-    const result = handleSubmissionCb(data);
-    setSuccessfullAddition(result);
-    //send data to BE
+
+    handleSubmissionCb(data, setSuccessfullAddition);
   };
   return (
     <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
       <Alerts
         failLabel="Addition Failed"
         successLabel="Added"
-        success={successfullAddition}
         setSuccess={setSuccessfullAddition}
+        success={successfullAddition}
       />
       <InputField
         id="heading"
