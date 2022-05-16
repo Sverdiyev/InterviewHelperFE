@@ -3,19 +3,22 @@ import Cookies from 'js-cookie';
 
 const baseUrl = 'https://localhost:3001';
 
-// generic get request
-export const getEndpoint = (dataIdentifier, endpoint) => {
+export const useEndpoint = (endpoint, dataIdentifier, method = 'GET', inputData = null) => {
   const url = baseUrl + endpoint;
 
-  return useQuery(dataIdentifier, async () => {
-    const data = await (
-      await fetch(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + Cookies.get('jwt')
-        }
-      })
-    ).json();
+  const options = {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('jwt')
+    }
+  };
+
+  return useQuery([dataIdentifier, inputData], async () => {
+    if (inputData) options.body = JSON.stringify(inputData);
+    const res = await fetch(url, options);
+    const data = await res.json();
+
     return data;
   });
 };
