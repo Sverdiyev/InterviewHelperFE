@@ -1,9 +1,14 @@
-import { getEndpoint, requestData } from './http-client.js';
+import { useEndpoint, requestData } from './http-client.js';
 
 //get all questions
-export const useQuestions = (query) => {
-  const url = `/questions${query ? '?search=' + query : ''}  `;
-  return getEndpoint(url, 'questions');
+export const useQuestions = (searchParams) => {
+  const url = `/questions`;
+  return useEndpoint(url, 'questionsFetch', 'POST', searchParams);
+};
+
+export const useQuestionTags = () => {
+  const url = `/questions/tags`;
+  return useEndpoint(url, 'tagsFetch');
 };
 
 //post new question
