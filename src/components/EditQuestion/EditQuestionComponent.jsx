@@ -3,11 +3,16 @@ import { useMutation, useQueryClient } from 'react-query';
 import QuestionForm from '../Question/QuestionForm.js';
 import AddIcon from '@mui/icons-material/AddCircleOutline';
 import { putQuestion } from '../../services/api-requests/questions.js';
+import { useRef, useState } from 'react';
+import { editQuestionValidator } from '../../services/helpers.js';
 
 function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null }) {
   const queryClient = useQueryClient();
   const allQuestions = queryClient.getQueriesData('questionsFetch')[0][1];
+
+  const [failureText, setFailureText] = useState('Edition failed');
   const chosenQuestion = allQuestions.filter((question) => question.id === questionId)[0];
+  const oldHeadingValue = useRef(chosenQuestion.questionContent);
 
   const editMutation = useMutation((value) => putQuestion(value), {
     onSuccess: () => queryClient.invalidateQueries('questionsFetch')
@@ -15,6 +20,12 @@ function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null 
 
   const handleSubmissionCb = (data, setSuccess = () => null) => {
     data.id = questionId;
+
+    if (!editQuestionValidator(oldHeadingValue.current, data.questionContent)) {
+      setFailureText('Cannot change more than 5 words in question Heading');
+      return setSuccess(false);
+    }
+    setFailureText('Edition failed');
     editMutation.mutate(data, {
       onSuccess: () => {
         setSuccess(true);
@@ -45,7 +56,7 @@ function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null 
         buttonText="Save Changes"
         handleSubmissionCb={handleSubmissionCb}
         alertsSuccessText="Edited"
-        alertsFailutreText="Edition failed"
+        alertsFailutreText={failureText}
       />
     </>
   );
