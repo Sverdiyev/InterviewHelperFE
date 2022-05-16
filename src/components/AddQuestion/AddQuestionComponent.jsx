@@ -8,7 +8,7 @@ function AddQuestionComponent({ setPopupIsVisible = () => null }) {
   const queryClient = useQueryClient();
 
   const addMutation = useMutation((value) => postQuestion(value), {
-    onSuccess: () => queryClient.invalidateQueries('questions')
+    onSuccess: () => queryClient.invalidateQueries('questionsFetch')
   });
 
   const handleSubmissionCb = (data, setSuccess = () => null) => {
