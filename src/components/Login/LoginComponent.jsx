@@ -25,7 +25,7 @@ function LoginComponent({ setPopupIsVisible = () => null }) {
   const onChangeEmail = (e) => setEmailValue(e);
   const onChangePassword = (e) => setPasswordValue(e);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formIsValid) {
@@ -35,7 +35,7 @@ function LoginComponent({ setPopupIsVisible = () => null }) {
     }
 
     const data = { email: emailValue, password: passwordValue };
-    const res = await authCtx.logIn(data);
+    const res = authCtx.logIn(data);
     setSuccessfullLogin(res);
     if (res) setPopupIsVisible(false);
   };
