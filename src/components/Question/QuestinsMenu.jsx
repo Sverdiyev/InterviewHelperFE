@@ -10,7 +10,7 @@ function QuestionMenu({ questionId }) {
   const [editPopupIsVisible, setEditPopupIsVisible] = useState(false);
 
   const open = Boolean(anchorEl);
-  const [popupIsVisible, setPopupIsVisible] = useState(false);
+  const [deletePopupIsVisible, setDeletePopupIsVisible] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -20,7 +20,7 @@ function QuestionMenu({ questionId }) {
   };
   const handleDeleteClick = () => {
     setAnchorEl(null);
-    setPopupIsVisible(true);
+    setDeletePopupIsVisible(true);
   };
 
   const handleEditClick = () => {
@@ -54,8 +54,8 @@ function QuestionMenu({ questionId }) {
 
       <QuestionDeletionPopup
         questionId={questionId}
-        popupIsVisible={popupIsVisible}
-        setPopupIsVisible={setPopupIsVisible}
+        popupIsVisible={deletePopupIsVisible}
+        setPopupIsVisible={setDeletePopupIsVisible}
         setAnchorEl={setAnchorEl}
       />
     </div>
