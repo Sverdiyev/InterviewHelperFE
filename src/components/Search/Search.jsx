@@ -13,7 +13,7 @@ const MIN_QUESTION_RATING = -30;
 
 function Search({ searchValues, setSearchValues }) {
   const { data, isSuccess } = useQuestionTags();
-  const allTags = isSuccess ? data.map((tag) => tag.tagName) : ['Tags are loading'];
+  const allTags = isSuccess ? data : ['Tags are loading'];
 
   const [, setSearchParams] = useSearchParams();
 
