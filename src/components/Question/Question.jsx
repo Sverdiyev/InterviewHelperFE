@@ -19,14 +19,14 @@ const StyledCardActions = styled(CardActions)({
 });
 
 function Question({
+  id,
+  creationDate,
   complexity,
   questionContent,
   note,
   vote,
   tags,
-  id,
   userVote,
-  creationDate,
   isUserFavourite
 }) {
   return (
