@@ -28,3 +28,11 @@ export const postVote = async (userVote, voteType) =>
 //delete user vote
 export const deleteVote = async (userQuestion) =>
   requestData('/questions/votes', 'DELETE', userQuestion);
+
+//post user Favourite
+export const postFavourite = async (userQuestion) =>
+  requestData('/questions/favourites/add', 'POST', userQuestion);
+
+//delete user Favourite
+export const deleteFavourite = async (userQuestion) =>
+  requestData('/questions/favourites', 'DELETE', userQuestion);
