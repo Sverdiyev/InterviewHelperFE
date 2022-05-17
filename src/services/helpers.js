@@ -94,6 +94,5 @@ export const editQuestionValidator = (oldQuestion, newQuestion) => {
       changes += 1;
     }
   }
-  if (changes > MAX_CHANGES) return false;
-  return true;
+  return changes > MAX_CHANGES;
 };
