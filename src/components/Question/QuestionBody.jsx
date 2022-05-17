@@ -1,6 +1,7 @@
 import { CardContent, Chip, Grid } from '@mui/material';
+import { calculateElapedPostTime } from '../../services/helpers';
 
-function QuestionBody({ note, tags }) {
+function QuestionBody({ creationDate, note, tags }) {
   return (
     <CardContent
       component={Grid}
@@ -21,6 +22,9 @@ function QuestionBody({ note, tags }) {
               />
             ))}
       </Grid>
+      <span style={{ fontSize: '0.7rem', fontStyle: 'italic' }}>
+        {calculateElapedPostTime(new Date(), new Date(creationDate))}
+      </span>
     </CardContent>
   );
 }

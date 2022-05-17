@@ -26,6 +26,7 @@ function QuestionForm({
   const [tagsValue, setTagsValue] = useInputField({ defaultValue: defaultTags });
   const [complexityValue, setComplexityValue] = useInputField({ defaultValue: defaultComplexity });
   const [successfullAddition, setSuccessfullAddition] = useState(null);
+  const [canSubmit, setCanSubmit] = useState(true);
 
   const hardToGoogleRef = useRef(defaultHardToGoogle);
   const formIsValid = headingIsValid;
@@ -39,6 +40,8 @@ function QuestionForm({
       setTagsValue();
       return;
     }
+    setCanSubmit(false);
+
     const data = {
       questionContent: headingValue,
       note: noteValue,
@@ -46,8 +49,7 @@ function QuestionForm({
       tags: tagsValue.split(',').map((tag) => tag.trim()),
       complexity: complexityValue
     };
-
-    handleSubmissionCb(data, setSuccessfullAddition);
+    handleSubmissionCb(data, setSuccessfullAddition, setCanSubmit);
   };
   return (
     <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
@@ -89,7 +91,7 @@ function QuestionForm({
           label="Hard to google"
         />
       </Grid>
-      <SubmitButton disabled={!headingIsValid}>{buttonText}</SubmitButton>
+      <SubmitButton disabled={!headingIsValid || !canSubmit}>{buttonText}</SubmitButton>
     </form>
   );
 }

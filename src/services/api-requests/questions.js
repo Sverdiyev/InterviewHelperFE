@@ -17,6 +17,10 @@ export const postQuestion = async (question) => requestData('/questions/add', 'P
 //put - edit question
 export const putQuestion = async (question) => requestData('/questions/edit', 'PUT', question);
 
+// delete - delete question
+export const deleteQuestion = async (questionId) =>
+  requestData(`/questions/${questionId}`, 'DELETE', null);
+
 //post user vote
 export const postVote = async (userVote, voteType) =>
   requestData(`/questions/votes/${voteType}`, 'POST', userVote);
@@ -24,3 +28,11 @@ export const postVote = async (userVote, voteType) =>
 //delete user vote
 export const deleteVote = async (userQuestion) =>
   requestData('/questions/votes', 'DELETE', userQuestion);
+
+//post user Favourite
+export const postFavourite = async (userQuestion) =>
+  requestData('/questions/favourites/add', 'POST', userQuestion);
+
+//delete user Favourite
+export const deleteFavourite = async (userQuestion) =>
+  requestData('/questions/favourites', 'DELETE', userQuestion);

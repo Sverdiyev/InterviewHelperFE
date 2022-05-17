@@ -18,7 +18,7 @@ function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null 
     onSuccess: () => queryClient.invalidateQueries('questionsFetch')
   });
 
-  const handleSubmissionCb = (data, setSuccess = () => null) => {
+  const handleSubmissionCb = (data, setSuccess = () => null, setCanSubmit) => {
     data.id = questionId;
 
     if (!editQuestionValidator(oldHeadingValue.current, data.questionContent)) {
@@ -35,6 +35,7 @@ function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null 
       },
       onError: () => {
         setSuccess(false);
+        setCanSubmit(true);
       }
     });
   };

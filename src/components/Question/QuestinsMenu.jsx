@@ -2,18 +2,25 @@ import { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditQuestionPopup from '../EditQuestion/EditQuestionPopup';
+import QuestionDeletionPopup from './QuestionDeletionPopup';
 
-function QuestionMenu({ id }) {
+function QuestionMenu({ questionId }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [editPopupIsVisible, setEditPopupIsVisible] = useState(false);
 
   const open = Boolean(anchorEl);
+  const [popupIsVisible, setPopupIsVisible] = useState(false);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleDeleteClick = () => {
+    setAnchorEl(null);
+    setPopupIsVisible(true);
   };
 
   const handleEditClick = () => {
@@ -36,12 +43,19 @@ function QuestionMenu({ id }) {
           }
         }}>
         <MenuItem onClick={handleEditClick}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
       </Menu>
       <EditQuestionPopup
         editPopupIsVisible={editPopupIsVisible}
-        questionId={id}
+        questionId={questionId}
         setEditPopupIsVisible={setEditPopupIsVisible}
+        setAnchorEl={setAnchorEl}
+      />
+
+      <QuestionDeletionPopup
+        questionId={questionId}
+        popupIsVisible={popupIsVisible}
+        setPopupIsVisible={setPopupIsVisible}
         setAnchorEl={setAnchorEl}
       />
     </div>
