@@ -14,7 +14,7 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
 
   const deleteMutation = useMutation((value) => deleteQuestion(value), {
     onSuccess: () => {
-      queryClient.invalidateQueries('questions');
+      queryClient.invalidateQueries('questionsFetch');
       handleClose();
     },
     onError: () => {
