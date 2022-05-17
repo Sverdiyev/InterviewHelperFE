@@ -23,6 +23,7 @@ function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null 
 
     if (!editQuestionValidator(oldHeadingValue.current, data.questionContent)) {
       setFailureText('Cannot change more than 5 words in question Heading');
+      setCanSubmit(true);
       return setSuccess(false);
     }
     setFailureText('Edition failed');
