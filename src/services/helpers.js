@@ -105,16 +105,13 @@ export const editQuestionValidator = (oldQuestion, newQuestion) => {
     else oldWordsMap[el] = 1;
   }
 
-  console.log('🚀 ~ editQuestionValidator ~ oldWordsMap', oldWordsMap);
   let changes = 0;
   for (let el of newWords) {
-    console.log('🚀 ~ editQuestionValidator ~ el', el);
     if (el in oldWordsMap) {
       oldWordsMap[el] -= 1;
       if (oldWordsMap[el] === 0) delete oldWordsMap[el];
     } else {
       changes += 1;
-      console.log('🚀 ~ editQuestionValidator ~ changes', changes);
     }
   }
   return changes < MAX_CHANGES;
