@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import QuestionDeletionPopup from './QuestionDeletionPopup';
 
-function QuestionMenu() {
+function QuestionMenu({ questionId }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [popupIsVisible, setPopupIsVisible] = useState(false);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleDeleteClick = () => {
+    setAnchorEl(null);
+    setPopupIsVisible(true);
   };
 
   return (
@@ -27,8 +34,14 @@ function QuestionMenu() {
           }
         }}>
         <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
       </Menu>
+      <QuestionDeletionPopup
+        questionId={questionId}
+        popupIsVisible={popupIsVisible}
+        setPopupIsVisible={setPopupIsVisible}
+        setAnchorEl={setAnchorEl}
+      />
     </div>
   );
 }

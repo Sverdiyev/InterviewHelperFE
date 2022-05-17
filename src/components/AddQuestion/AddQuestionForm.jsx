@@ -17,6 +17,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
   const [tagsValue, setTagsValue] = useInputField();
   const [complexityValue, setComplexityValue] = useInputField({ defaultValue: 'easy' });
   const [successfullAddition, setSuccessfullAddition] = useState(null);
+  const [canSubmit, setCanSubmit] = useState(true);
   const queryClient = useQueryClient();
 
   const easyToGoogleRef = useRef(true);
@@ -28,6 +29,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setCanSubmit(false);
 
     if (!formIsValid) {
       setHeadingValue();
@@ -47,9 +49,10 @@ function AddQuestionForm({ setPopupIsVisible }) {
         setSuccessfullAddition(true);
         setTimeout(() => {
           setPopupIsVisible(false);
-        }, 2000); // pause for 2 seconds so the user sees prompt for seccessful addition
+        }, 2000);
       },
       onError: () => {
+        setCanSubmit(true);
         setSuccessfullAddition(false);
       }
     });
@@ -99,7 +102,7 @@ function AddQuestionForm({ setPopupIsVisible }) {
           label="Easy to google"
         />
       </Grid>
-      <SubmitButton disabled={!headingIsValid}>Add Question</SubmitButton>
+      <SubmitButton disabled={!headingIsValid || !canSubmit}>Add Question</SubmitButton>
     </form>
   );
 }

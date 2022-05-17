@@ -16,6 +16,7 @@ function QuestionActions({ questionVote, userVote, questionId }) {
   const [voteCount, setVoteCount] = useState(questionVote);
   const [currentUserVote, setCurrentUserVote] = useState(userVote);
   const queryClient = useQueryClient();
+  const [voteActive, setVoteActive] = useState(true);
 
   const upVoteMutation = useMutation((value) => postVote(value, 'upvote'), {
     onSuccess: () => {
@@ -24,6 +25,7 @@ function QuestionActions({ questionVote, userVote, questionId }) {
         : setVoteCount((voteCount) => voteCount + 1);
       setCurrentUserVote('up');
       queryClient.invalidateQueries('questions');
+      setVoteActive(true);
     }
   });
 
@@ -34,6 +36,7 @@ function QuestionActions({ questionVote, userVote, questionId }) {
         : setVoteCount((voteCount) => voteCount - 1);
       setCurrentUserVote('down');
       queryClient.invalidateQueries('questions');
+      setVoteActive(true);
     }
   });
 
@@ -44,6 +47,7 @@ function QuestionActions({ questionVote, userVote, questionId }) {
         ? setVoteCount((voteCount) => voteCount - 1)
         : setVoteCount((voteCount) => voteCount + 1);
       queryClient.invalidateQueries('questions');
+      setVoteActive(true);
     }
   });
 
@@ -68,11 +72,15 @@ function QuestionActions({ questionVote, userVote, questionId }) {
           checkedIcon={<ThumbUpAltIcon />}
           checked={currentUserVote == 'up'}
           onClick={() => handleVote('up')}
+          disabled={!voteActive}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],
             '&.Mui-checked': {
               color: green[600]
+            },
+            '&.Mui-disabled': {
+              color: grey[800]
             }
           }}
         />
@@ -81,11 +89,15 @@ function QuestionActions({ questionVote, userVote, questionId }) {
           checkedIcon={<ThumbDownAltIcon />}
           checked={currentUserVote == 'down'}
           onClick={() => handleVote('down')}
+          disabled={!voteActive}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],
             '&.Mui-checked': {
               color: red[600]
+            },
+            '&.Mui-disabled': {
+              color: grey[800]
             }
           }}
         />
