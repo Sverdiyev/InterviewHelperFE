@@ -13,7 +13,14 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
   const queryClient = new useQueryClient();
 
   const deleteMutation = useMutation((value) => deleteQuestion(value), {
-    onSuccess: () => queryClient.invalidateQueries('questions')
+    onSuccess: () => {
+      queryClient.invalidateQueries('questions');
+      handleClose();
+    },
+    onError: () => {
+      handleClose();
+      alert('something went wrong!');
+    }
   });
 
   const handleClose = () => {
@@ -21,13 +28,8 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
     setAnchorEl(null);
   };
 
-  const handleCancel = () => {
-    handleClose();
-  };
-
   const handleDelete = () => {
     deleteMutation.mutate(questionId);
-    handleClose();
   };
   return (
     <>
@@ -41,7 +43,7 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleCancel()}>Cancel</Button>
+          <Button onClick={() => handleClose()}>Cancel</Button>
           <Button onClick={() => handleDelete()}>Confirm</Button>
         </DialogActions>
       </Dialog>
