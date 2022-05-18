@@ -5,7 +5,7 @@ const useInputField = (
 ) => {
   const [inputValue, setInputValue] = useState(defaultValue);
 
-  const [inputIsValid, setInputIsValid] = useState(null);
+  const [inputIsValid, setInputIsValid] = useState(validationCb(defaultValue) || null);
 
   const setInputValueHandler = (event) => {
     if (!event) return setInputIsValid(false);
