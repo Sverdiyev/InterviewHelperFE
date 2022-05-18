@@ -3,8 +3,8 @@ import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-
+import CommentIcon from '@mui/icons-material/Comment';
+import { grey } from '@mui/material/colors';
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -64,9 +64,9 @@ function Question({
           backgroundColor: 'white',
           fontStyle: 'italic',
           fontWeight: 'bold',
-          color: 'grey'
+          color: grey[800]
         }}
-        endIcon={<SendIcon />}
+        endIcon={<CommentIcon />}
         onClick={() => handleDrawerOpen()}>
         Open Comments
       </Button>
