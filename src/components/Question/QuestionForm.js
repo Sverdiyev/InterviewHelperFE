@@ -1,7 +1,5 @@
 import { Checkbox, FormControlLabel, Grid } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import { useQueryClient, useMutation } from 'react-query';
-import { postQuestion } from '../../services/api-requests/questions.js';
 import useInputField from '../../services/useInputField.js';
 import { questionHeadingValidaton } from '../../services/validators.js';
 import Alerts from '../StyledUI/Alerts.jsx';
@@ -9,27 +7,32 @@ import InputField from '../StyledUI/InputField.jsx';
 import SelectField from '../StyledUI/SelectField.jsx';
 import SubmitButton from '../StyledUI/SubmitButton.jsx';
 
-function AddQuestionForm({ setPopupIsVisible }) {
+function QuestionForm({
+  defaultNote = '',
+  defaultTags = '',
+  defaultComplexity = 'easy',
+  defaultHardToGoogle = false,
+  defaultHeading = '',
+  buttonText,
+  handleSubmissionCb,
+  alertsSuccessText,
+  alertsFailutreText
+}) {
   const [headingValue, setHeadingValue, headingIsValid] = useInputField({
+    defaultValue: defaultHeading,
     validationCb: questionHeadingValidaton
   });
-  const [noteValue, setNoteValue] = useInputField();
-  const [tagsValue, setTagsValue] = useInputField();
-  const [complexityValue, setComplexityValue] = useInputField({ defaultValue: 'easy' });
+  const [noteValue, setNoteValue] = useInputField({ defaultValue: defaultNote });
+  const [tagsValue, setTagsValue] = useInputField({ defaultValue: defaultTags });
+  const [complexityValue, setComplexityValue] = useInputField({ defaultValue: defaultComplexity });
   const [successfullAddition, setSuccessfullAddition] = useState(null);
   const [canSubmit, setCanSubmit] = useState(true);
-  const queryClient = useQueryClient();
 
-  const easyToGoogleRef = useRef(true);
+  const hardToGoogleRef = useRef(defaultHardToGoogle);
   const formIsValid = headingIsValid;
-
-  const addMutation = useMutation((value) => postQuestion(value), {
-    onSuccess: () => queryClient.invalidateQueries('questionsFetch')
-  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCanSubmit(false);
 
     if (!formIsValid) {
       setHeadingValue();
@@ -37,31 +40,22 @@ function AddQuestionForm({ setPopupIsVisible }) {
       setTagsValue();
       return;
     }
+    setCanSubmit(false);
+
     const data = {
       questionContent: headingValue,
       note: noteValue,
-      easyToGoogle: easyToGoogleRef.current,
+      hardToGoogle: hardToGoogleRef.current,
       tags: tagsValue.split(',').map((tag) => tag.trim()),
       complexity: complexityValue
     };
-    addMutation.mutate(data, {
-      onSuccess: () => {
-        setSuccessfullAddition(true);
-        setTimeout(() => {
-          setPopupIsVisible(false);
-        }, 2000);
-      },
-      onError: () => {
-        setCanSubmit(true);
-        setSuccessfullAddition(false);
-      }
-    });
+    handleSubmissionCb(data, setSuccessfullAddition, setCanSubmit);
   };
   return (
     <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
       <Alerts
-        failLabel="Addition Failed"
-        successLabel="Added"
+        failLabel={alertsFailutreText}
+        successLabel={alertsSuccessText}
         setSuccess={setSuccessfullAddition}
         success={successfullAddition}
       />
@@ -93,18 +87,13 @@ function AddQuestionForm({ setPopupIsVisible }) {
         </Grid>
         <FormControlLabel
           sx={{ margin: '0 auto' }}
-          control={
-            <Checkbox
-              defaultChecked
-              onChange={(e) => (easyToGoogleRef.current = e.target.checked)}
-            />
-          }
-          label="Easy to google"
+          control={<Checkbox onChange={(e) => (hardToGoogleRef.current = e.target.checked)} />}
+          label="Hard to google"
         />
       </Grid>
-      <SubmitButton disabled={!headingIsValid || !canSubmit}>Add Question</SubmitButton>
+      <SubmitButton disabled={!headingIsValid || !canSubmit}>{buttonText}</SubmitButton>
     </form>
   );
 }
 
-export default AddQuestionForm;
+export default QuestionForm;

@@ -92,3 +92,27 @@ export const filterUnneededValues = (searchObj) => {
   }
   return tmp;
 };
+
+export const editQuestionValidator = (oldQuestion, newQuestion) => {
+  const MAX_CHANGES = 5;
+  const newWords = newQuestion.split(' ');
+  const oldWords = oldQuestion.split(' ');
+
+  const oldWordsMap = {};
+
+  for (let el of oldWords) {
+    if (el in oldWordsMap) oldWordsMap[el] += 1;
+    else oldWordsMap[el] = 1;
+  }
+
+  let changes = 0;
+  for (let el of newWords) {
+    if (el in oldWordsMap) {
+      oldWordsMap[el] -= 1;
+      if (oldWordsMap[el] === 0) delete oldWordsMap[el];
+    } else {
+      changes += 1;
+    }
+  }
+  return changes <= MAX_CHANGES;
+};
