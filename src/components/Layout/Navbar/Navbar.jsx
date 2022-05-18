@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Button, Container, Grid, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import AuthActions from './AuthActions.jsx';
-import LoginPopup from '../../Login/LoginPopup.jsx';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#EAEAEA'
@@ -26,10 +24,8 @@ const StyledButton = styled(Button)({
 const pages = { questions: '' };
 
 function Navbar() {
-  const [popupIsVisible, setPopupIsVisible] = useState(false);
   return (
     <>
-      <LoginPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
       <StyledAppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -51,7 +47,7 @@ function Navbar() {
                 </Link>
               ))}
             </Grid>
-            <AuthActions setPopupIsVisible={setPopupIsVisible} />
+            <AuthActions />
           </Toolbar>
         </Container>
       </StyledAppBar>
