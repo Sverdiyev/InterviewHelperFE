@@ -2,6 +2,8 @@ import React from 'react';
 import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
@@ -27,8 +29,14 @@ function Question({
   vote,
   tags,
   userVote,
-  isUserFavourite
+  isUserFavourite,
+  setDrawerOpen,
+  setComments
 }) {
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+    setComments(`${questionContent}`);
+  };
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
       <QuestionHeading questionId={id} complexity={complexity} questionContent={questionContent} />
@@ -47,6 +55,21 @@ function Question({
           />
         </StyledCardActions>
       </Grid>
+      <Button
+        variant="contained"
+        size="small"
+        color="success"
+        style={{
+          marginTop: '1rem',
+          backgroundColor: 'white',
+          fontStyle: 'italic',
+          fontWeight: 'bold',
+          color: 'grey'
+        }}
+        endIcon={<SendIcon />}
+        onClick={() => handleDrawerOpen()}>
+        Open Comments
+      </Button>
     </StyledCard>
   );
 }
