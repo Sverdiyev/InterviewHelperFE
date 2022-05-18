@@ -23,7 +23,7 @@ const StyledButton = styled(Button)({
   display: 'block'
 });
 
-const pages = { questions: '', about: 'about' };
+const pages = { questions: '' };
 
 function Navbar() {
   const [popupIsVisible, setPopupIsVisible] = useState(false);
