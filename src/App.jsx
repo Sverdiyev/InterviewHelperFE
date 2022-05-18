@@ -8,7 +8,7 @@ import Login from './pages/Login.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Register from './pages/Register.jsx';
 import AddQuestion from './pages/AddQuestion.jsx';
-import PrivatePage from './pages/PrivatePage.jsx';
+import AuthorizedPage from './pages/AuthorizedPage.jsx';
 
 function App() {
   return (
@@ -21,17 +21,17 @@ function App() {
           <Route
             path="/add-question"
             element={
-              <PrivatePage>
+              <AuthorizedPage>
                 <AddQuestion />
-              </PrivatePage>
+              </AuthorizedPage>
             }
           />
           <Route
             path="/"
             element={
-              <PrivatePage>
+              <AuthorizedPage>
                 <Questions />
-              </PrivatePage>
+              </AuthorizedPage>
             }
           />
           <Route path="*" element={<NotFound />} />
