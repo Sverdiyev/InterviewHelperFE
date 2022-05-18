@@ -91,23 +91,21 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
 
   const handleFavourite = () => {
     setFavouriteActive(false);
-    const data = questionId;
     if (userFavourite) {
-      deleteFavouriteMutation.mutate(data);
+      deleteFavouriteMutation.mutate(questionId);
     } else {
-      addFavouriteMutation.mutate(data);
+      addFavouriteMutation.mutate(questionId);
     }
   };
 
   const handleVote = (value) => {
     setVoteActive(false);
-    const data = questionId;
     if (currentUserVote == value) {
-      deleteVoteMutation.mutate(data);
+      deleteVoteMutation.mutate(questionId);
     } else if (value == 'up') {
-      upVoteMutation.mutate(data);
+      upVoteMutation.mutate(questionId);
     } else if (value == 'down') {
-      downVoteMutation.mutate(data);
+      downVoteMutation.mutate(questionId);
     }
   };
 
