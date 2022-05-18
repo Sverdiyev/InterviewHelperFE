@@ -114,5 +114,5 @@ export const editQuestionValidator = (oldQuestion, newQuestion) => {
       changes += 1;
     }
   }
-  return changes < MAX_CHANGES;
+  return changes <= MAX_CHANGES;
 };
