@@ -67,7 +67,7 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
     }
   });
 
-  const addFavouriteMutation = useMutation(() => postFavourite({ questionId }), {
+  const addFavouriteMutation = useMutation((value) => postFavourite(value), {
     onSuccess: () => {
       setUserFavourite(true);
       queryClient.invalidateQueries('questionsFetch');
@@ -78,7 +78,7 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
     }
   });
 
-  const deleteFavouriteMutation = useMutation(() => deleteFavourite({ questionId }), {
+  const deleteFavouriteMutation = useMutation((value) => deleteFavourite(value), {
     onSuccess: () => {
       setUserFavourite(false);
       queryClient.invalidateQueries('questionsFetch');
@@ -91,16 +91,17 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
 
   const handleFavourite = () => {
     setFavouriteActive(false);
+    const data = questionId;
     if (userFavourite) {
-      deleteFavouriteMutation.mutate();
+      deleteFavouriteMutation.mutate(data);
     } else {
-      addFavouriteMutation.mutate();
+      addFavouriteMutation.mutate(data);
     }
   };
 
   const handleVote = (value) => {
     setVoteActive(false);
-    const data = { questionId };
+    const data = questionId;
     if (currentUserVote == value) {
       deleteVoteMutation.mutate(data);
     } else if (value == 'up') {
