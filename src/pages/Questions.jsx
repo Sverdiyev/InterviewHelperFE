@@ -27,7 +27,7 @@ function Questions() {
               container
               alignItems="center"
               flexGrow="1"
-              sx={{ paddingBottom: '5%', width: '15%' }}>
+              sx={{ paddingBottom: '5%', width: '15%', marginLeft: '50%' }}>
               <CircularProgress size="30%" />
             </Grid>
           )}
