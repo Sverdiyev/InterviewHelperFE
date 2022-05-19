@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import AddQuestionPopup from '../components/AddQuestion/AddQuestionPopup.jsx';
 import FloatingAddQuestions from '../components/AddQuestion/FloatingAddQuestions.jsx';
+import Cart from '../components/Cart/Cart.jsx';
 import Question from '../components/Question/Question.jsx';
 import Search from '../components/Search/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
@@ -55,7 +56,7 @@ function Questions() {
             Comments
           </Grid>
           <Grid sx={{ backgroundColor: 'green', height: '40vh', position: 'sticky', bottom: 0 }}>
-            list of question
+            <Cart />
           </Grid>
         </Grid>
       </Grid>
