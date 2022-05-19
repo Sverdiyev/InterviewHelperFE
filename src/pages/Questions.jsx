@@ -13,7 +13,6 @@ function Questions() {
   const [searchParams] = useSearchParams();
 
   const cartCtx = useContext(CartContext);
-  console.log('🚀 ~ Questions ~ cartCtx', cartCtx);
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams));
 

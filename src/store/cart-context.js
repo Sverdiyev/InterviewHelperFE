@@ -27,7 +27,8 @@ const reducer = (state, action) => {
   const newState = {};
 
   if (action.type === ACTIONS.ADD_TO_CART) {
-    newState.cartQuestions = [...state.cartQuestions, action.questionId];
+    const uniqueItems = Array.from(new Set([...state.cartQuestions, action.questionId]));
+    newState.cartQuestions = uniqueItems;
   } else if (action.type === ACTIONS.REMOVE_FROM_CART) {
     newState.cartQuestions = state.cartQuestions.filter((el) => el !== action.questionId);
   }
@@ -43,7 +44,9 @@ export function CartContextProvider({ children }) {
   // const navigate = useNavigate();
 
   const addToCart = (questionId) => {
+    const uniqueItems = Array.from(new Set([...state.cartQuestions, questionId]));
     dispatch({ type: ACTIONS.ADD_TO_CART, questionId });
+    Cookies.set('cart', uniqueItems);
   };
   const removeFromCart = (questionId) => {
     dispatch({ type: ACTIONS.ADD_TO_CART, questionId });

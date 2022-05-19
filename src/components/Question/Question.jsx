@@ -27,7 +27,8 @@ function Question({
   vote,
   tags,
   userVote,
-  isUserFavourite
+  isUserFavourite,
+  questionIsInCart
 }) {
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
@@ -44,6 +45,7 @@ function Question({
             userVote={userVote}
             questionId={id}
             isUserFavourite={isUserFavourite}
+            questionIsInCart={questionIsInCart}
           />
         </StyledCardActions>
       </Grid>
