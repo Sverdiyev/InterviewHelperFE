@@ -60,7 +60,7 @@ export function AuthContextProvider({ children }) {
   const logOut = () => {
     logOutRequest();
     dispatch({ type: ACTIONS.LOG_OUT });
-    navigate('/');
+    navigate('/login');
   };
 
   const register = (data) => {
