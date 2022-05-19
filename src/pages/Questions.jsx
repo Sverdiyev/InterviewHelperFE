@@ -38,7 +38,7 @@ function Questions() {
             data.map((question) => (
               <Question
                 key={question.id}
-                questionIsInCart={cartCtx.cartQuestions.some((item) => item.id === question.id)}
+                questionIsInCart={cartCtx.cartQuestions.some((item) => item === question.id)}
                 setInCart
                 {...question}
               />

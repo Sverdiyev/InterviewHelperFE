@@ -20,7 +20,10 @@ const ACTIONS = {
 };
 
 const initialState = {
-  cartQuestions: Cookies.get('cart')?.split(',') || []
+  cartQuestions:
+    Cookies.get('cart')
+      ?.split(',')
+      .map((item) => +item) || []
 };
 
 const reducer = (state, action) => {
