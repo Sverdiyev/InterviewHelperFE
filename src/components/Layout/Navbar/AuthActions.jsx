@@ -28,12 +28,12 @@ const StyledLogout = styled(StyledButton)({
   [':hover']: { backgroundColor: '#fff' }
 });
 
-function AuthActions({ setPopupIsVisible }) {
+function AuthActions() {
   const authCtx = useContext(AuthContext);
 
   const navigate = useNavigate();
 
-  const loginHandler = () => setPopupIsVisible(true);
+  const loginHandler = () => navigate('/login');
   const registerHandler = () => navigate('/signup');
   const logoutHandler = () => authCtx.logOut();
 
