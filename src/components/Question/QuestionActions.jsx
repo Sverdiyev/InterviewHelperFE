@@ -118,8 +118,9 @@ function QuestionActions({
     }
   };
 
-  const addToListHandler = () => {
-    cartCtx.addToCart(questionId);
+  const handleCart = (e) => {
+    if (e.target.checked) cartCtx.addToCart(questionId);
+    else cartCtx.removeFromCart(questionId);
   };
   return (
     <>
@@ -165,7 +166,7 @@ function QuestionActions({
           checked={questionIsInCart}
           icon={<PlaylistAddIcon />}
           checkedIcon={<PlaylistAddCheckIcon />}
-          onClick={addToListHandler}
+          onClick={handleCart}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],
