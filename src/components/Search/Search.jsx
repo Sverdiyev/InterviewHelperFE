@@ -56,8 +56,8 @@ function Search({ searchValues, setSearchValues }) {
   };
 
   return (
-    <Grid container sx={{ width: '60%', mb: 1 }} alignItems="center">
-      <Grid item xs={8}>
+    <Grid container sx={{ mb: 1 }} alignItems="center" justifyContent="space-between">
+      <Grid item xs={7}>
         <BasicSearch
           setSearchValue={setSearchValue}
           searchValue={searchValue}
