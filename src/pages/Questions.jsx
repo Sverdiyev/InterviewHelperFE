@@ -35,16 +35,18 @@ function Questions() {
           {isSuccess && data.map((question) => <Question key={question.id} {...question} />)}
           {isSuccess && data.length === 0 && <div>No Questions Found</div>}
         </Grid>
-        <Grid
-          item
-          container
-          justifyContent="space-between"
-          flexDirection="column"
-          sx={{ width: '30%', marginBottom: '1rem' }}>
-          <Grid sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
-            Comments
+        {isSuccess && data.length !== 0 && (
+          <Grid
+            item
+            container
+            justifyContent="space-between"
+            flexDirection="column"
+            sx={{ width: '30%', marginBottom: '1rem' }}>
+            <Grid sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
+              Comments
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Grid>
       <FloatingAddQuestions setPopupIsVisible={setPopupIsVisible} />
     </>
