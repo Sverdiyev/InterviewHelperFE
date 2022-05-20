@@ -1,15 +1,21 @@
-import Drawer from '@mui/material/Drawer';
+import * as React from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Comment from './Comment.jsx';
 
-function QuestionComments({ drawerOpen, setDrawerOpen, comments }) {
-  const handleDrawerClose = () => {
-    setDrawerOpen(false);
-  };
+function QuestionComments({ comments, sectionHeader }) {
   return (
-    <div>
-      <Drawer open={drawerOpen} onClose={() => handleDrawerClose()}>
-        {comments}
-      </Drawer>
-    </div>
+    <>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <ListItem alignItems="center">
+          <ListItemText sx={{ fontSize: '2rem', fontWeight: 'bold' }} primary={sectionHeader} />
+        </ListItem>
+        {comments.length !== 0 &&
+          comments.map((comment) => <Comment key={comment.id} {...comment} />)}
+        {comments.length === 0 && <div>No Comments Found</div>}
+      </List>
+    </>
   );
 }
 

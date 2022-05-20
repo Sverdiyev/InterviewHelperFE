@@ -2,11 +2,12 @@ import React from 'react';
 import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import { grey } from '@mui/material/colors';
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
+import { useComments } from '../../services/api-requests/comments.js';
 
 const StyledCard = styled(Card)({
   textAlign: 'left',
@@ -30,12 +31,13 @@ function Question({
   tags,
   userVote,
   isUserFavourite,
-  setDrawerOpen,
-  setComments
+  setComments,
+  setSectionHeader
 }) {
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true);
-    setComments(`${questionContent}`);
+  const { data } = useComments(id);
+  const handleCommentsOpen = () => {
+    setSectionHeader(questionContent);
+    setComments(data);
   };
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
@@ -55,21 +57,19 @@ function Question({
           />
         </StyledCardActions>
       </Grid>
-      <Button
+      <IconButton
         variant="contained"
         size="small"
         color="success"
         style={{
           marginTop: '1rem',
           backgroundColor: 'white',
-          fontStyle: 'italic',
-          fontWeight: 'bold',
-          color: grey[800]
+          color: grey[800],
+          maxWidth: '30px'
         }}
-        endIcon={<CommentIcon />}
-        onClick={() => handleDrawerOpen()}>
-        Open Comments
-      </Button>
+        onClick={() => handleCommentsOpen()}>
+        <CommentIcon />
+      </IconButton>
     </StyledCard>
   );
 }
