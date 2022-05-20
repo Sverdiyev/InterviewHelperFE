@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import AddQuestionPopup from '../components/AddQuestion/AddQuestionPopup.jsx';
 import FloatingAddQuestions from '../components/AddQuestion/FloatingAddQuestions.jsx';
 import Cart from '../components/Cart/Cart.jsx';
+import FloatingQuestionsCart from '../components/Cart/FloatingQuestionsCart.jsx';
 import Question from '../components/Question/Question.jsx';
 import Search from '../components/Search/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
@@ -19,10 +20,11 @@ function Questions() {
 
   const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 
+  const [cartIsVisible, setCartIsVisible] = useState(false);
   return (
     <>
-      <Grid container sx={{ width: '80%', marginLeft: 'auto' }}>
-        <Grid item sx={{ width: '70%' }}>
+      <Grid container justifyContent="space-around" sx={{ width: '80%', marginLeft: 'auto' }}>
+        <Grid item sx={{ width: '69%' }}>
           <AddQuestionPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
           <Search searchValues={searchValues} setSearchValues={setSearchValues} />
           {isLoading && (
@@ -55,11 +57,14 @@ function Questions() {
           <Grid sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
             Comments
           </Grid>
-          <Grid sx={{ height: '40vh', position: 'sticky', bottom: 0, overflowY: 'scroll' }}>
-            <Cart />
-          </Grid>
+          {cartIsVisible && (
+            <Grid sx={{ height: '40vh', position: 'sticky', bottom: 0, overflowY: 'scroll' }}>
+              <Cart />
+            </Grid>
+          )}
         </Grid>
       </Grid>
+      <FloatingQuestionsCart setCartIsVisible={setCartIsVisible} />
       <FloatingAddQuestions setPopupIsVisible={setPopupIsVisible} />
     </>
   );
