@@ -7,7 +7,9 @@ const CartContext = createContext({
   addToCart: () => null,
   removeFromCart: () => null,
   clearCart: () => null,
-  print: () => null
+  print: () => null,
+  toggleCart: () => null,
+  cartIsOpen: false
 });
 
 const ACTIONS = {
@@ -15,14 +17,16 @@ const ACTIONS = {
   REMOVE_FROM_CART: 'remove',
   CLEAR_CART: 'clear',
   SET_CART: 'setCart',
-  PRINT_CART: 'print'
+  PRINT_CART: 'print',
+  TOGGLE_CART: 'toggle'
 };
 
 const initialState = {
   cartQuestions:
     Cookies.get('cart')
       ?.split(',')
-      .map((item) => +item) || []
+      .map((item) => +item) || [],
+  cartIsOpen: false
 };
 
 const reducer = (state, action) => {
@@ -40,6 +44,8 @@ const reducer = (state, action) => {
   } else if (action.type === ACTIONS.CLEAR_CART) {
     Cookies.remove('cart');
     newState.cartQuestions = [];
+  } else if (action.type === ACTIONS.TOGGLE_CART) {
+    newState.cartIsOpen = !state.cartIsOpen;
   }
 
   return {
@@ -61,11 +67,15 @@ export function CartContextProvider({ children }) {
   const clearCart = () => {
     dispatch({ type: ACTIONS.CLEAR_CART });
   };
+  const toggleCart = () => {
+    dispatch({ type: ACTIONS.TOGGLE_CART });
+  };
 
   const contextValue = {
     addToCart,
     clearCart,
     removeFromCart,
+    toggleCart,
     ...state
   };
 

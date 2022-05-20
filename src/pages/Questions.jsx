@@ -20,7 +20,6 @@ function Questions() {
 
   const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 
-  const [cartIsVisible, setCartIsVisible] = useState(false);
   return (
     <>
       <Grid container justifyContent="space-around" sx={{ width: '80%', marginLeft: 'auto' }}>
@@ -57,14 +56,14 @@ function Questions() {
           <Grid sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
             Comments
           </Grid>
-          {cartIsVisible && (
+          {cartCtx.cartIsOpen && (
             <Grid sx={{ maxHeight: '40vh', position: 'sticky', bottom: '5px' }}>
               <Cart />
             </Grid>
           )}
         </Grid>
       </Grid>
-      <FloatingQuestionsCart setCartIsVisible={setCartIsVisible} />
+      {!cartCtx.cartIsOpen && <FloatingQuestionsCart />}
       <FloatingAddQuestions setPopupIsVisible={setPopupIsVisible} />
     </>
   );

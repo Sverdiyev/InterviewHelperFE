@@ -1,4 +1,12 @@
-import { Button, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  IconButton,
+  Typography
+} from '@mui/material';
 import { useContext } from 'react';
 import { useQueryClient } from 'react-query';
 import CartContext from '../../store/cart-context.js';
@@ -27,9 +35,22 @@ function Cart() {
   return (
     <Card variant="outlined">
       <CardContent>
-        <Typography gutterBottom variant="h5">
-          Chosen Questions
-        </Typography>
+        <Grid container>
+          <Grid item xs={10}>
+            <Typography gutterBottom variant="h5">
+              Chosen Questions
+            </Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <IconButton
+              size="small"
+              variant="outlined"
+              onClick={cartCtx.toggleCart}
+              sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+              <ClearIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
         {chosenQuestions.length === 0 && (
           <Typography variant="body2">No Questions added to cart</Typography>
         )}
