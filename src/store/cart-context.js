@@ -7,7 +7,6 @@ const CartContext = createContext({
   addToCart: () => null,
   removeFromCart: () => null,
   clearCart: () => null,
-  setCart: () => null,
   print: () => null
 });
 
@@ -38,6 +37,9 @@ const reducer = (state, action) => {
     const newItems = state.cartQuestions.filter((item) => item !== action.questionId);
     Cookies.set('cart', newItems);
     newState.cartQuestions = newItems;
+  } else if (action.type === ACTIONS.CLEAR_CART) {
+    Cookies.remove('cart');
+    newState.cartQuestions = [];
   }
 
   return {
@@ -56,9 +58,13 @@ export function CartContextProvider({ children }) {
   const removeFromCart = (questionId) => {
     dispatch({ type: ACTIONS.REMOVE_FROM_CART, questionId });
   };
+  const clearCart = () => {
+    dispatch({ type: ACTIONS.CLEAR_CART });
+  };
 
   const contextValue = {
     addToCart,
+    clearCart,
     removeFromCart,
     ...state
   };

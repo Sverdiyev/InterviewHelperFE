@@ -17,11 +17,18 @@ function Cart() {
 
   const chosenQuestions = allQuestions.filter((item) => chosenQuestionsIds.includes(item.id));
 
+  const exportHandler = () => {
+    //handle question export
+    //via ctx - to be implemented
+  };
+
+  const clearhandler = () => cartCtx.clearCart();
+
   return (
     <Card variant="outlined">
       <CardContent>
         <Typography gutterBottom variant="h5">
-          Cart
+          Chosen Questions
         </Typography>
         {chosenQuestions.length === 0 && (
           <Typography variant="body2">No Questions added to cart</Typography>
@@ -42,6 +49,7 @@ function Cart() {
             size="small"
             variant="outlined"
             startIcon={<PrintIcon />}
+            onClick={exportHandler}
             sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
             Export
           </Button>
@@ -49,6 +57,7 @@ function Cart() {
             size="small"
             variant="outlined"
             startIcon={<ClearIcon />}
+            onClick={clearhandler}
             sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
             Clear
           </Button>
