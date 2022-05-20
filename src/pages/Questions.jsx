@@ -58,7 +58,11 @@ function Questions() {
             flexDirection="column"
             sx={{ width: '30%', marginBottom: '1rem' }}>
             <Grid sx={{ height: '50vh', position: 'sticky', top: 0 }}>
-              <QuestionComments comments={comments} sectionHeader={sectionHeader} />
+              <QuestionComments
+                comments={comments}
+                sectionHeader={sectionHeader}
+                setSectionHeader={setSectionHeader}
+              />
             </Grid>
           </Grid>
         )}
