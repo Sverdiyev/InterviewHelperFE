@@ -65,7 +65,9 @@ function QuestionComments({ commentsContent, setsectionOpen }) {
           </IconButton>
         </ListItem>
         {isSuccess && comments.map((comment) => <Comment key={comment.id} {...comment} />)}
-        {comments.length === 0 && <div>No Comment Found</div>}
+        {comments.length === 0 && (
+          <span style={{ fontSize: '0.7rem', fontStyle: 'italic' }}>No comments </span>
+        )}
         <ListItem
           sx={{
             '& .MuiListItem-root': { paddingRight: 0 }
