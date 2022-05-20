@@ -58,7 +58,7 @@ function Questions() {
             Comments
           </Grid>
           {cartIsVisible && (
-            <Grid sx={{ height: '40vh', position: 'sticky', bottom: 0, overflowY: 'scroll' }}>
+            <Grid sx={{ maxHeight: '40vh', position: 'sticky', bottom: '5px' }}>
               <Cart />
             </Grid>
           )}
