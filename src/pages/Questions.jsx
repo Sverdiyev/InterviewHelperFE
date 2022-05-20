@@ -55,7 +55,7 @@ function Questions() {
           <Grid sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
             Comments
           </Grid>
-          <Grid sx={{ backgroundColor: 'green', height: '40vh', position: 'sticky', bottom: 0 }}>
+          <Grid sx={{ height: '40vh', position: 'sticky', bottom: 0, overflowY: 'scroll' }}>
             <Cart />
           </Grid>
         </Grid>
