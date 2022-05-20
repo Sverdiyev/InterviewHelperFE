@@ -7,7 +7,6 @@ import CommentIcon from '@mui/icons-material/Comment';
 import { grey } from '@mui/material/colors';
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
-import { useComments } from '../../services/api-requests/comments.js';
 
 const StyledCard = styled(Card)({
   textAlign: 'left',
@@ -31,13 +30,12 @@ function Question({
   tags,
   userVote,
   isUserFavourite,
-  setComments,
-  setSectionHeader
+  setCommentsContent,
+  setsectionOpen
 }) {
-  const { data } = useComments(id);
   const handleCommentsOpen = () => {
-    setSectionHeader(questionContent);
-    setComments(data);
+    setsectionOpen(true);
+    setCommentsContent({ id, questionContent });
   };
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">

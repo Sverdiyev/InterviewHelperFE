@@ -3,7 +3,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
 
 export default function Comment({ commentContent, userName }) {
   const formattedUserName = userName.charAt(0).toUpperCase() + userName.slice(1);
@@ -18,7 +17,6 @@ export default function Comment({ commentContent, userName }) {
           secondary={<React.Fragment>{commentContent}</React.Fragment>}
         />
       </ListItem>
-      <Divider variant="inset" component="li" />
     </>
   );
 }

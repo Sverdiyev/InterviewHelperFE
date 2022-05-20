@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
-
+import { ReactQueryDevtools } from 'react-query/devtools';
 import App from './App';
 import { AuthContextProvider } from './store/auth-context.js';
 
@@ -15,6 +15,7 @@ ReactDOM.render(
       <AuthContextProvider>
         <QueryClientProvider client={queryClient}>
           <App />
+          <ReactQueryDevtools />
         </QueryClientProvider>
       </AuthContextProvider>
     </BrowserRouter>

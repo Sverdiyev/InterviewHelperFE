@@ -14,8 +14,8 @@ function Questions() {
 
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams));
-  const [comments, setComments] = useState([]);
-  const [sectionHeader, setSectionHeader] = useState(null);
+  const [commentsContent, setCommentsContent] = useState(null);
+  const [sectionOpen, setsectionOpen] = useState(false);
 
   const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 
@@ -27,7 +27,7 @@ function Questions() {
           <Search
             searchValues={searchValues}
             setSearchValues={setSearchValues}
-            setSectionHeader={setSectionHeader}
+            setsectionOpen={setsectionOpen}
           />
           {isLoading && (
             <Grid
@@ -44,13 +44,13 @@ function Questions() {
               <Question
                 key={question.id}
                 {...question}
-                setComments={setComments}
-                setSectionHeader={setSectionHeader}
+                setCommentsContent={setCommentsContent}
+                setsectionOpen={setsectionOpen}
               />
             ))}
           {isSuccess && data.length === 0 && <div>No Questions Found</div>}
         </Grid>
-        {isSuccess && data.length !== 0 && sectionHeader && (
+        {isSuccess && data.length !== 0 && sectionOpen && (
           <Grid
             item
             container
@@ -58,11 +58,7 @@ function Questions() {
             flexDirection="column"
             sx={{ width: '30%', marginBottom: '1rem' }}>
             <Grid sx={{ height: '50vh', position: 'sticky', top: 0 }}>
-              <QuestionComments
-                comments={comments}
-                sectionHeader={sectionHeader}
-                setSectionHeader={setSectionHeader}
-              />
+              <QuestionComments commentsContent={commentsContent} setsectionOpen={setsectionOpen} />
             </Grid>
           </Grid>
         )}
