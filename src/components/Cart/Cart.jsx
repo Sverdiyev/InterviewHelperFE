@@ -26,8 +26,7 @@ function Cart() {
   const chosenQuestions = allQuestions.filter((item) => chosenQuestionsIds.includes(item.id));
 
   const exportHandler = () => {
-    //handle question export
-    //via ctx - to be implemented
+    console.log(chosenQuestionsIds);
   };
 
   const clearhandler = () => cartCtx.clearCart();
@@ -67,6 +66,7 @@ function Cart() {
       <CardActions>
         <Grid container justifyContent="space-evenly">
           <Button
+            disabled={chosenQuestionsIds.length == 0}
             size="small"
             variant="outlined"
             startIcon={<PrintIcon />}
