@@ -78,7 +78,6 @@ function Cart() {
       <CardActions>
         <Grid container justifyContent="space-evenly">
           <Button
-            download
             disabled={chosenQuestionsIds.length == 0}
             size="small"
             variant="outlined"
