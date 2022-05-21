@@ -7,7 +7,6 @@ import CartContext from '../../store/cart-context.js';
 
 const StyledCard = styled(Card)({
   textAlign: 'left',
-  border: '1px solid rgba(0, 0, 0, 0.12)',
   marginBottom: '5px',
   padding: '3px 0 3px 10px'
 });

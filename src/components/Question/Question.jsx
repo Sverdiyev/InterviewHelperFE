@@ -29,7 +29,8 @@ function Question({
   isUserFavourite,
   questionIsInCart,
   setCommentsContent,
-  setSectionOpen
+  setSectionOpen,
+  questionCommentsOpen
 }) {
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
@@ -54,6 +55,7 @@ function Question({
             questionContent={questionContent}
             setSectionOpen={setSectionOpen}
             setCommentsContent={setCommentsContent}
+            questionCommentsOpen={questionCommentsOpen}
           />
         </StyledCardActions>
       </Grid>

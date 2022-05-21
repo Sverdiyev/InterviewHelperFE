@@ -52,6 +52,7 @@ function Questions() {
                 {...question}
                 setCommentsContent={setCommentsContent}
                 setSectionOpen={setSectionOpen}
+                questionCommentsOpen={commentsContent?.id === question.id}
               />
             ))}
           {isSuccess && data.length === 0 && <div>No Questions Found</div>}

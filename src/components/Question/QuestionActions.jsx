@@ -20,7 +20,8 @@ function QuestionActions({
   questionIsInCart,
   setCommentsContent,
   setSectionOpen,
-  questionContent
+  questionContent,
+  questionCommentsOpen
 }) {
   const cartCtx = useContext(CartContext);
 
@@ -94,6 +95,7 @@ function QuestionActions({
     setSectionOpen(true);
     setCommentsContent({ id: questionId, questionContent });
   };
+
   return (
     <>
       <span>{voteCount > 0 ? '+' + voteCount : voteCount}</span>
@@ -148,8 +150,9 @@ function QuestionActions({
           }}
         />
         <Checkbox
-          checked={questionIsInCart}
+          checked={questionCommentsOpen}
           icon={<CommentIcon />}
+          checkedIcon={<CommentIcon sx={{ color: green[600] }} />}
           onClick={handleCommentsOpen}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },

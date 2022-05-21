@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { postComment, useComments } from '../../services/api-requests/comments.js';
-import { CircularProgress, Grid } from '@mui/material';
+import { Card, CircularProgress, Grid } from '@mui/material';
 import Comment from './Comment.jsx';
 
 function QuestionComments({ commentsContent, setSectionOpen }) {
@@ -53,7 +53,7 @@ function QuestionComments({ commentsContent, setSectionOpen }) {
     );
   }
   return (
-    <>
+    <Card variant="outlined">
       <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         <ListItem>
           <ListItemText
@@ -95,7 +95,7 @@ function QuestionComments({ commentsContent, setSectionOpen }) {
           </IconButton>
         </ListItem>
       </List>
-    </>
+    </Card>
   );
 }
 
