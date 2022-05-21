@@ -1,23 +1,20 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import ListItemText from '@mui/material/ListItemText';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { postComment, useComments } from '../../services/api-requests/comments.js';
-import { Card, CircularProgress, Grid } from '@mui/material';
+import { Card, CircularProgress, Grid, Typography, List, ListItem } from '@mui/material';
 import Comment from './Comment.jsx';
 
-function QuestionComments({ commentsContent, setSectionOpen }) {
+function QuestionComments({ commentsContent, setSectionOpen, setCommentsContent }) {
   const [newComment, setNewComment] = useState('');
   const queryClient = useQueryClient();
 
   const handleCommentsClose = () => {
     setSectionOpen(false);
+    setCommentsContent(null);
   };
   const handleAddComment = () => {
     const commentToAdd = {
@@ -56,16 +53,25 @@ function QuestionComments({ commentsContent, setSectionOpen }) {
     <Card variant="outlined">
       <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         <ListItem>
-          <ListItemText
-            sx={{ fontSize: '2rem', fontWeight: 'bold' }}
-            primary={commentsContent.questionContent}
-          />
-          <IconButton onClick={() => handleCommentsClose()}>
-            <CloseIcon />
-          </IconButton>
+          <Grid container>
+            <Grid item xs={10}>
+              <Typography gutterBottom variant="subtitle1" sx={{ textAlign: 'center' }}>
+                {commentsContent.questionContent}
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton
+                size="small"
+                variant="outlined"
+                onClick={handleCommentsClose}
+                sx={{ borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+                <CloseIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
         </ListItem>
         {isSuccess && (
-          <div style={{ overflowY: 'scroll', maxHeight: '200px' }}>
+          <div style={{ overflowY: 'scroll', maxHeight: '300px' }}>
             {comments.map((comment) => (
               <Comment key={comment.id} {...comment} />
             ))}

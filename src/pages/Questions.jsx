@@ -65,10 +65,13 @@ function Questions() {
           sx={{ width: '30%' }}>
           {isSuccess && data.length !== 0 && sectionOpen && (
             <Grid item sx={{ maxHeight: '50vh', position: 'sticky', top: 0 }}>
-              <QuestionComments commentsContent={commentsContent} setSectionOpen={setSectionOpen} />
+              <QuestionComments
+                commentsContent={commentsContent}
+                setSectionOpen={setSectionOpen}
+                setCommentsContent={setCommentsContent}
+              />
             </Grid>
           )}
-
           {cartCtx.cartIsOpen && (
             <Grid item sx={{ maxHeight: '40vh', position: 'sticky', bottom: 0, marginTop: 'auto' }}>
               <Cart />

@@ -37,7 +37,7 @@ function Cart() {
       <CardContent>
         <Grid container>
           <Grid item xs={10}>
-            <Typography gutterBottom variant="h6">
+            <Typography gutterBottom variant="subtitle1">
               Chosen Questions
             </Typography>
           </Grid>
