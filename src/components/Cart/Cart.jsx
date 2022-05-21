@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useContext } from 'react';
 import { useQueryClient } from 'react-query';
+import { downloadQuestions } from '../../services/api-requests/questions.js';
 import CartContext from '../../store/cart-context.js';
 import CartQuestion from './CartQuestion.jsx';
 import PrintIcon from '@mui/icons-material/Print';
@@ -26,7 +27,18 @@ function Cart() {
   const chosenQuestions = allQuestions.filter((item) => chosenQuestionsIds.includes(item.id));
 
   const exportHandler = () => {
-    console.log(chosenQuestionsIds);
+    const requestData = {
+      interviewDate: new Date(),
+      intervieweePosition: 'N/A',
+      questions: chosenQuestionsIds
+    };
+    downloadQuestions(requestData)
+      .then((res) => res.blob())
+      .then((blob) => {
+        var fileWindow = window.open();
+        var file = fileWindow.URL.createObjectURL(blob);
+        fileWindow.location.assign(file);
+      });
   };
 
   const clearhandler = () => cartCtx.clearCart();
@@ -66,6 +78,7 @@ function Cart() {
       <CardActions>
         <Grid container justifyContent="space-evenly">
           <Button
+            download
             disabled={chosenQuestionsIds.length == 0}
             size="small"
             variant="outlined"

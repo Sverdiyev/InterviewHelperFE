@@ -10,6 +10,9 @@ export const useQuestionTags = () => {
   const url = `/questions/tags`;
   return useEndpoint(url, 'tagsFetch');
 };
+// download question pdf
+export const downloadQuestions = async (questions) =>
+  requestData('/questionExport', 'POST', questions);
 
 //post new question
 export const postQuestion = async (question) => requestData('/questions/add', 'POST', question);
