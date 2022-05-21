@@ -11,7 +11,7 @@ import { useQuestionTags } from '../../services/api-requests/questions.js';
 const MAX_QUESTION_RATING = 100;
 const MIN_QUESTION_RATING = -30;
 
-function Search({ searchValues, setSearchValues, setsectionOpen }) {
+function Search({ searchValues, setSearchValues, setSectionOpen }) {
   const { data, isSuccess } = useQuestionTags();
   const allTags = isSuccess ? data : ['Tags are loading'];
 
@@ -42,7 +42,7 @@ function Search({ searchValues, setSearchValues, setsectionOpen }) {
     setSearchParamsHandler(setSearchParams, filteredNewSearchValues);
 
     setSearchValues(filteredNewSearchValues);
-    setsectionOpen(false);
+    setSectionOpen(false);
   };
   const clearHandler = () => {
     setSearchValue('');
@@ -54,7 +54,7 @@ function Search({ searchValues, setSearchValues, setsectionOpen }) {
 
     setSearchParams({});
     setSearchValues({});
-    setsectionOpen(false);
+    setSectionOpen(false);
   };
 
   return (

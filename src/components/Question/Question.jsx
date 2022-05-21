@@ -32,10 +32,10 @@ function Question({
   isUserFavourite,
   questionIsInCart,
   setCommentsContent,
-  setsectionOpen
+  setSectionOpen
 }) {
   const handleCommentsOpen = () => {
-    setsectionOpen(true);
+    setSectionOpen(true);
     setCommentsContent({ id, questionContent });
   };
   return (

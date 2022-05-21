@@ -19,7 +19,7 @@ function Questions() {
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams));
   const [commentsContent, setCommentsContent] = useState(null);
-  const [sectionOpen, setsectionOpen] = useState(false);
+  const [sectionOpen, setSectionOpen] = useState(false);
 
   const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 
@@ -31,7 +31,7 @@ function Questions() {
           <Search
             searchValues={searchValues}
             setSearchValues={setSearchValues}
-            setsectionOpen={setsectionOpen}
+            setSectionOpen={setSectionOpen}
           />
 
           {isLoading && (
@@ -51,7 +51,7 @@ function Questions() {
                 questionIsInCart={cartCtx.cartQuestions.some((item) => item === question.id)}
                 {...question}
                 setCommentsContent={setCommentsContent}
-                setsectionOpen={setsectionOpen}
+                setSectionOpen={setSectionOpen}
               />
             ))}
           {isSuccess && data.length === 0 && <div>No Questions Found</div>}
@@ -63,8 +63,8 @@ function Questions() {
           flexDirection="column"
           sx={{ width: '30%' }}>
           {isSuccess && data.length !== 0 && sectionOpen && (
-            <Grid sx={{ height: '50vh', position: 'sticky', top: 0 }}>
-              <QuestionComments commentsContent={commentsContent} setsectionOpen={setsectionOpen} />
+            <Grid item sx={{ maxHeight: '50vh', position: 'sticky', top: 0 }}>
+              <QuestionComments commentsContent={commentsContent} setSectionOpen={setSectionOpen} />
             </Grid>
           )}
 

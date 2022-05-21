@@ -12,12 +12,12 @@ import { postComment, useComments } from '../../services/api-requests/comments.j
 import { CircularProgress, Grid } from '@mui/material';
 import Comment from './Comment.jsx';
 
-function QuestionComments({ commentsContent, setsectionOpen }) {
+function QuestionComments({ commentsContent, setSectionOpen }) {
   const [newComment, setNewComment] = useState('');
   const queryClient = useQueryClient();
 
   const handleCommentsClose = () => {
-    setsectionOpen(false);
+    setSectionOpen(false);
   };
   const handleAddComment = () => {
     const commentToAdd = {
@@ -54,7 +54,7 @@ function QuestionComments({ commentsContent, setsectionOpen }) {
   }
   return (
     <>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         <ListItem>
           <ListItemText
             sx={{ fontSize: '2rem', fontWeight: 'bold' }}
@@ -64,7 +64,13 @@ function QuestionComments({ commentsContent, setsectionOpen }) {
             <CloseIcon />
           </IconButton>
         </ListItem>
-        {isSuccess && comments.map((comment) => <Comment key={comment.id} {...comment} />)}
+        {isSuccess && (
+          <div style={{ overflowY: 'scroll', maxHeight: '200px' }}>
+            {comments.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))}
+          </div>
+        )}
         {comments.length === 0 && (
           <span style={{ fontSize: '0.7rem', fontStyle: 'italic' }}>No comments </span>
         )}
@@ -82,7 +88,7 @@ function QuestionComments({ commentsContent, setsectionOpen }) {
           />
           <IconButton
             sx={{
-              '& .MuiSvgIcon-root': { fontSize: 50 }
+              '& .MuiSvgIcon-root': { fontSize: 30 }
             }}
             onClick={() => handleAddComment()}>
             <AddCircleIcon />
