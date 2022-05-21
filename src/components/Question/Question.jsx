@@ -40,7 +40,12 @@ function Question({
   };
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
-      <QuestionHeading questionId={id} complexity={complexity} questionContent={questionContent} />
+      <QuestionHeading
+        questionId={id}
+        complexity={complexity}
+        questionContent={questionContent}
+        isUserFavourite={isUserFavourite}
+      />
       <Grid container justifyContent="space-between" alignContent="space-between">
         <QuestionBody
           creationDate={creationDate}
@@ -52,7 +57,6 @@ function Question({
             questionVote={vote}
             userVote={userVote}
             questionId={id}
-            isUserFavourite={isUserFavourite}
             questionIsInCart={questionIsInCart}
           />
         </StyledCardActions>

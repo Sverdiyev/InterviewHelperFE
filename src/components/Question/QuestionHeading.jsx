@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { CardContent, Grid } from '@mui/material';
 import React from 'react';
 import QuestionMenu from './QuestinsMenu';
+import QuestionFavorite from './QuestionFavorite.jsx';
 
 const StyledComplexity = styled('span')(({ complexity }) => {
   let bgColor;
@@ -31,7 +32,7 @@ const StyledComplexity = styled('span')(({ complexity }) => {
   };
 });
 
-function QuestionHeading({ questionId, complexity, questionContent }) {
+function QuestionHeading({ questionId, complexity, questionContent, isUserFavourite }) {
   return (
     <CardContent
       component={Grid}
@@ -52,6 +53,8 @@ function QuestionHeading({ questionId, complexity, questionContent }) {
         <StyledComplexity complexity={complexity.toLowerCase()}>
           {complexity.toLowerCase()}
         </StyledComplexity>
+
+        <QuestionFavorite questionId={questionId} isUserFavourite={isUserFavourite} />
         <QuestionMenu questionId={questionId} />
       </div>
     </CardContent>

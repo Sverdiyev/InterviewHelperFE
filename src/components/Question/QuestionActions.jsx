@@ -4,35 +4,22 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useQueryClient, useMutation } from 'react-query';
-import {
-  postVote,
-  deleteVote,
-  postFavourite,
-  deleteFavourite
-} from '../../services/api-requests/questions.js';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import StarIcon from '@mui/icons-material/Star';
+import { postVote, deleteVote } from '../../services/api-requests/questions.js';
+
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-import { yellow, grey, green, red } from '@mui/material/colors';
+import { grey, green, red } from '@mui/material/colors';
 import { Grid, Checkbox } from '@mui/material';
 import CartContext from '../../store/cart-context.js';
 
-function QuestionActions({
-  questionVote,
-  userVote,
-  questionId,
-  isUserFavourite,
-  questionIsInCart
-}) {
+function QuestionActions({ questionVote, userVote, questionId, questionIsInCart }) {
   const cartCtx = useContext(CartContext);
 
   const [voteCount, setVoteCount] = useState(questionVote);
   const [currentUserVote, setCurrentUserVote] = useState(userVote);
-  const [userFavourite, setUserFavourite] = useState(isUserFavourite);
+
   const queryClient = useQueryClient();
   const [voteActive, setVoteActive] = useState(true);
-  const [favouriteActive, setFavouriteActive] = useState(true);
 
   const upVoteMutation = useMutation((value) => postVote(value, 'upvote'), {
     onSuccess: () => {
@@ -75,37 +62,6 @@ function QuestionActions({
       setVoteActive(true);
     }
   });
-
-  const addFavouriteMutation = useMutation((value) => postFavourite(value), {
-    onSuccess: () => {
-      setUserFavourite(true);
-      queryClient.invalidateQueries('questionsFetch');
-      setFavouriteActive(true);
-    },
-    onError: () => {
-      setFavouriteActive(true);
-    }
-  });
-
-  const deleteFavouriteMutation = useMutation((value) => deleteFavourite(value), {
-    onSuccess: () => {
-      setUserFavourite(false);
-      queryClient.invalidateQueries('questionsFetch');
-      setFavouriteActive(true);
-    },
-    onError: () => {
-      setFavouriteActive(true);
-    }
-  });
-
-  const handleFavourite = () => {
-    setFavouriteActive(false);
-    if (userFavourite) {
-      deleteFavouriteMutation.mutate(questionId);
-    } else {
-      addFavouriteMutation.mutate(questionId);
-    }
-  };
 
   const handleVote = (value) => {
     setVoteActive(false);
@@ -174,23 +130,6 @@ function QuestionActions({
             color: grey[800],
             '&.Mui-checked': {
               color: green[600]
-            }
-          }}
-        />
-        <Checkbox
-          icon={<StarOutlineIcon />}
-          checkedIcon={<StarIcon />}
-          checked={userFavourite}
-          disabled={!favouriteActive}
-          onClick={() => handleFavourite()}
-          sx={{
-            '& .MuiSvgIcon-root': { fontSize: 32 },
-            color: grey[800],
-            '&.Mui-checked': {
-              color: yellow[600]
-            },
-            '&.Mui-disabled': {
-              color: grey[800]
             }
           }}
         />
