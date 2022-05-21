@@ -2,7 +2,7 @@ import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select } fro
 
 function MultipleSelectField({ values, setValue, options, label }) {
   return (
-    <FormControl fullWidth sx={{ mt: 1 }}>
+    <FormControl fullWidth sx={{ mt: 1 }} size="small">
       <InputLabel id={label + '-label'}>{label[0].toUpperCase() + label.slice(1)}</InputLabel>
       <Select
         sx={{ textAlign: 'left' }}
