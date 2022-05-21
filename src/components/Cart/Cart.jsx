@@ -35,8 +35,8 @@ function Cart() {
     downloadQuestions(requestData)
       .then((res) => res.blob())
       .then((blob) => {
-        var fileWindow = window.open();
-        var file = fileWindow.URL.createObjectURL(blob);
+        const fileWindow = window.open();
+        const file = fileWindow.URL.createObjectURL(blob);
         fileWindow.location.assign(file);
       });
   };
