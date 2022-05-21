@@ -32,7 +32,14 @@ const StyledComplexity = styled('span')(({ complexity }) => {
   };
 });
 
-function QuestionHeading({ questionId, complexity, questionContent, isUserFavourite }) {
+function QuestionHeading({
+  questionId,
+  complexity,
+  questionContent,
+  isUserFavourite,
+  setCommentsContent,
+  setSectionOpen
+}) {
   return (
     <CardContent
       component={Grid}
@@ -55,7 +62,11 @@ function QuestionHeading({ questionId, complexity, questionContent, isUserFavour
         </StyledComplexity>
 
         <QuestionFavorite questionId={questionId} isUserFavourite={isUserFavourite} />
-        <QuestionMenu questionId={questionId} />
+        <QuestionMenu
+          questionId={questionId}
+          setCommentsContent={setCommentsContent}
+          setSectionOpen={setSectionOpen}
+        />
       </div>
     </CardContent>
   );

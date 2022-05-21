@@ -4,7 +4,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditQuestionPopup from '../EditQuestion/EditQuestionPopup';
 import QuestionDeletionPopup from './QuestionDeletionPopup';
 
-function QuestionMenu({ questionId }) {
+function QuestionMenu({ questionId, setSectionOpen, setCommentsContent }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [editPopupIsVisible, setEditPopupIsVisible] = useState(false);
@@ -50,6 +50,8 @@ function QuestionMenu({ questionId }) {
         questionId={questionId}
         setEditPopupIsVisible={setEditPopupIsVisible}
         setAnchorEl={setAnchorEl}
+        setSectionOpen={setSectionOpen}
+        setCommentsContent={setCommentsContent}
       />
 
       <QuestionDeletionPopup
@@ -57,6 +59,8 @@ function QuestionMenu({ questionId }) {
         popupIsVisible={deletePopupIsVisible}
         setPopupIsVisible={setDeletePopupIsVisible}
         setAnchorEl={setAnchorEl}
+        setSectionOpen={setSectionOpen}
+        setCommentsContent={setCommentsContent}
       />
     </div>
   );

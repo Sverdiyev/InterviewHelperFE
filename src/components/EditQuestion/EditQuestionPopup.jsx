@@ -1,7 +1,14 @@
 import { Dialog, Grid } from '@mui/material';
 import EditQuestionComponent from './EditQuestionComponent.jsx';
 
-function EditQuestionPopup({ editPopupIsVisible, questionId, setEditPopupIsVisible, setAnchorEl }) {
+function EditQuestionPopup({
+  editPopupIsVisible,
+  questionId,
+  setEditPopupIsVisible,
+  setAnchorEl,
+  setSectionOpen,
+  setCommentsContent
+}) {
   const handleClose = () => {
     setEditPopupIsVisible(false);
     setAnchorEl(null);
@@ -16,6 +23,8 @@ function EditQuestionPopup({ editPopupIsVisible, questionId, setEditPopupIsVisib
         <EditQuestionComponent
           questionId={questionId}
           setEditPopupIsVisible={setEditPopupIsVisible}
+          setCommentsContent={setCommentsContent}
+          setSectionOpen={setSectionOpen}
         />
       </Grid>
     </Dialog>

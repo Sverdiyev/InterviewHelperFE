@@ -39,6 +39,8 @@ function Question({
         complexity={complexity}
         questionContent={questionContent}
         isUserFavourite={isUserFavourite}
+        setCommentsContent={setCommentsContent}
+        setSectionOpen={setSectionOpen}
       />
       <Grid container justifyContent="space-between" alignContent="space-between">
         <QuestionBody
