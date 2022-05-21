@@ -119,8 +119,10 @@ function QuestionActions({
   };
 
   const handleCart = (e) => {
-    if (e.target.checked) cartCtx.addToCart(questionId);
-    else cartCtx.removeFromCart(questionId);
+    if (e.target.checked) {
+      cartCtx.addToCart(questionId);
+      if (!cartCtx.cartIsOpen) cartCtx.toggleCart();
+    } else cartCtx.removeFromCart(questionId);
   };
   return (
     <>

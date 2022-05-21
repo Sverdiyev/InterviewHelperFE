@@ -52,12 +52,12 @@ function Questions() {
           container
           justifyContent="space-between"
           flexDirection="column"
-          sx={{ width: '30%', marginBottom: '1rem' }}>
-          <Grid sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
+          sx={{ width: '30%' }}>
+          <Grid item sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
             Comments
           </Grid>
           {cartCtx.cartIsOpen && (
-            <Grid sx={{ maxHeight: '40vh', position: 'sticky', bottom: '5px' }}>
+            <Grid item sx={{ maxHeight: '40vh', position: 'sticky', bottom: 0 }}>
               <Cart />
             </Grid>
           )}
