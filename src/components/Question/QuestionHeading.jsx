@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CardContent, Grid } from '@mui/material';
+import { CardContent, Grid, Typography } from '@mui/material';
 import React from 'react';
 import QuestionMenu from './QuestinsMenu';
 import QuestionFavorite from './QuestionFavorite.jsx';
@@ -40,9 +40,9 @@ function QuestionHeading({ questionId, complexity, questionContent, isUserFavour
       alignItems="center"
       justifyContent="space-between"
       sx={{ padding: '0', marginBottom: '1rem' }}>
-      <h4 style={{ wordBreak: 'break-all', margin: 0, maxWidth: '70%', fontSize: '1.3rem' }}>
+      <Typography variant="h6" sx={{ wordBreak: 'break-all', margin: 0, maxWidth: '70%' }}>
         {questionContent}
-      </h4>
+      </Typography>
       <div
         style={{
           display: 'flex',
