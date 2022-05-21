@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
-
 import App from './App';
 import { AuthContextProvider } from './store/auth-context.js';
 import { CartContextProvider } from './store/cart-context.js';

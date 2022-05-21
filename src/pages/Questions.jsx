@@ -10,6 +10,7 @@ import Search from '../components/Search/Search.jsx';
 import { useQuestions } from '../services/api-requests/questions.js';
 import { decodeQueryParams } from '../services/helpers.js';
 import CartContext from '../store/cart-context.js';
+import QuestionComments from '../components/QuestionComments/QuestionComments.jsx';
 
 function Questions() {
   const [searchParams] = useSearchParams();
@@ -17,6 +18,8 @@ function Questions() {
   const cartCtx = useContext(CartContext);
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams));
+  const [commentsContent, setCommentsContent] = useState(null);
+  const [sectionOpen, setsectionOpen] = useState(false);
 
   const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 
@@ -25,13 +28,18 @@ function Questions() {
       <Grid container justifyContent="space-around" sx={{ width: '80%', marginLeft: 'auto' }}>
         <Grid item sx={{ width: '69%' }}>
           <AddQuestionPopup popupIsVisible={popupIsVisible} setPopupIsVisible={setPopupIsVisible} />
-          <Search searchValues={searchValues} setSearchValues={setSearchValues} />
+          <Search
+            searchValues={searchValues}
+            setSearchValues={setSearchValues}
+            setsectionOpen={setsectionOpen}
+          />
+
           {isLoading && (
             <Grid
               container
               alignItems="center"
               flexGrow="1"
-              sx={{ paddingBottom: '5%', width: '15%' }}>
+              sx={{ paddingBottom: '5%', width: '15%', marginLeft: '50%' }}>
               <CircularProgress size="30%" />
             </Grid>
           )}
@@ -41,8 +49,9 @@ function Questions() {
               <Question
                 key={question.id}
                 questionIsInCart={cartCtx.cartQuestions.some((item) => item === question.id)}
-                setInCart
                 {...question}
+                setCommentsContent={setCommentsContent}
+                setsectionOpen={setsectionOpen}
               />
             ))}
           {isSuccess && data.length === 0 && <div>No Questions Found</div>}
@@ -53,17 +62,22 @@ function Questions() {
           justifyContent="space-between"
           flexDirection="column"
           sx={{ width: '30%' }}>
-          <Grid item sx={{ backgroundColor: 'pink', height: '50vh', position: 'sticky', top: 0 }}>
-            Comments
-          </Grid>
+          {isSuccess && data.length !== 0 && sectionOpen && (
+            <Grid sx={{ height: '50vh', position: 'sticky', top: 0 }}>
+              <QuestionComments commentsContent={commentsContent} setsectionOpen={setsectionOpen} />
+            </Grid>
+          )}
+
           {cartCtx.cartIsOpen && (
-            <Grid item sx={{ maxHeight: '40vh', position: 'sticky', bottom: 0 }}>
+            <Grid item sx={{ maxHeight: '40vh', position: 'sticky', bottom: 0, marginTop: 'auto' }}>
               <Cart />
             </Grid>
           )}
         </Grid>
       </Grid>
+
       {!cartCtx.cartIsOpen && <FloatingQuestionsCart />}
+
       <FloatingAddQuestions setPopupIsVisible={setPopupIsVisible} />
     </>
   );
