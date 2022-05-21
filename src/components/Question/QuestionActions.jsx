@@ -3,6 +3,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import CommentIcon from '@mui/icons-material/Comment';
 import { useQueryClient, useMutation } from 'react-query';
 import { postVote, deleteVote } from '../../services/api-requests/questions.js';
 
@@ -12,7 +13,15 @@ import { grey, green, red } from '@mui/material/colors';
 import { Grid, Checkbox } from '@mui/material';
 import CartContext from '../../store/cart-context.js';
 
-function QuestionActions({ questionVote, userVote, questionId, questionIsInCart }) {
+function QuestionActions({
+  questionVote,
+  userVote,
+  questionId,
+  questionIsInCart,
+  setCommentsContent,
+  setSectionOpen,
+  questionContent
+}) {
   const cartCtx = useContext(CartContext);
 
   const [voteCount, setVoteCount] = useState(questionVote);
@@ -80,6 +89,11 @@ function QuestionActions({ questionVote, userVote, questionId, questionIsInCart 
       if (!cartCtx.cartIsOpen) cartCtx.toggleCart();
     } else cartCtx.removeFromCart(questionId);
   };
+
+  const handleCommentsOpen = () => {
+    setSectionOpen(true);
+    setCommentsContent({ id: questionId, questionContent });
+  };
   return (
     <>
       <span>{voteCount > 0 ? '+' + voteCount : voteCount}</span>
@@ -125,6 +139,18 @@ function QuestionActions({ questionVote, userVote, questionId, questionIsInCart 
           icon={<PlaylistAddIcon />}
           checkedIcon={<PlaylistAddCheckIcon />}
           onClick={handleCart}
+          sx={{
+            '& .MuiSvgIcon-root': { fontSize: 32 },
+            color: grey[800],
+            '&.Mui-checked': {
+              color: green[600]
+            }
+          }}
+        />
+        <Checkbox
+          checked={questionIsInCart}
+          icon={<CommentIcon />}
+          onClick={handleCommentsOpen}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],

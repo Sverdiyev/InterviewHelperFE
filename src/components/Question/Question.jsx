@@ -1,10 +1,7 @@
-import React from 'react';
 import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
-import { grey } from '@mui/material/colors';
+
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -34,10 +31,6 @@ function Question({
   setCommentsContent,
   setSectionOpen
 }) {
-  const handleCommentsOpen = () => {
-    setSectionOpen(true);
-    setCommentsContent({ id, questionContent });
-  };
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
       <QuestionHeading
@@ -58,22 +51,12 @@ function Question({
             userVote={userVote}
             questionId={id}
             questionIsInCart={questionIsInCart}
+            questionContent={questionContent}
+            setSectionOpen={setSectionOpen}
+            setCommentsContent={setCommentsContent}
           />
         </StyledCardActions>
       </Grid>
-      <IconButton
-        variant="contained"
-        size="small"
-        color="success"
-        style={{
-          marginTop: '1rem',
-          backgroundColor: 'white',
-          color: grey[800],
-          maxWidth: '30px'
-        }}
-        onClick={() => handleCommentsOpen()}>
-        <CommentIcon />
-      </IconButton>
     </StyledCard>
   );
 }

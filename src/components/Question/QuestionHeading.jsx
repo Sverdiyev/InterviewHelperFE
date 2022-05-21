@@ -40,7 +40,7 @@ function QuestionHeading({ questionId, complexity, questionContent, isUserFavour
       alignItems="center"
       justifyContent="space-between"
       sx={{ padding: '0', marginBottom: '1rem' }}>
-      <h4 style={{ wordBreak: 'break-all', margin: 0, maxWidth: '80%', fontSize: '1.3rem' }}>
+      <h4 style={{ wordBreak: 'break-all', margin: 0, maxWidth: '70%', fontSize: '1.3rem' }}>
         {questionContent}
       </h4>
       <div
