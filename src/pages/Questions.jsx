@@ -62,7 +62,7 @@ function Questions() {
           container
           justifyContent="space-between"
           flexDirection="column"
-          sx={{ width: '30%' }}>
+          sx={{ width: '30%', minHeight: '90vh' }}>
           {isSuccess && data.length !== 0 && sectionOpen && (
             <Grid item sx={{ maxHeight: '50vh', position: 'sticky', top: 0 }}>
               <QuestionComments

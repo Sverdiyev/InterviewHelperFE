@@ -1,5 +1,5 @@
 import { Button, Grid } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Search as SearchIcon } from '@mui/icons-material';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import BasicSearch from './BasicSearch.jsx';
@@ -7,11 +7,14 @@ import AdvancedSearch from './AdvancedSearch.jsx';
 import { filterUnneededValues, setSearchParamsHandler } from '../../services/helpers.js';
 import { useSearchParams } from 'react-router-dom';
 import { useQuestionTags } from '../../services/api-requests/questions.js';
+import CartContext from '../../store/cart-context.js';
 
 const MAX_QUESTION_RATING = 100;
 const MIN_QUESTION_RATING = -30;
 
 function Search({ searchValues, setSearchValues, setSectionOpen }) {
+  const cartCtx = useContext(CartContext);
+
   const { data, isSuccess } = useQuestionTags();
   const allTags = isSuccess ? data : ['Tags are loading'];
 
@@ -41,6 +44,7 @@ function Search({ searchValues, setSearchValues, setSectionOpen }) {
     const filteredNewSearchValues = filterUnneededValues(newSearchValues);
     setSearchParamsHandler(setSearchParams, filteredNewSearchValues);
 
+    if (cartCtx.cartIsOpen) cartCtx.toggleCart();
     setSearchValues(filteredNewSearchValues);
     setSectionOpen(false);
   };
@@ -52,6 +56,7 @@ function Search({ searchValues, setSearchValues, setSectionOpen }) {
     setQuestionRatingValue([MIN_QUESTION_RATING, MAX_QUESTION_RATING]);
     setFavoriteValue(false);
 
+    if (cartCtx.cartIsOpen) cartCtx.toggleCart();
     setSearchParams({});
     setSearchValues({});
     setSectionOpen(false);
