@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
@@ -16,8 +16,17 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import { yellow, grey, green, red } from '@mui/material/colors';
 import { Grid, Checkbox } from '@mui/material';
+import CartContext from '../../store/cart-context.js';
 
-function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }) {
+function QuestionActions({
+  questionVote,
+  userVote,
+  questionId,
+  isUserFavourite,
+  questionIsInCart
+}) {
+  const cartCtx = useContext(CartContext);
+
   const [voteCount, setVoteCount] = useState(questionVote);
   const [currentUserVote, setCurrentUserVote] = useState(userVote);
   const [userFavourite, setUserFavourite] = useState(isUserFavourite);
@@ -109,6 +118,12 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
     }
   };
 
+  const handleCart = (e) => {
+    if (e.target.checked) {
+      cartCtx.addToCart(questionId);
+      if (!cartCtx.cartIsOpen) cartCtx.toggleCart();
+    } else cartCtx.removeFromCart(questionId);
+  };
   return (
     <>
       <span>{voteCount > 0 ? '+' + voteCount : voteCount}</span>
@@ -150,8 +165,10 @@ function QuestionActions({ questionVote, userVote, questionId, isUserFavourite }
       </Grid>
       <Grid container direction="column">
         <Checkbox
+          checked={questionIsInCart}
           icon={<PlaylistAddIcon />}
           checkedIcon={<PlaylistAddCheckIcon />}
+          onClick={handleCart}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
             color: grey[800],

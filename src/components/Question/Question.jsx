@@ -30,6 +30,7 @@ function Question({
   tags,
   userVote,
   isUserFavourite,
+  questionIsInCart,
   setCommentsContent,
   setsectionOpen
 }) {
@@ -52,6 +53,7 @@ function Question({
             userVote={userVote}
             questionId={id}
             isUserFavourite={isUserFavourite}
+            questionIsInCart={questionIsInCart}
           />
         </StyledCardActions>
       </Grid>
