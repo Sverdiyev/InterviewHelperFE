@@ -52,7 +52,9 @@ function Cart() {
           </Grid>
         </Grid>
         {chosenQuestions.length === 0 && (
-          <Typography variant="body2">No Questions added to cart</Typography>
+          <span style={{ fontSize: '0.7rem', fontStyle: 'italic' }}>
+            No Questions added to cart
+          </span>
         )}
         <div style={{ overflowY: 'scroll', maxHeight: '190px' }}>
           {chosenQuestions.map((question) => (
