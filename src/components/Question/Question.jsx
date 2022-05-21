@@ -2,7 +2,9 @@ import React from 'react';
 import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
-
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
+import { grey } from '@mui/material/colors';
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -27,8 +29,14 @@ function Question({
   vote,
   tags,
   userVote,
-  isUserFavourite
+  isUserFavourite,
+  setCommentsContent,
+  setsectionOpen
 }) {
+  const handleCommentsOpen = () => {
+    setsectionOpen(true);
+    setCommentsContent({ id, questionContent });
+  };
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
       <QuestionHeading questionId={id} complexity={complexity} questionContent={questionContent} />
@@ -47,6 +55,19 @@ function Question({
           />
         </StyledCardActions>
       </Grid>
+      <IconButton
+        variant="contained"
+        size="small"
+        color="success"
+        style={{
+          marginTop: '1rem',
+          backgroundColor: 'white',
+          color: grey[800],
+          maxWidth: '30px'
+        }}
+        onClick={() => handleCommentsOpen()}>
+        <CommentIcon />
+      </IconButton>
     </StyledCard>
   );
 }
