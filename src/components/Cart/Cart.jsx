@@ -42,11 +42,7 @@ function Cart() {
             </Typography>
           </Grid>
           <Grid item xs={1}>
-            <IconButton
-              size="small"
-              variant="outlined"
-              onClick={cartCtx.toggleCart}
-              sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+            <IconButton size="small" variant="outlined" onClick={cartCtx.toggleCart}>
               <ClearIcon />
             </IconButton>
           </Grid>

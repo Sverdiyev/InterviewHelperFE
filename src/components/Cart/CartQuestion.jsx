@@ -7,8 +7,9 @@ import CartContext from '../../store/cart-context.js';
 
 const StyledCard = styled(Card)({
   textAlign: 'left',
-  marginBottom: '5px',
-  padding: '3px 0 3px 10px'
+  marginBottom: '8px',
+  padding: '3px 0 3px 10px',
+  boxShadow: 'none'
 });
 
 function CartQuestion({ questionId, questionContent }) {
@@ -17,7 +18,7 @@ function CartQuestion({ questionId, questionContent }) {
   return (
     <Grid container alignItems="center" component={StyledCard}>
       <Grid item xs={10}>
-        <Typography variant="body1">{questionContent}</Typography>
+        <Typography variant="body2">{questionContent}</Typography>
       </Grid>
       <Grid item xs={2}>
         <IconButton onClick={() => cartCtx.removeFromCart(questionId)}>
