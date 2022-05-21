@@ -52,7 +52,7 @@ function AdvancedSearch({
       </Grid>
       <Grid item xs={4} container flexDirection="column" sx={{ paddingLeft: '3%' }}>
         <FormControlLabel
-          sx={{ marginRight: 'auto' }}
+          sx={{ marginRight: 'auto', fontWeight: 400 }}
           control={
             <Checkbox
               onChange={(e) => setHardToGoogle(e.target.checked)}
@@ -62,7 +62,7 @@ function AdvancedSearch({
           label="Hard to google"
         />
         <FormControlLabel
-          sx={{ marginRight: 'auto' }}
+          sx={{ marginRight: 'auto', fontWeight: 400 }}
           control={
             <Checkbox onChange={(e) => setFavorite(e.target.checked)} checked={favoriteValue} />
           }
