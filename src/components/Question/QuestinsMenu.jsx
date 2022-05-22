@@ -33,15 +33,7 @@ function QuestionMenu({ questionId, setSectionOpen, setCommentsContent }) {
       <IconButton onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            width: '100px'
-          }
-        }}>
+      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={handleEditClick}>Edit</MenuItem>
         <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
       </Menu>
