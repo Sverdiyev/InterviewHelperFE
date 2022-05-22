@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import AddQuestionPopup from '../components/AddQuestion/AddQuestionPopup.jsx';
 import FloatingAddQuestions from '../components/AddQuestion/FloatingAddQuestions.jsx';
 import Cart from '../components/Cart/Cart.jsx';
@@ -55,7 +55,17 @@ function Questions() {
                 questionCommentsOpen={commentsContent?.id === question.id}
               />
             ))}
-          {isSuccess && data.length === 0 && <div>No Questions Found</div>}
+          {isSuccess && data.length === 0 && (
+            <Grid
+              container
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ height: '50vh' }}>
+              We did not find any questions :)
+              <Link to="/add-question">Maybe it is time to add one?</Link>
+            </Grid>
+          )}
         </Grid>
         <Grid
           item

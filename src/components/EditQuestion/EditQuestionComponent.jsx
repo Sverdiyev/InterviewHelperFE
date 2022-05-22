@@ -39,7 +39,7 @@ function EditQuestionComponent({
           setSectionOpen(false);
           setCommentsContent(null);
           setEditPopupIsVisible(false);
-        }, 2000);
+        }, 1000);
       },
       onError: () => {
         setSuccess(false);

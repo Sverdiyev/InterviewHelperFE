@@ -1,6 +1,7 @@
 import AddIcon from '@mui/icons-material/AddCircleOutline';
 import { Avatar, Typography } from '@mui/material';
 import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { postQuestion } from '../../services/api-requests/questions.js';
 import QuestionForm from '../Question/QuestionForm.js';
 
@@ -11,13 +12,15 @@ function AddQuestionComponent({ setPopupIsVisible = () => null }) {
     onSuccess: () => queryClient.invalidateQueries('questionsFetch')
   });
 
+  const navigate = useNavigate();
   const handleSubmissionCb = (data, setSuccess = () => null) => {
     addMutation.mutate(data, {
       onSuccess: () => {
         setSuccess(true);
         setTimeout(() => {
-          setPopupIsVisible(false);
-        }, 2000);
+          const res = setPopupIsVisible(false);
+          if (!res) navigate('/');
+        }, 1000);
       },
       onError: () => {
         setSuccess(false);
