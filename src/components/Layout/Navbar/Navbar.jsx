@@ -5,7 +5,8 @@ import AuthActions from './AuthActions.jsx';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#EAEAEA',
-  padding: '10px 20px'
+  padding: '10px 20px',
+  marginBottom: '10px'
 });
 
 const StyledTypography = styled(Typography)({

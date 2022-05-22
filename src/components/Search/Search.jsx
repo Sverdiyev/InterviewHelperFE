@@ -72,12 +72,12 @@ function Search({ searchValues, setSearchValues, setSectionOpen }) {
           clearHandler={clearHandler}
         />
       </Grid>
-      <Grid item xs={2} sx={{ pt: 1 }}>
+      <Grid item xs={2}>
         <Button variant="outlined" startIcon={<SearchIcon />} onClick={searchHandler}>
           Search
         </Button>
       </Grid>
-      <Grid item xs={2} sx={{ pt: 1 }}>
+      <Grid item xs={2}>
         <Button
           variant="outlined"
           startIcon={<SettingsSuggestIcon />}
