@@ -52,7 +52,7 @@ function Cart() {
             No Questions added to cart
           </span>
         )}
-        <div style={{ overflowY: 'scroll', maxHeight: '190px' }}>
+        <div style={{ overflowY: 'auto', maxHeight: '190px' }}>
           {chosenQuestions.map((question) => (
             <CartQuestion
               key={question.id + 'questionCart'}

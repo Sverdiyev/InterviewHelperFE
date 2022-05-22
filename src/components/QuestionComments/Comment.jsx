@@ -7,7 +7,7 @@ export default function Comment({ commentContent, userName, creationDate }) {
   const parsedDate = new Date(Date.parse(creationDate));
 
   const creationMonth = parsedDate.toLocaleString('default', { month: 'long' });
-  const creationDay = parsedDate.getDay();
+  const creationDay = parsedDate.getDate();
 
   return (
     <>

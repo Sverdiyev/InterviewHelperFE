@@ -71,7 +71,7 @@ function QuestionComments({ commentsContent, setSectionOpen, setCommentsContent 
           </Grid>
         </ListItem>
         {isSuccess && (
-          <div style={{ overflowY: 'scroll', maxHeight: '300px' }}>
+          <div style={{ overflowY: 'auto', maxHeight: '300px' }}>
             {comments.map((comment) => (
               <Comment key={comment.id} {...comment} />
             ))}
