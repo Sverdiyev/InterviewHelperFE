@@ -80,16 +80,10 @@ function Cart() {
             size="small"
             variant="outlined"
             startIcon={<PrintIcon />}
-            onClick={exportHandler}
-            sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+            onClick={exportHandler}>
             Export
           </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<ClearIcon />}
-            onClick={clearhandler}
-            sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+          <Button size="small" variant="outlined" startIcon={<ClearIcon />} onClick={clearhandler}>
             Clear
           </Button>
         </Grid>

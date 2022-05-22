@@ -7,9 +7,7 @@ import CartContext from '../../store/cart-context.js';
 const StyledFab = styled(Fab)({
   position: 'fixed',
   bottom: '35px',
-  right: '20px',
-  backgroundColor: '#878787',
-  [':hover']: { backgroundColor: '#343434' }
+  right: '20px'
 });
 
 function FloatingQuestionsCart() {

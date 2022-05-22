@@ -9,7 +9,7 @@ const StyledComplexity = styled('span')(({ complexity }) => {
 
   switch (complexity) {
     case 'easy':
-      bgColor = 'green';
+      bgColor = '#2a623d';
       break;
     case 'medium':
       bgColor = '#bb9c35';

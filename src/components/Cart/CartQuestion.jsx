@@ -9,7 +9,9 @@ const StyledCard = styled(Card)({
   textAlign: 'left',
   marginBottom: '8px',
   padding: '3px 0 3px 10px',
-  boxShadow: 'none'
+  boxShadow: 'none',
+  borderBottom: '1px solid #afafaf',
+  borderRadius: 0
 });
 
 function CartQuestion({ questionId, questionContent }) {

@@ -73,7 +73,7 @@ function Search({ searchValues, setSearchValues, setSectionOpen }) {
         />
       </Grid>
       <Grid item xs={2}>
-        <Button variant="outlined" startIcon={<SearchIcon />} onClick={searchHandler}>
+        <Button variant="contained" startIcon={<SearchIcon />} onClick={searchHandler}>
           Search
         </Button>
       </Grid>
