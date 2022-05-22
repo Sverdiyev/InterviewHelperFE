@@ -1,4 +1,5 @@
 import { Button, Checkbox, FormControlLabel, Grid, Slider, Typography } from '@mui/material';
+import { DARK_GREEN, GREEN } from '../../App.jsx';
 import MultipleSelectField from '../StyledUI/MultipleSelectField.jsx';
 
 function AdvancedSearch({
@@ -68,7 +69,17 @@ function AdvancedSearch({
           }
           label="Favorite"
         />
-        <Button variant="contained" onClick={clearHandler}>
+        <Button
+          sx={{
+            borderColor: GREEN,
+            color: GREEN,
+            [':hover']: {
+              borderColor: DARK_GREEN,
+              color: DARK_GREEN
+            }
+          }}
+          variant="outlined"
+          onClick={clearHandler}>
           Clear Filters
         </Button>
       </Grid>

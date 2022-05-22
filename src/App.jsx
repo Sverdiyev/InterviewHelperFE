@@ -9,6 +9,9 @@ import Register from './pages/Register.jsx';
 import AddQuestion from './pages/AddQuestion.jsx';
 import AuthorizedPage from './pages/AuthorizedPage.jsx';
 
+export const DARK_GREEN = '#1c311d';
+export const GREEN = '#2f4f4f';
+
 function App() {
   return (
     <div className="App">
