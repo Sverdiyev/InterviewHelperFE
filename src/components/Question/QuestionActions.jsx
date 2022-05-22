@@ -108,10 +108,6 @@ function QuestionActions({
           disabled={!voteActive}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
-            color: grey[800],
-            '&.Mui-checked': {
-              color: green[600]
-            },
             '&.Mui-disabled': {
               color: grey[800]
             }
@@ -125,7 +121,6 @@ function QuestionActions({
           disabled={!voteActive}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 32 },
-            color: grey[800],
             '&.Mui-checked': {
               color: red[600]
             },
@@ -142,11 +137,7 @@ function QuestionActions({
           checkedIcon={<PlaylistAddCheckIcon />}
           onClick={handleCart}
           sx={{
-            '& .MuiSvgIcon-root': { fontSize: 32 },
-            color: grey[800],
-            '&.Mui-checked': {
-              color: green[600]
-            }
+            '& .MuiSvgIcon-root': { fontSize: 32 }
           }}
         />
         <Checkbox
@@ -155,11 +146,7 @@ function QuestionActions({
           checkedIcon={<CommentIcon sx={{ color: green[600] }} />}
           onClick={handleCommentsOpen}
           sx={{
-            '& .MuiSvgIcon-root': { fontSize: 32 },
-            color: grey[800],
-            '&.Mui-checked': {
-              color: green[600]
-            }
+            '& .MuiSvgIcon-root': { fontSize: 32 }
           }}
         />
       </Grid>
