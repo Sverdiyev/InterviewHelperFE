@@ -9,7 +9,7 @@ import { postVote, deleteVote } from '../../services/api-requests/questions.js';
 
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-import { grey, green, red } from '@mui/material/colors';
+import { grey, red } from '@mui/material/colors';
 import { Grid, Checkbox } from '@mui/material';
 import CartContext from '../../store/cart-context.js';
 
@@ -107,7 +107,6 @@ function QuestionActions({
           onClick={() => handleVote('up')}
           disabled={!voteActive}
           sx={{
-            '& .MuiSvgIcon-root': { fontSize: 32 },
             '&.Mui-disabled': {
               color: grey[800]
             }
@@ -120,7 +119,6 @@ function QuestionActions({
           onClick={() => handleVote('down')}
           disabled={!voteActive}
           sx={{
-            '& .MuiSvgIcon-root': { fontSize: 32 },
             '&.Mui-checked': {
               color: red[600]
             },
@@ -136,18 +134,12 @@ function QuestionActions({
           icon={<PlaylistAddIcon />}
           checkedIcon={<PlaylistAddCheckIcon />}
           onClick={handleCart}
-          sx={{
-            '& .MuiSvgIcon-root': { fontSize: 32 }
-          }}
         />
         <Checkbox
           checked={questionCommentsOpen}
           icon={<CommentIcon />}
-          checkedIcon={<CommentIcon sx={{ color: green[600] }} />}
+          checkedIcon={<CommentIcon />}
           onClick={handleCommentsOpen}
-          sx={{
-            '& .MuiSvgIcon-root': { fontSize: 32 }
-          }}
         />
       </Grid>
     </>
