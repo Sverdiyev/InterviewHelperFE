@@ -46,7 +46,7 @@ function QuestionHeading({
       container
       alignItems="center"
       justifyContent="space-between"
-      sx={{ padding: '0', marginBottom: '1rem' }}>
+      sx={{ padding: '0' }}>
       <Typography variant="h6" sx={{ wordBreak: 'break-all', margin: 0, maxWidth: '70%' }}>
         {questionContent}
       </Typography>

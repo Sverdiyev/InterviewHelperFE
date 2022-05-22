@@ -52,7 +52,6 @@ function QuestionFavorite({ questionId, isUserFavourite }) {
         disabled={!favouriteActive}
         onClick={() => handleFavourite()}
         sx={{
-          '& .MuiSvgIcon-root': { fontSize: 32 },
           color: grey[800],
           '&.Mui-checked': {
             color: yellow[600]

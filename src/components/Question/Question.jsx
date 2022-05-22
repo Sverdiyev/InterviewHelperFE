@@ -9,6 +9,7 @@ const StyledCard = styled(Card)({
   textAlign: 'left',
   width: '100%',
   padding: '1rem',
+  paddingTop: '0.5rem',
   marginBottom: '1rem'
 });
 const StyledCardActions = styled(CardActions)({
