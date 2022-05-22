@@ -30,7 +30,7 @@ function Navbar() {
   return (
     <>
       <StyledAppBar position="static">
-        <Grid container>
+        <Grid container alignItems="center">
           <StyledTypography variant="h6" noWrap component={Link} to="/" sx={{ mr: 2 }}>
             Interview Helper
           </StyledTypography>
