@@ -8,7 +8,6 @@ import { filterUnneededValues, setSearchParamsHandler } from '../../services/hel
 import { useSearchParams } from 'react-router-dom';
 import { useQuestionTags } from '../../services/api-requests/questions.js';
 import CartContext from '../../store/cart-context.js';
-import { DARK_GREEN, GREEN } from '../../App.jsx';
 
 const MAX_QUESTION_RATING = 100;
 const MIN_QUESTION_RATING = -30;
@@ -74,31 +73,12 @@ function Search({ searchValues, setSearchValues, setSectionOpen }) {
         />
       </Grid>
       <Grid item xs={2}>
-        <Button
-          sx={{
-            borderColor: GREEN,
-            color: GREEN,
-            [':hover']: {
-              borderColor: DARK_GREEN,
-              color: DARK_GREEN
-            }
-          }}
-          variant="outlined"
-          startIcon={<SearchIcon />}
-          onClick={searchHandler}>
+        <Button variant="outlined" startIcon={<SearchIcon />} onClick={searchHandler}>
           Search
         </Button>
       </Grid>
       <Grid item xs={2}>
         <Button
-          sx={{
-            borderColor: GREEN,
-            color: GREEN,
-            [':hover']: {
-              borderColor: DARK_GREEN,
-              color: DARK_GREEN
-            }
-          }}
           variant="outlined"
           startIcon={<SettingsSuggestIcon />}
           onClick={() => setAdvSearchIsOpen((prevState) => !prevState)}>
