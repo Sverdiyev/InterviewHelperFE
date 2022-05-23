@@ -5,9 +5,7 @@ import { styled } from '@mui/system';
 const StyledFab = styled(Fab)({
   position: 'fixed',
   bottom: '35px',
-  left: '20px',
-  backgroundColor: '#878787',
-  [':hover']: { backgroundColor: '#343434' }
+  left: '20px'
 });
 
 function FloatingAddQuestions({ setPopupIsVisible }) {

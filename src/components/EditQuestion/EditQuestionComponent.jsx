@@ -6,7 +6,12 @@ import { putQuestion } from '../../services/api-requests/questions.js';
 import { useRef, useState } from 'react';
 import { editQuestionValidator } from '../../services/helpers.js';
 
-function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null }) {
+function EditQuestionComponent({
+  questionId,
+  setEditPopupIsVisible = () => null,
+  setSectionOpen,
+  setCommentsContent
+}) {
   const queryClient = useQueryClient();
   const allQuestions = queryClient.getQueriesData('questionsFetch')[0][1];
 
@@ -31,8 +36,10 @@ function EditQuestionComponent({ questionId, setEditPopupIsVisible = () => null 
       onSuccess: () => {
         setSuccess(true);
         setTimeout(() => {
+          setSectionOpen(false);
+          setCommentsContent(null);
           setEditPopupIsVisible(false);
-        }, 2000);
+        }, 1000);
       },
       onError: () => {
         setSuccess(false);

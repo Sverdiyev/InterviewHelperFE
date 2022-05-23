@@ -1,10 +1,7 @@
-import React from 'react';
 import QuestionActions from './QuestionActions.jsx';
 import QuestionBody from './QuestionBody.jsx';
 import QuestionHeading from './QuestionHeading.jsx';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
-import { grey } from '@mui/material/colors';
+
 import { Card, CardActions, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -12,6 +9,7 @@ const StyledCard = styled(Card)({
   textAlign: 'left',
   width: '100%',
   padding: '1rem',
+  paddingTop: '0.5rem',
   marginBottom: '1rem'
 });
 const StyledCardActions = styled(CardActions)({
@@ -32,15 +30,19 @@ function Question({
   isUserFavourite,
   questionIsInCart,
   setCommentsContent,
-  setsectionOpen
+  setSectionOpen,
+  questionCommentsOpen
 }) {
-  const handleCommentsOpen = () => {
-    setsectionOpen(true);
-    setCommentsContent({ id, questionContent });
-  };
   return (
     <StyledCard variant="outlined" component={Grid} container direction="column">
-      <QuestionHeading questionId={id} complexity={complexity} questionContent={questionContent} />
+      <QuestionHeading
+        questionId={id}
+        complexity={complexity}
+        questionContent={questionContent}
+        isUserFavourite={isUserFavourite}
+        setCommentsContent={setCommentsContent}
+        setSectionOpen={setSectionOpen}
+      />
       <Grid container justifyContent="space-between" alignContent="space-between">
         <QuestionBody
           creationDate={creationDate}
@@ -52,24 +54,14 @@ function Question({
             questionVote={vote}
             userVote={userVote}
             questionId={id}
-            isUserFavourite={isUserFavourite}
             questionIsInCart={questionIsInCart}
+            questionContent={questionContent}
+            setSectionOpen={setSectionOpen}
+            setCommentsContent={setCommentsContent}
+            questionCommentsOpen={questionCommentsOpen}
           />
         </StyledCardActions>
       </Grid>
-      <IconButton
-        variant="contained"
-        size="small"
-        color="success"
-        style={{
-          marginTop: '1rem',
-          backgroundColor: 'white',
-          color: grey[800],
-          maxWidth: '30px'
-        }}
-        onClick={() => handleCommentsOpen()}>
-        <CommentIcon />
-      </IconButton>
     </StyledCard>
   );
 }

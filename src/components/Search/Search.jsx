@@ -1,5 +1,5 @@
 import { Button, Grid } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Search as SearchIcon } from '@mui/icons-material';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import BasicSearch from './BasicSearch.jsx';
@@ -7,11 +7,14 @@ import AdvancedSearch from './AdvancedSearch.jsx';
 import { filterUnneededValues, setSearchParamsHandler } from '../../services/helpers.js';
 import { useSearchParams } from 'react-router-dom';
 import { useQuestionTags } from '../../services/api-requests/questions.js';
+import CartContext from '../../store/cart-context.js';
 
 const MAX_QUESTION_RATING = 100;
 const MIN_QUESTION_RATING = -30;
 
-function Search({ searchValues, setSearchValues, setsectionOpen }) {
+function Search({ searchValues, setSearchValues, setSectionOpen }) {
+  const cartCtx = useContext(CartContext);
+
   const { data, isSuccess } = useQuestionTags();
   const allTags = isSuccess ? data : ['Tags are loading'];
 
@@ -41,8 +44,9 @@ function Search({ searchValues, setSearchValues, setsectionOpen }) {
     const filteredNewSearchValues = filterUnneededValues(newSearchValues);
     setSearchParamsHandler(setSearchParams, filteredNewSearchValues);
 
+    if (cartCtx.cartIsOpen) cartCtx.toggleCart();
     setSearchValues(filteredNewSearchValues);
-    setsectionOpen(false);
+    setSectionOpen(false);
   };
   const clearHandler = () => {
     setSearchValue('');
@@ -52,9 +56,10 @@ function Search({ searchValues, setSearchValues, setsectionOpen }) {
     setQuestionRatingValue([MIN_QUESTION_RATING, MAX_QUESTION_RATING]);
     setFavoriteValue(false);
 
+    if (cartCtx.cartIsOpen) cartCtx.toggleCart();
     setSearchParams({});
     setSearchValues({});
-    setsectionOpen(false);
+    setSectionOpen(false);
   };
 
   return (
@@ -67,12 +72,12 @@ function Search({ searchValues, setSearchValues, setsectionOpen }) {
           clearHandler={clearHandler}
         />
       </Grid>
-      <Grid item xs={2} sx={{ pt: 1 }}>
-        <Button variant="outlined" startIcon={<SearchIcon />} onClick={searchHandler}>
+      <Grid item xs={2}>
+        <Button variant="contained" startIcon={<SearchIcon />} onClick={searchHandler}>
           Search
         </Button>
       </Grid>
-      <Grid item xs={2} sx={{ pt: 1 }}>
+      <Grid item xs={2}>
         <Button
           variant="outlined"
           startIcon={<SettingsSuggestIcon />}

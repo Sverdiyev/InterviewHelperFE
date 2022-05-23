@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import AddQuestionPopup from '../components/AddQuestion/AddQuestionPopup.jsx';
 import FloatingAddQuestions from '../components/AddQuestion/FloatingAddQuestions.jsx';
 import Cart from '../components/Cart/Cart.jsx';
@@ -19,7 +19,7 @@ function Questions() {
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [searchValues, setSearchValues] = useState(decodeQueryParams(searchParams));
   const [commentsContent, setCommentsContent] = useState(null);
-  const [sectionOpen, setsectionOpen] = useState(false);
+  const [sectionOpen, setSectionOpen] = useState(false);
 
   const { data, error, isSuccess, isLoading } = useQuestions(searchValues);
 
@@ -31,7 +31,7 @@ function Questions() {
           <Search
             searchValues={searchValues}
             setSearchValues={setSearchValues}
-            setsectionOpen={setsectionOpen}
+            setSectionOpen={setSectionOpen}
           />
 
           {isLoading && (
@@ -51,23 +51,37 @@ function Questions() {
                 questionIsInCart={cartCtx.cartQuestions.some((item) => item === question.id)}
                 {...question}
                 setCommentsContent={setCommentsContent}
-                setsectionOpen={setsectionOpen}
+                setSectionOpen={setSectionOpen}
+                questionCommentsOpen={commentsContent?.id === question.id}
               />
             ))}
-          {isSuccess && data.length === 0 && <div>No Questions Found</div>}
+          {isSuccess && data.length === 0 && (
+            <Grid
+              container
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ height: '50vh' }}>
+              We did not find any questions :)
+              <Link to="/add-question">Maybe it is time to add one?</Link>
+            </Grid>
+          )}
         </Grid>
         <Grid
           item
           container
           justifyContent="space-between"
           flexDirection="column"
-          sx={{ width: '30%' }}>
+          sx={{ width: '30%', minHeight: '90vh' }}>
           {isSuccess && data.length !== 0 && sectionOpen && (
-            <Grid sx={{ height: '50vh', position: 'sticky', top: 0 }}>
-              <QuestionComments commentsContent={commentsContent} setsectionOpen={setsectionOpen} />
+            <Grid item sx={{ maxHeight: '50vh', position: 'sticky', top: 0 }}>
+              <QuestionComments
+                commentsContent={commentsContent}
+                setSectionOpen={setSectionOpen}
+                setCommentsContent={setCommentsContent}
+              />
             </Grid>
           )}
-
           {cartCtx.cartIsOpen && (
             <Grid item sx={{ maxHeight: '40vh', position: 'sticky', bottom: 0, marginTop: 'auto' }}>
               <Cart />

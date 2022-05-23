@@ -1,14 +1,15 @@
 import styled from '@emotion/styled';
-import { CardContent, Grid } from '@mui/material';
+import { CardContent, Grid, Typography } from '@mui/material';
 import React from 'react';
 import QuestionMenu from './QuestinsMenu';
+import QuestionFavorite from './QuestionFavorite.jsx';
 
 const StyledComplexity = styled('span')(({ complexity }) => {
   let bgColor;
 
   switch (complexity) {
     case 'easy':
-      bgColor = 'green';
+      bgColor = '#2a623d';
       break;
     case 'medium':
       bgColor = '#bb9c35';
@@ -31,17 +32,24 @@ const StyledComplexity = styled('span')(({ complexity }) => {
   };
 });
 
-function QuestionHeading({ questionId, complexity, questionContent }) {
+function QuestionHeading({
+  questionId,
+  complexity,
+  questionContent,
+  isUserFavourite,
+  setCommentsContent,
+  setSectionOpen
+}) {
   return (
     <CardContent
       component={Grid}
       container
       alignItems="center"
       justifyContent="space-between"
-      sx={{ padding: '0', marginBottom: '1rem' }}>
-      <h4 style={{ wordBreak: 'break-all', margin: 0, maxWidth: '80%', fontSize: '1.3rem' }}>
+      sx={{ padding: '0' }}>
+      <Typography variant="h6" sx={{ wordBreak: 'break-all', margin: 0, maxWidth: '70%' }}>
         {questionContent}
-      </h4>
+      </Typography>
       <div
         style={{
           display: 'flex',
@@ -52,7 +60,13 @@ function QuestionHeading({ questionId, complexity, questionContent }) {
         <StyledComplexity complexity={complexity.toLowerCase()}>
           {complexity.toLowerCase()}
         </StyledComplexity>
-        <QuestionMenu questionId={questionId} />
+
+        <QuestionFavorite questionId={questionId} isUserFavourite={isUserFavourite} />
+        <QuestionMenu
+          questionId={questionId}
+          setCommentsContent={setCommentsContent}
+          setSectionOpen={setSectionOpen}
+        />
       </div>
     </CardContent>
   );

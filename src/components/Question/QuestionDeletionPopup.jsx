@@ -9,7 +9,14 @@ import {
 import { deleteQuestion } from '../../services/api-requests/questions.js';
 import { useQueryClient, useMutation } from 'react-query';
 
-function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, setAnchorEl }) {
+function QuestionDeletionPopup({
+  questionId,
+  popupIsVisible,
+  setPopupIsVisible,
+  setAnchorEl,
+  setSectionOpen,
+  setCommentsContent
+}) {
   const queryClient = new useQueryClient();
 
   const deleteMutation = useMutation((value) => deleteQuestion(value), {
@@ -30,6 +37,8 @@ function QuestionDeletionPopup({ questionId, popupIsVisible, setPopupIsVisible, 
 
   const handleDelete = () => {
     deleteMutation.mutate(questionId);
+    setCommentsContent(null);
+    setSectionOpen(false);
   };
   return (
     <>

@@ -4,6 +4,7 @@ import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
 function BasicSearch({ setSearchValue, searchValue, searchHandler, clearHandler }) {
   return (
     <TextField
+      sx={{ margin: 0 }}
       fullWidth
       size="small"
       margin="normal"

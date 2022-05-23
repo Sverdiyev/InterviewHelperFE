@@ -48,24 +48,22 @@ function Cart() {
       <CardContent>
         <Grid container>
           <Grid item xs={10}>
-            <Typography gutterBottom variant="h6">
+            <Typography gutterBottom variant="subtitle1">
               Chosen Questions
             </Typography>
           </Grid>
           <Grid item xs={1}>
-            <IconButton
-              size="small"
-              variant="outlined"
-              onClick={cartCtx.toggleCart}
-              sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+            <IconButton size="small" variant="outlined" onClick={cartCtx.toggleCart}>
               <ClearIcon />
             </IconButton>
           </Grid>
         </Grid>
         {chosenQuestions.length === 0 && (
-          <Typography variant="body2">No Questions added to cart</Typography>
+          <span style={{ fontSize: '0.7rem', fontStyle: 'italic' }}>
+            No Questions added to cart
+          </span>
         )}
-        <div style={{ overflowY: 'scroll', maxHeight: '190px' }}>
+        <div style={{ overflowY: 'auto', maxHeight: '190px' }}>
           {chosenQuestions.map((question) => (
             <CartQuestion
               key={question.id + 'questionCart'}
@@ -82,16 +80,10 @@ function Cart() {
             size="small"
             variant="outlined"
             startIcon={<PrintIcon />}
-            onClick={exportHandler}
-            sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+            onClick={exportHandler}>
             Export
           </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<ClearIcon />}
-            onClick={clearhandler}
-            sx={{ color: 'rgba(0, 0, 0, 0.87)', borderColor: 'rgba(0, 0, 0, 0.12)' }}>
+          <Button size="small" variant="outlined" startIcon={<ClearIcon />} onClick={clearhandler}>
             Clear
           </Button>
         </Grid>
