@@ -116,3 +116,9 @@ export const editQuestionValidator = (oldQuestion, newQuestion) => {
   }
   return changes <= MAX_CHANGES;
 };
+
+export const produceTimeStamp = (timeStamp, offset) => {
+  const hoursToAdd = -(offset / 60);
+  timeStamp.setTime(timeStamp.getTime() + hoursToAdd * 60 * 60 * 1000);
+  return timeStamp;
+};

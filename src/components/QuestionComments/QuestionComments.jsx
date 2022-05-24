@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { postComment, useComments } from '../../services/api-requests/comments.js';
 import { Card, CircularProgress, Grid, Typography, List, ListItem } from '@mui/material';
+import { produceTimeStamp } from '../../services/helpers';
 import Comment from './Comment.jsx';
 
 function QuestionComments({ commentsContent, setSectionOpen, setCommentsContent }) {
@@ -17,10 +18,12 @@ function QuestionComments({ commentsContent, setSectionOpen, setCommentsContent 
     setCommentsContent(null);
   };
   const handleAddComment = () => {
+    const UtcDate = new Date();
+    const timeStamp = produceTimeStamp(UtcDate, UtcDate.getTimezoneOffset());
     const commentToAdd = {
       commentContent: newComment,
       questionId: commentsContent.id,
-      creationDate: new Date()
+      creationDate: timeStamp
     };
     addCommentMutation.mutate(commentToAdd);
     setNewComment('');
