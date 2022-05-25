@@ -29,7 +29,7 @@ function Cart() {
   const exportHandler = () => {
     const requestData = {
       interviewDate: new Date(),
-      intervieweePosition: 'N/A',
+      intervieweePosition: '',
       questions: chosenQuestionsIds
     };
     downloadQuestions(requestData)
